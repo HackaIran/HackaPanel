@@ -1,8 +1,14 @@
-const editor = ace.edit("editor");
-editor.setTheme("ace/theme/clouds");
-editor.getSession().setTabSize(4);
-editor.getSession().setMode("ace/mode/javascript");
-editor.getSession().setUseSoftTabs(true);
-editor.setOptions({
-    enableBasicAutocompletion: true
-});
+const Editor = require("./Editor")
+const Leaderboard = require("./Leaderboard")
+
+class App {
+    constructor () {
+        this.editor = new Editor("editor")
+        this.leaderboard = new Leaderboard(".ranks")
+    }
+    initEditor () {
+        
+    }
+}
+
+window.app = new App()

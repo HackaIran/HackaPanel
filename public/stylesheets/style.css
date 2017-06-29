@@ -137,7 +137,7 @@ body > main > section > nav > li {
     border-bottom: 4px solid #cfcfcf;
 }
 body > main > section > nav > li:hover {
-    background: #CCC;
+    background: #DDD;
 }
 body > main > section > nav > li.active {
     pointer-events: none;
@@ -147,7 +147,10 @@ body > main > section > nav > li.submit {
     background: #39c484;
     color: white;
     border-bottom: none;
-    flex-grow: 0.5;
+    flex-grow: 0.3;
+}
+body > main > section > nav > li.submit:hover {
+    background: #15ad67;
 }
 body > main > section > nav > li > em {
     font-style: normal;
@@ -161,7 +164,20 @@ body > main > section > #editor {
 }
 
 
-
+body > footer {
+    color: #DDD;
+    text-align: center;
+    font-size: 12px;
+    padding: 5px 0;
+    cursor: default;
+}
+body > footer > a {
+    color: white;
+    text-decoration: none;
+}
+body > footer > a:hover {
+    opacity: 0.5;
+}
 
 @media (max-width: 600px) {
     body > main {
