@@ -1,0 +1,14 @@
+{
+  "name": "express-server",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Donghyun Go <godong9@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/godong9/MuggleNews",
+  "private": true,
+  "dependencies": {
+    "jquery": "^3.1.1"
+  }
+}
