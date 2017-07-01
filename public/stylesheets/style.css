@@ -1,3 +1,7 @@
+::selection {
+    background: rgba(0,0,0,0.2);
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -161,6 +165,14 @@ body > main > section > nav > li > em {
 body > main > section > #editor {
     flex-grow: 1;
     font-size: 16px;
+}
+body > main > section > #challenge {
+    flex-grow: 1;
+    background: red;
+}
+body > main > section > #output {
+    flex-grow: 1;
+    background: yellow;
 }
 
 

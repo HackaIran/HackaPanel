@@ -30,6 +30,30 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 /**
+ * Socket.io setup
+ */
+var moment = require("moment")
+
+const start = moment().set({
+  hour: 16,
+  minute: 0,
+  second: 0
+})
+const end = moment().set({
+  hour: 18,
+  minute: 0,
+  second: 0
+})
+console.log(start, end, moment())
+const getRemainingTime = () => -moment().diff(end, 'seconds')
+
+var io = require('socket.io').listen(server)
+io.on("connection", socket => {
+  io.to(socket.id).emit("time-sync", getRemainingTime())
+})
+setInterval(() => io.emit("time-sync", getRemainingTime()), 1000)
+
+/**
  * Normalize a port into a number, string, or false.
  */
 

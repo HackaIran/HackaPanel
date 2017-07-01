@@ -2,7 +2,7 @@ const Team = require("./Team")
 
 class Leaderboard {
     constructor (query) {
-        this.list = document.querySelector(query)
+        this.list = $(query)
         this.teams = []
     }
     addTeam (id, name, score) {

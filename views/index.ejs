@@ -10,7 +10,7 @@
                 <h3 class="name">Eagle Team</h3>
                 <span>score: 76</span>
             </div>
-            <time>14:02</time>
+            <time></time>
         </header>
         <main>
             <aside>
@@ -21,19 +21,22 @@
             </aside>
             <section>
                 <nav>
-                    <li>Challenge</li>
-                    <li class="active">Code</li>
-                    <li>Output</li>
-                    <li class="submit">Run The Code<em>(F5)</em></li>
+                    <li data-page="challenge">Challenge</li>
+                    <li data-page="editor">Code</li>
+                    <li data-page="output">Output</li>
+                    <li data-page="output" class="submit">Run The Code<em>(F5)</em></li>
                 </nav>
-                <div id="editor"></div>
+                <div class="tab-page" id="challenge"></div>
+                <div class="tab-page" id="editor"></div>
+                <div class="tab-page" id="output"></div>
             </section>
         </main>
         <footer>
             All right reserved by <a href="http://hackaglobal.com/" title="HackaGlobal - The largest global community of developers!" target="_blank">HackaGlobal</a>
         </footer>
-        <script type="text/javascript" src="/javascripts/ace/ace.js" charset="utf-8"></script>
+        <script src="/javascripts/socket.io/socket.io.js"></script>
+        <script src="/javascripts/ace/ace.js" charset="utf-8"></script>
         <script src="/javascripts/ace/ext-language_tools.js"></script>
-        <script type="text/javascript" src="main.bundle.js" charset="utf-8"></script>
+        <script src="main.bundle.js" charset="utf-8"></script>
     </body>
 </html>
