@@ -55,7 +55,7 @@ class Auth {
         if (usingLocalStorage) {
             this.box.style.display = "none"
         } else {
-            setTimeout(() => this.box.style.display = 'none', 1600)
+            setTimeout(() => this.box.style.display = 'none', 1000)
             this.store(username)
         }
         this.app = new App(this, username)
