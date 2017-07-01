@@ -1,8 +1,9 @@
 class Team {
-    constructor (leaderboard, id, name, score) {
+    constructor (leaderboard, id, username, name, score) {
         this.leaderboard = leaderboard
         this.id = id
         this.name = name
+        this.username = username
         this.score = score
         this.element = this.defineElement()
         this.scoreElement = this.element.querySelector(".score")
@@ -13,6 +14,7 @@ class Team {
         li.innerHTML = `<span class="name">${this.name}</span>
                         <span class="score">${this.score}</span>
                         <div class="progress"></div>`
+        if (this.username === this.leaderboard.app.username) li.classList.add('me')
         return li;
     }
     setScore (score) {
