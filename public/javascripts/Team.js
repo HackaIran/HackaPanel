@@ -4,6 +4,7 @@ class Team {
         this.id = id
         this._rank = 1
         this._place = 0
+        this.isMe = false
         this.name = name
         this.username = username
         this._score = score
@@ -17,7 +18,10 @@ class Team {
                         <span class="score">${this.score}</span>
                         <div class="progress"></div>
                         <div class="behind-progress"></div>`
-        if (this.username === this.leaderboard.app.username) li.classList.add('me')
+        if (this.username === this.leaderboard.app.username) {
+            li.classList.add('me')
+            this.isMe = true
+        }
         return li;
     }
     get score () {
@@ -26,6 +30,7 @@ class Team {
     set score (score) {
         this._score = score
         this.scoreElement.innerHTML = score
+        if (this.isMe) $('header .team .score').innerHTML = score
         this.leaderboard.updateTeams()
     }
     get place () {
