@@ -5,6 +5,7 @@ class Leaderboard {
         this.app = app
         this.list = $(query)
         this.teams = []
+        this.hightscore = 0
     }
     addTeam (id, username, name, score, needsUpdate = true) {
         const team = new Team(this, id, username, name, score)
@@ -43,14 +44,24 @@ class Leaderboard {
     updateTeams () {
         let scores = [], place = 0
         for (let team of this.teams) scores.push(team.score)
-        scores = scores.filter((score, i) => scores.indexOf(score) == i).sort().reverse()
+        scores = scores.filter((score, i) => scores.indexOf(score) == i).sort((A, B) => {
+            if(A < B) return 1;
+            if(A > B) return -1;
+            return 0;
+        })
+        console.log(scores)
         for (let team of this.teams) team.rank = scores.indexOf(team.score) + 1
         this.teams.sort((A, B) => {
             if(A.rank < B.rank) return -1;
             if(A.rank > B.rank) return 1;
             return 0;
         })
-        for (let team of this.teams) team.place = place++
+        this.hightscore = this.teams[0].score
+        for (let team of this.teams) {
+            team.place = place++
+            if (this.hightscore !== 0) team.progress = team.score / this.hightscore
+            else team.progress = 0
+        }
     }
     disable () {
 

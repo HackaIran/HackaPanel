@@ -58,7 +58,7 @@ class Auth {
             setTimeout(() => this.box.style.display = 'none', 1000)
             this.store(username)
         }
-        window.app = this.app = new App(this, username)
+        this.app = new App(this, username)
     }
 }
 new Auth

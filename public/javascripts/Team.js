@@ -15,7 +15,8 @@ class Team {
         const li = document.createElement("li")
         li.innerHTML = `<span class="name">${this.name}</span>
                         <span class="score">${this.score}</span>
-                        <div class="progress"></div>`
+                        <div class="progress"></div>
+                        <div class="behind-progress"></div>`
         if (this.username === this.leaderboard.app.username) li.classList.add('me')
         return li;
     }
@@ -42,7 +43,7 @@ class Team {
         // this.rankElement.innerHTML = rank
     }
     set progress (rate) {
-        this.progressElement.style.width = rate + "%"
+        this.progressElement.style.width = (rate * 100) + "%"
     }
 }
 
