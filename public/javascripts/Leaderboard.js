@@ -19,6 +19,7 @@ class Leaderboard {
             team.element.remove()
             team = null
         }
+        this.teams = []
     }
     getTeamById (id) {
         for (let team of this.teams) if (team.id == id) return team

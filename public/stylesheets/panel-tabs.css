@@ -1,0 +1,12 @@
+body > main > section > #editor {
+    flex-grow: 1;
+    font-size: 16px;
+}
+body > main > section > #challenge {
+    flex-grow: 1;
+    background: red;
+}
+body > main > section > #output {
+    flex-grow: 1;
+    background: yellow;
+}

@@ -1,0 +1,14 @@
+body > footer {
+    color: #DDD;
+    text-align: center;
+    font-size: 12px;
+    padding: 5px 0;
+    cursor: default;
+}
+body > footer > a {
+    color: white;
+    text-decoration: none;
+}
+body > footer > a:hover {
+    opacity: 0.5;
+}

@@ -1,0 +1,143 @@
+body > main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row-reverse;
+}
+body > main > aside {
+    background: #EEE;
+    flex-grow: 1;
+    min-width: 150px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+body > main > aside > header {
+    text-align: center;
+}
+body > main > aside > ol.ranks {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    flex-grow: 1;
+    text-align: left;
+    overflow-y: auto;
+    position: relative;
+}
+body > main > aside > ol.ranks > li {
+    padding: 10px 0;
+    font-weight: bold;
+    border: 1px solid #DDD;
+    margin: 5px 10px;
+    padding-left: 15px;
+    overflow: hidden;
+    position: absolute;
+    width: calc(100% - 35px);
+    transition-duration: 0.5s;
+}
+body > main > aside > ol.ranks > li.me {
+    border-left: 8px solid #fbcb42;
+    width: calc(100% - 43px);
+}
+body > main > aside > ol.ranks > li > .progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #2b1174, #eba4e6);
+    z-index: -1;
+    transition-duration: 0.5s;
+}
+body > main > aside > ol.ranks > li > .behind-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #777, #ddd);
+    z-index: -2;
+}
+body > main > aside > ol.ranks > li > span.name {
+    color: white;
+}
+body > main > aside > ol.ranks > li > span.rank {
+    color: orange;
+    font-size: 120%;
+}
+body > main > aside > ol.ranks > li > span.score {
+    font-size: 70%;
+    font-weight: normal;
+    color: yellow;
+    margin-left: 7px;
+}
+body > main > aside > ol.ranks > li > span.score:before {
+    content: " (score: ";
+}
+body > main > aside > ol.ranks > li > span.score:after {
+    content: ")";
+}
+body > main > aside > header > img {
+    width: 70px;
+    margin-top: 15px;
+    user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+}
+body > main > section {
+    background: white;
+    flex-grow: 6;
+    display: flex;
+    flex-direction: column;
+}
+body > main > section > nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style-type: none;
+    align-items: stretch;
+    height: 45px;
+}
+body > main > section > nav > li {
+    flex-grow: 1;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #EFEFEF;
+    cursor: pointer;
+    border-bottom: 4px solid #cfcfcf;
+}
+body > main > section > nav > li:hover {
+    background: #DDD;
+}
+body > main > section > nav > li.active {
+    pointer-events: none;
+    border-bottom: 4px solid #9c6acf;
+}
+body > main > section > nav > li.submit {
+    background: #39c484;
+    color: white;
+    border-bottom: none;
+    flex-grow: 0.3;
+}
+body > main > section > nav > li.submit:hover {
+    background: #15ad67;
+}
+body > main > section > nav > li > em {
+    font-style: normal;
+    font-size: 12px;
+    margin-left: 5px;
+    color: #EEE;
+}
+
+@import './panel-tabs.css';
+
+@media (max-width: 600px) {
+    body > main {
+        flex-direction: column;
+    }
+    body > main > aside {
+        max-height: 250px;
+    }
+}
