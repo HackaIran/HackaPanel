@@ -12,7 +12,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 body > header {
     background-color: #444;
@@ -56,6 +56,7 @@ body > main {
 body > main > aside {
     background: #EEE;
     flex-grow: 1;
+    min-width: 150px;
     box-shadow: 0 0 30px rgba(0,0,0,0.3);
     z-index: 2;
     display: flex;
@@ -71,6 +72,7 @@ body > main > aside > ol.ranks {
     flex-grow: 1;
     text-align: left;
     overflow-y: auto;
+    position: relative;
 }
 body > main > aside > ol.ranks > li {
     padding: 10px 0;
@@ -78,11 +80,14 @@ body > main > aside > ol.ranks > li {
     border: 1px solid #DDD;
     margin: 5px 10px;
     padding-left: 15px;
-    position: relative;
     overflow: hidden;
+    position: absolute;
+    width: calc(100% - 35px);
+    transition-duration: 0.5s;
 }
 body > main > aside > ol.ranks > li.me {
     border-left: 8px solid #fbcb42;
+    width: calc(100% - 43px);
 }
 body > main > aside > ol.ranks > li > .progress {
     position: absolute;
@@ -121,7 +126,7 @@ body > main > aside > header > img {
 }
 body > main > section {
     background: white;
-    flex-grow: 10;
+    flex-grow: 6;
     display: flex;
     flex-direction: column;
 }

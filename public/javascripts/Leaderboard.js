@@ -6,10 +6,11 @@ class Leaderboard {
         this.list = $(query)
         this.teams = []
     }
-    addTeam (id, username, name, score) {
+    addTeam (id, username, name, score, needsUpdate = true) {
         const team = new Team(this, id, username, name, score)
         this.list.appendChild(team.element)
         this.teams.push(team)
+        if (needsUpdate) this.updateTeams()
         return team.element
     }
     clearAll () {
@@ -34,12 +35,22 @@ class Leaderboard {
         for (let username in teams) {
             const team = teams[username]
             if (username === this.app.username) team.id = this.app.connection.id
-            this.addTeam(team.id, username, team.name, team.score)
+            this.addTeam(team.id, username, team.name, team.score, false)
         }
+        this.app.ui.initProfile(this.getThisTeam())
         this.updateTeams()
     }
     updateTeams () {
-        this.app.ui.initProfile(this.getThisTeam())
+        let scores = [], place = 0
+        for (let team of this.teams) scores.push(team.score)
+        scores = scores.filter((score, i) => scores.indexOf(score) == i).sort().reverse()
+        for (let team of this.teams) team.rank = scores.indexOf(team.score) + 1
+        this.teams.sort((A, B) => {
+            if(A.rank < B.rank) return -1;
+            if(A.rank > B.rank) return 1;
+            return 0;
+        })
+        for (let team of this.teams) team.place = place++
     }
     disable () {
 

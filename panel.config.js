@@ -6,7 +6,7 @@ module.exports = {
     teams: {
         choco: { name: "Eagles Team", connect: false, score: 0 },
         buban: { name: "Shitty Team", connect: false, score: 0 },
-        sushi: { name: "Mountain Team", connect: false, score: 0 },
+        sushi: { name: "Mountain Team", connect: false, score: 60 },
         dango: { name: "Beaches Team", connect: false, score: 0 },
         chichi: { name: "Dang Show", connect: false, score: 30 }
     }
