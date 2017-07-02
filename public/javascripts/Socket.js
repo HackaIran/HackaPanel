@@ -37,10 +37,10 @@ class Socket {
         this._connected = shouldConnect
     }
     onConnectionFound () {
-        console.log("Connection Found!")
+        $('footer .connection').classList.remove('fail')
     }
     onConnectionLost () {
-        console.log("Connection Lost!")
+        $('footer .connection').classList.add('fail')
     }
     onScoreChanged (data) {
         this.app.leaderboard.getTeamByUsername(data.username).score = data.score

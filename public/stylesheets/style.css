@@ -214,13 +214,29 @@ body > footer {
     font-size: 12px;
     padding: 5px 0;
     cursor: default;
+    position: relative;
 }
-body > footer > a {
+body > footer > span > a {
     color: white;
     text-decoration: none;
 }
-body > footer > a:hover {
+body > footer > span > a:hover {
     opacity: 0.5;
+}
+body > footer > .connection {
+    background: lime;
+    box-shadow: 0 0 10px lime; 
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+}
+body > footer > .connection.fail {
+    background: #ff2424;
+    box-shadow: 0 0 10px #ff2424;
 }
 .float-box {
     position: fixed;
