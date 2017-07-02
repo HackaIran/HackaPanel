@@ -30,6 +30,13 @@ class SocketServer {
     tick () {
         this.io.emit("time-sync", getRemainingTime())
     }
+    setScore (username, score) {
+        config.teams[username].score = score
+        this.io.emit("score-changed", {
+            username: username,
+            score: score
+        })
+    }
 }
 
 module.exports = SocketServer

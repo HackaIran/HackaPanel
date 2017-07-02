@@ -50,7 +50,6 @@ class Leaderboard {
             if(A > B) return -1;
             return 0;
         })
-        console.log(scores)
         for (let team of this.teams) team.rank = scores.indexOf(team.score) + 1
         this.teams.sort((A, B) => {
             if(A.rank < B.rank) return -1;

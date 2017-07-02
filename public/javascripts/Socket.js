@@ -4,6 +4,7 @@ class Socket {
         this.socket = io.connect(address)
         this.socket.on('initial-settings', this.onInitialSettings.bind(this))
         this.socket.on('time-sync', this.onTimeSync.bind(this))
+        this.socket.on('score-changed', this.onScoreChanged.bind(this))
         this._connected = true
         this.testConnectionInterval = setTimeout(() => this.isConnected = false, 5000)
     }
@@ -40,6 +41,9 @@ class Socket {
     }
     onConnectionLost () {
         console.log("Connection Lost!")
+    }
+    onScoreChanged (data) {
+        this.app.leaderboard.getTeamByUsername(data.username).score = data.score
     }
 }
 

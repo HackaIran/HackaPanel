@@ -18,6 +18,12 @@ module.exports = (io) => {
     const username = req.body.username
     res.json(teamAuth.login(username))
   })
+
+
+  const usernames = ['choco', 'buban', 'sushi', 'dango', 'chichi']
+  setInterval(()=>{
+    socketServer.setScore(usernames[Math.floor(Math.random() * usernames.length)], Math.floor(Math.random() * 100))
+  }, 3000)
     
   return router
 };
