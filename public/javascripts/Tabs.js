@@ -1,9 +1,12 @@
 class Tabs {
-    constructor () {
+    constructor (app) {
+        this.app = app
         const tabs = $$("body > main > section > nav > li")
         for (let tab of tabs) {
             tab.addEventListener("click", e => this.select(e.target.getAttribute("data-page")))
         }
+        const submitBtn = document.querySelector('body > main > section > nav > li.submit')
+        submitBtn.addEventListener("click", this.runTheCode.bind(this))
         this.tryToRemember()
     }
     tryToRemember () {
@@ -22,6 +25,9 @@ class Tabs {
         $(`body > main > section > nav > li:not(.submit)[data-page="${which}"]`).classList.add("active")
         // Store
         this.storeLastTabSelected(which)
+    }
+    runTheCode () {
+        this.app.socket.runTheCode()
     }
 }
 

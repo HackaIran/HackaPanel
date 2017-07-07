@@ -193,7 +193,11 @@ body > main > section > #editor {
 }
 body > main > section > #challenge {
     flex-grow: 1;
-    background: red;
+    display: flex;
+}
+body > main > section > #challenge > iframe {
+    border: none;
+    flex-grow: 1;
 }
 body > main > section > #output {
     flex-grow: 1;

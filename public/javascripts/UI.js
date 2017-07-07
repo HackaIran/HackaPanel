@@ -3,7 +3,7 @@ const Tabs = require("./Tabs")
 class UI {
     constructor (app) {
         this.app = app
-        this.tabs = new Tabs
+        this.tabs = new Tabs(app)
         this.usernameTxt = $('header .team .name')
         this.scoreTxt = $('header .team .score')
     }

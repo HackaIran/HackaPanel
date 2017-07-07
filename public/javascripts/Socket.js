@@ -28,6 +28,12 @@ class Socket {
         clearTimeout(this.testConnectionInterval)
         this.testConnectionInterval = setTimeout(() => this.isConnected = false, 5000)
     }
+    runTheCode () {
+        this.socket.emit('user-run', {
+            code: this.app.editor.value,
+            lang: 'javascript'
+        })
+    }
     get isConnected () {
         return this._connected
     }

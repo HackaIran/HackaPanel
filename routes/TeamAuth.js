@@ -14,11 +14,9 @@ class TeamAuth {
             status: 1,
             message: "This team has logged in another system!"
         }
-        else {
-            return {
-                status: 2,
-                message: "Logged in successfully!"
-            }
+        else return {
+            status: 2,
+            message: "Logged in successfully!"
         }
     }
     findTeamIndexById (id) {
