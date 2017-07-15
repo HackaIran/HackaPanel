@@ -2,6 +2,7 @@ class Socket {
     constructor (app, address) {
         this.app = app
         this.editor = app.editor
+        this.output = app.output
         this.socket = io.connect(address)
         this.socket.on('initial-settings', this.onInitialSettings.bind(this))
         this.socket.on('time-sync', this.onTimeSync.bind(this))
@@ -20,7 +21,7 @@ class Socket {
         });
     }
     onConsoleResponse (data) {
-        console.log(data)
+        this.output.putResponse(data)
     }
     onTimeSync (seconds) {
         if (seconds < (10 * 60) && this.app.mode === 'coding') this.app.enterNitroMode()
@@ -38,6 +39,7 @@ class Socket {
             code: this.app.editor.value,
             lang: this.editor.language
         })
+        this.output.enableLoading()
     }
     get isConnected () {
         return this._connected

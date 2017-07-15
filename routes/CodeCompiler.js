@@ -13,6 +13,10 @@ const languages = {
         ext: 'py',
         runPattern: 'py %s'
     },
+    cplusplus: {
+        ext: 'cpp',
+        runPattern: 'gcc %s'
+    }
 }
 
 class CodeCompiler {

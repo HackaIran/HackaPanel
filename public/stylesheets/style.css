@@ -22,7 +22,7 @@ body > header {
     background-position: center;
     background-size: contain;
     flex-basis: 80px;
-    min-width: 80px;
+    min-height: 80px;
     z-index: 5;
     box-shadow: 0 0 50px rgba(0,0,0,0.2);
     display: flex;
@@ -153,6 +153,7 @@ body > main > section > nav {
     list-style-type: none;
     align-items: stretch;
     height: 45px;
+    min-height: 45px;
 }
 body > main > section > nav > li {
     flex-grow: 1;
@@ -201,7 +202,54 @@ body > main > section > #challenge > iframe {
 }
 body > main > section > #output {
     flex-grow: 1;
-    background: yellow;
+    display: flex;
+    align-items: stretch;
+    position: relative;
+}
+
+body > main > section > #output > div:not(.cssload-container) {
+    flex-grow: 1;
+    margin: 40px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-basis: 100%;
+}
+body > main > section > #output > div:not(.cssload-container).output {
+    margin: 40px;
+    margin-left: 20px;
+    flex-grow: 2;
+    flex-basis: 200%;
+}
+body > main > section > #output > .cssload-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(240, 240, 240, 0.8);
+}
+body > main > section > #output > .cssload-container > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(50px);
+}
+body > main > section > #output > div > h1 {
+    margin: 5px 10px;
+}
+body > main > section > #output > div > pre {
+    flex-grow: 1;
+    background: #EEE;
+    text-align: left;
+    font-weight: bold;
+    padding: 30px;
+    font-size: 20px;
+    overflow: auto;
+}
+body > main > section > #output > div > pre.error-mode {
+    color: #b30000;
 }
 
 @media (max-width: 600px) {
@@ -327,4 +375,91 @@ body > footer > .connection.fail {
 }
 .float-box.animate > div > span {
     margin-bottom: 20px;
+}
+
+
+.cssload-container{
+	position:relative;
+}
+	
+.cssload-whirlpool,
+.cssload-whirlpool::before,
+.cssload-whirlpool::after {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border: 1px solid rgb(204,204,204);
+	border-left-color: rgb(0,0,0);
+	border-radius: 974px;
+		-o-border-radius: 974px;
+		-ms-border-radius: 974px;
+		-webkit-border-radius: 974px;
+		-moz-border-radius: 974px;
+}
+
+.cssload-whirlpool {
+	margin: -24px 0 0 -24px;
+	height: 49px;
+	width: 49px;
+	animation: cssload-rotate 1150ms linear infinite;
+		-o-animation: cssload-rotate 1150ms linear infinite;
+		-ms-animation: cssload-rotate 1150ms linear infinite;
+		-webkit-animation: cssload-rotate 1150ms linear infinite;
+		-moz-animation: cssload-rotate 1150ms linear infinite;
+}
+
+.cssload-whirlpool::before {
+	content: "";
+	margin: -22px 0 0 -22px;
+	height: 43px;
+	width: 43px;
+	animation: cssload-rotate 1150ms linear infinite;
+		-o-animation: cssload-rotate 1150ms linear infinite;
+		-ms-animation: cssload-rotate 1150ms linear infinite;
+		-webkit-animation: cssload-rotate 1150ms linear infinite;
+		-moz-animation: cssload-rotate 1150ms linear infinite;
+}
+
+.cssload-whirlpool::after {
+	content: "";
+	margin: -28px 0 0 -28px;
+	height: 55px;
+	width: 55px;
+	animation: cssload-rotate 2300ms linear infinite;
+		-o-animation: cssload-rotate 2300ms linear infinite;
+		-ms-animation: cssload-rotate 2300ms linear infinite;
+		-webkit-animation: cssload-rotate 2300ms linear infinite;
+		-moz-animation: cssload-rotate 2300ms linear infinite;
+}
+
+
+
+@keyframes cssload-rotate {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@-o-keyframes cssload-rotate {
+	100% {
+		-o-transform: rotate(360deg);
+	}
+}
+
+@-ms-keyframes cssload-rotate {
+	100% {
+		-ms-transform: rotate(360deg);
+	}
+}
+
+@-webkit-keyframes cssload-rotate {
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@-moz-keyframes cssload-rotate {
+	100% {
+		-moz-transform: rotate(360deg);
+	}
 }

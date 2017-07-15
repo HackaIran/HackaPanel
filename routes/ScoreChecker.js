@@ -4,7 +4,6 @@ class ScoreChecker {
         this.socketServer = codeCompiler.socketServer
     }
     check (response) {
-        console.log(response)
         this.socketServer.sendConsoleResponse(response)
         this.setScore(response.username, Math.floor(Math.random() * 300))
     }
