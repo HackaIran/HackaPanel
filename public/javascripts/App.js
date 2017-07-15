@@ -1,4 +1,5 @@
 const Editor = require("./Editor")
+const Output = require("./Output")
 const Leaderboard = require("./Leaderboard")
 const UI = require("./UI")
 const Socket = require("./Socket")
@@ -11,6 +12,7 @@ class App {
         this.mode = 'coding'
         this.connection = {}
         this.editor = new Editor("editor")
+        this.output = new Output(this)
         this.leaderboard = new Leaderboard(this, ".ranks")
         this.ui = new UI(this)
         this.socket = new Socket(this, '/')

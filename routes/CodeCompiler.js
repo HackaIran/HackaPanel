@@ -13,14 +13,6 @@ const languages = {
         ext: 'py',
         runPattern: 'py %s'
     },
-    cplusplus: {
-        ext: 'cpp',
-        runPattern: ''
-    },
-    csharp: {
-        ext: 'cs',
-        runPattern: ''
-    },
 }
 
 class CodeCompiler {
@@ -28,20 +20,42 @@ class CodeCompiler {
         this.socketServer = socketServer
         this.scoreChecker = new ScoreChecker(this)
     }
-    saveAndRun (username, code, lang) {
-        const filepath = './codes/' + username + '.' + languages[lang].ext
-        fs.writeFile(filepath, code, 'utf8', (err) => {
-            if (err) throw err;
-            console.log(username + ' submited a new file!');
-            exec(util.format(languages[lang].runPattern, filepath), (err, stdout, stderr) => {
+    saveAndRun (id, username, code, lang) {
+        if (config.teams.hasOwnProperty(username)) {
+            const filepath = './codes/' + username + '.' + languages[lang].ext
+            fs.writeFile(filepath, code, 'utf8', (err) => {
                 if (err) throw err;
-                this.checkCompiledCode(username, stdout, stderr)
+                console.log(username + ' submited a new file!');
+                exec(util.format(languages[lang].runPattern, filepath), (err, stdout, stderr) => {
+                    const ret = {
+                        hasCompileError: false,
+                        hasCodeError: err ? true : false,
+                        id: id,
+                        username: username,
+                        stdout: stdout,
+                        stderr: stderr,
+                        err: err == null ? null : err.message
+                    }
+                    this.checkCompiledCode(ret)
+                })
             })
-        })
+        } else {
+            this.checkCompiledCode({
+                id: id,
+                hasCompileError: true,
+                message: 'No username received'
+            })
+        }
     }
-    checkCompiledCode (username, stdout, stderr) {
-        const score = this.scoreChecker.check(stdout)
-        this.socketServer.setScore(username, score)
+    checkCompiledCode (response) {
+        if (!response.hasCompileError) {
+            this.scoreChecker.check(response)
+        }
+        else {
+            if (response.username === undefined) {
+                console.warn('Could not submit a Code', response)
+            }
+        }
     }
     
 }

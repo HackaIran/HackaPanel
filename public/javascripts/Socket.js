@@ -1,10 +1,12 @@
 class Socket {
     constructor (app, address) {
         this.app = app
+        this.editor = app.editor
         this.socket = io.connect(address)
         this.socket.on('initial-settings', this.onInitialSettings.bind(this))
         this.socket.on('time-sync', this.onTimeSync.bind(this))
         this.socket.on('score-changed', this.onScoreChanged.bind(this))
+        this.socket.on('console-response', this.onConsoleResponse.bind(this))
         this._connected = true
         this.testConnectionInterval = setTimeout(() => this.isConnected = false, 5000)
     }
@@ -15,7 +17,10 @@ class Socket {
         this.socket.emit('user-connect', {
             username: this.app.username,
             id: this.app.connection.id
-        })
+        });
+    }
+    onConsoleResponse (data) {
+        console.log(data)
     }
     onTimeSync (seconds) {
         if (seconds < (10 * 60) && this.app.mode === 'coding') this.app.enterNitroMode()
@@ -31,7 +36,7 @@ class Socket {
     runTheCode () {
         this.socket.emit('user-run', {
             code: this.app.editor.value,
-            lang: 'javascript'
+            lang: this.editor.language
         })
     }
     get isConnected () {

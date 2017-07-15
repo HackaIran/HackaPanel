@@ -1,13 +1,13 @@
 module.exports = {
     time: {
-        start: {hour: 15, minute: 0, second: 0},
-        end: {hour: 18, minute: 0, second: 0}
+        start: {hour: 22, minute: 0, second: 0},
+        end: {hour: 23, minute: 20, second: 0}
     },
     teams: {
-        choco: { name: "Eagles Team", connect: false, score: 0 },
-        buban: { name: "Shitty Team", connect: false, score: 0 },
-        sushi: { name: "Mountain Team", connect: false, score: 60 },
-        dango: { name: "Beaches Team", connect: false, score: 0 },
-        chichi: { name: "Dang Show", connect: false, score: 30 }
+        choco: { name: "Hackers Team", connect: false, score: 90 },
+        buban: { name: "C.A.T Team", connect: false, score: 88 },
+        sushi: { name: "Gelobi Team", connect: false, score: 80 },
+        dango: { name: "PyLovers Team", connect: false, score: 45 },
+        chichi: { name: "JS-Eaters Team", connect: false, score: 30 }
     }
 }
