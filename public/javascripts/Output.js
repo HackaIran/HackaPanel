@@ -13,7 +13,16 @@ class Output {
             this.changeOutputBox(data.err, true)
         }
         else {
-            this.changeOutputBox(data.stdout)
+            let outputBoxMessage = ''
+            outputBoxMessage += data.solved ? `<span class='green'>Challenge solved!</span>\n` : `<span class='red'>Challenge not solved!</span>\n`
+            if (data.solved) {
+                outputBoxMessage += `<span class='green'> => Total Steps to Solve: ${data.steps} (Scores earned: ${data.scores.steps})</span>\n`
+                outputBoxMessage += `<span class='green'> => Executing Duration: ${data.duration} (Scores earned: ${data.scores.duration})</span>\n`
+                outputBoxMessage += `<span class='green'> => Estimated Total Score: ${data.scores.total}</span>\n`
+            }
+            outputBoxMessage += `\nYour Output:\n===============================\n`
+            outputBoxMessage += data.stdout
+            this.changeOutputBox(outputBoxMessage)
         }
     }
     clear () {

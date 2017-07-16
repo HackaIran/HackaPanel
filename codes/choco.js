@@ -1,5 +1,0 @@
-console.log('RIGHT')
-console.log('RIGHT')
-console.log('LEFT')
-console.log('RIGHT')
-console.log('RIGHT')

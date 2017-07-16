@@ -215,6 +215,7 @@ body > main > section > #output > div:not(.cssload-container) {
     flex-direction: column;
     align-items: stretch;
     flex-basis: 100%;
+    min-width: 200px;
 }
 body > main > section > #output > div:not(.cssload-container).output {
     margin: 40px;
@@ -250,6 +251,12 @@ body > main > section > #output > div > pre {
 }
 body > main > section > #output > div > pre.error-mode {
     color: #b30000;
+}
+body > main > section > #output > div > pre span.green {
+    color: green;
+}
+body > main > section > #output > div > pre span.red {
+    color: red;
 }
 
 @media (max-width: 600px) {

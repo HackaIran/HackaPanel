@@ -34,7 +34,10 @@ class SocketServer {
     }
     onUserRequestRunTheCode (id, data) {
         var username = this.teamAuth.findTeamIndexById(id)
-        this.compiler.saveAndRun(id, username, data.code, data.lang)
+        this.compiler.run(id, username, data.code, data.lang)
+    }
+    onUserRequestedToSubmitTheCode (data) {
+        
     }
     tick () {
         this.io.emit("time-sync", getRemainingTime())
