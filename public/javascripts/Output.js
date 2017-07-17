@@ -10,6 +10,7 @@ class Output {
         })
         this.outputsData = []
         this.disableLoading()
+        this.select(0)
     }
     select (i) {
         for (let item of this.selectItems) item.classList.remove('active')

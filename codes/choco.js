@@ -1,13 +1,10 @@
-var INPUT = `3
---d--
---x--
--u-d-
------
-o----`
+var INPUT = `5
+r-d--
+n----
+-r---
+--ue-
+-----`
 
-console.log("RIGHT")
-console.log("LEFT")
-console.log("DOWN")
-console.log("SILENT")
-console.log("SILENT")
-console.log("DOWN")
+var grid = INPUT.split("\n").slice(1)
+
+console.log(grid[0][0])

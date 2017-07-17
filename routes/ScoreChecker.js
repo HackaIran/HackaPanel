@@ -6,18 +6,22 @@ class ScoreChecker {
         this.socketServer = codeCompiler.socketServer
     }
     check (response) {
-        const solver = new Solver(response)
-        response.solved = (!response.hasCompileError && !response.hasCodeError) && true
-        response.steps = response.stdout.split('\n').length - 1
-        const stepsScore = Math.floor(Math.random() * 400)
-        const durationScore =  Math.floor(Math.random() * 300)
-        response.scores = {
-            steps: response.solved ? stepsScore : 0,
-            duration: response.solved ? durationScore : 0,
-            total: 0
+        response.solved = false
+        if (!response.hasCompileError && !response.hasCodeError) {
+            const solver = new Solver(response)
+            response.solved = solver.solved
+            response.scores = {steps: 0, duration: 0, total: 0}
+            if (response.solved) {
+                response.steps = response.stdout.split('\n').length - 1
+                response.scores.steps = Math.floor(Math.random() * 400)
+                response.scores.duration =  Math.floor(Math.random() * 300)
+                response.scores.total = response.scores.steps + response.scores.duration
+            } else {
+                
+            }
+            // Garbaging solver
+            this.solver = null
         }
-        if (response.solved) response.scores.total = response.scores.steps + response.scores.duration
-        this.solver = null // Garbaging solver
         return response
     }
     setScore (username, score) {
