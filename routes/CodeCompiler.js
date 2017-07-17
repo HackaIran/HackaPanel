@@ -15,11 +15,6 @@ const languages = {
         ext: 'py',
         input: 'INPUT = """%s"""',
         runPattern: 'py %s'
-    },
-    csharp: {
-        ext: 'cs',
-        input: '',
-        runPattern: 'csc %s'
     }
 }
 

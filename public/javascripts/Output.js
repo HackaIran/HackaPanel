@@ -1,6 +1,7 @@
 class Output {
     constructor (app) {
         this.app = app
+        this.escapeFromJailTimeout = null
         this.submitButton = $('body > main > section > #output > section > div.submit-container > button')
         this.submitButton.addEventListener('click', this.onSubmitRequested.bind(this))
         this.loader = $('body > main > section > #output > .cssload-container')
@@ -10,7 +11,6 @@ class Output {
         for (let item of this.selectItems) item.addEventListener('click', e => {
             this.select(parseInt(e.target.innerHTML) - 1)
         })
-    
         this.outputsData = []
         this.disableLoading()
         this.select(0)
@@ -24,7 +24,6 @@ class Output {
         this.outputsData[data.inputId] = data
     }
     putResponse (data) {
-        this.disableLoading()
         this.clear()
         if (data.hasError || data.hasCodeError) {
             this.changeOutputBox(data.err, true)
@@ -40,15 +39,14 @@ class Output {
             }
             else {
                 outputBoxMessage = `<span class='red'>Challenge not solved!</span>\n`
-                console.log(data.failingReason)
-                if (data.failingReason !== null) outputBoxMessage += `<span class='red'> => ${data.failingReason} </span>\n`
+                if (data.failingReason !== undefined && data.failingReason !== null)
+                    outputBoxMessage += `<span class='red'> => ${data.failingReason} </span>\n`
             }
 
             outputBoxMessage += `\nYour Output:\n===============================\n`
             outputBoxMessage += data.stdout
             this.changeOutputBox(outputBoxMessage)
         }
-        console.log(data)
         this.changeInputBox(data.input)
     }
     onSubmitRequested () {
@@ -67,9 +65,16 @@ class Output {
         this.outputBox.innerHTML = data
     }
     enableLoading () {
+        this.app.ui.turnOnDisableMode()
         this.loader.style.display = 'block'
+        this.escapeFromJailTimeout = setTimeout(() => {
+            this.disableLoading()
+        }, 10000)
     }
     disableLoading () {
+        clearTimeout(this.escapeFromJailTimeout)
+        if (this.app.socket !== undefined) { if (this.app.socket.isConnected) this.app.ui.turnOffDisableMode() }
+        else { this.app.ui.turnOffDisableMode() }
         this.loader.style.display = 'none'
     }
 

@@ -12,10 +12,10 @@ class App {
         this.mode = 'coding'
         this.canSubmit = false
         this.connection = {}
-        this.editor = new Editor("editor")
+        this.ui = new UI(this)
+        this.editor = new Editor(this, "editor")
         this.output = new Output(this)
         this.leaderboard = new Leaderboard(this, ".ranks")
-        this.ui = new UI(this)
         this.socket = new Socket(this, '/')
         this.initShortcuts()
     }

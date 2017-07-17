@@ -20,7 +20,10 @@ class Solver {
         return this.data.input.split('\n').slice(1)
     }
     getMoves () {
-        return this.data.stdout.split('\n').filter(move => availableMoves.includes(move.toLowerCase())).map(move => move.toLowerCase())
+        return this.data.stdout.split('\n')
+                .map(move => move.split("\r")[0])
+                .filter(move => availableMoves.includes(move.toLowerCase()))
+                .map(move => move.toLowerCase())
     }
     searchForChar (char) {
         for (let i = 0; i < this.grid.length; i++) 
@@ -97,7 +100,7 @@ class Solver {
     moveCharacter (move) {
         if (move == 'up') this.character.y = Math.max(0, this.character.y - 1)
         if (move == 'down') this.character.y = Math.min(this.grid.length-1, this.character.y + 1)
-        if (move == 'left') this.character.x = Math.min(0, this.character.x - 1)
+        if (move == 'left') this.character.x = Math.max(0, this.character.x - 1)
         if (move == 'right') this.character.x = Math.min(this.grid.length-1, this.character.x + 1)
     }
     hasWon () {

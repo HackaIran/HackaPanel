@@ -1,5 +1,6 @@
 class Editor {
-    constructor (id) {
+    constructor (app, id) {
+        this.app = app
         ace.require("ace/ext/language_tools");
         this.editor = ace.edit(id);
         this.session = this.editor.getSession()
@@ -24,7 +25,8 @@ class Editor {
     }
     set language (language) {
         this._language = window.localStorage['language'] = language
-        this.editor.getSession().setMode("ace/mode/" + language);
+        this.editor.getSession().setMode("ace/mode/" + language)
+        this.app.ui.languageChoose.value = this._language
     }
     get language () {
         return this._language

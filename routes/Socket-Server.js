@@ -36,7 +36,6 @@ class SocketServer {
     onUserRequestedToConnect (data) {
         db.json.teams[data.username].connect = true
         db.json.teams[data.username].id = data.id
-        console.log(this.teamAuth.teams)
         db.save()
     }
     onUserRequestRunTheCode (id, data) {
@@ -53,6 +52,7 @@ class SocketServer {
             data.id = id
             data.username = this.teamAuth.findTeamIndexById(id)
             this.compiler.volly(data, result => {
+                this.io.to(result.id).emit('code-submit-finished', true)
                 this.setScore(result.username, result.score)
             })
         }
@@ -74,8 +74,18 @@ class SocketServer {
             })
         }
     }
+    hiddenize (response) {
+        if (response.inputId > 3) {
+            response.input = '(hidden)'
+            response.stdout = '(hidden)'
+            response.stderr = ''
+            if (response.err != null) response.err = 'You have some structural erros, check level 1, 2 or 3 to find out what is that!'
+        }
+        return response
+    }
     sendConsoleResponse (response) {
         try {
+            response = this.hiddenize(response)
             this.io.to(response.id).emit("console-response", response)
         } catch (e) {}
     }

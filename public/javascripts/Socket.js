@@ -8,6 +8,7 @@ class Socket {
         this.socket.on('time-sync', this.onTimeSync.bind(this))
         this.socket.on('score-changed', this.onScoreChanged.bind(this))
         this.socket.on('console-response', this.onConsoleResponse.bind(this))
+        this.socket.on('code-submit-finished', this.onCodeSubmitFinished.bind(this))
         this._connected = true
         this.testConnectionInterval = setTimeout(() => this.isConnected = false, 5000)
     }
@@ -21,8 +22,13 @@ class Socket {
         });
     }
     onConsoleResponse (data) {
+        if (!this.isInHardLoading) this.output.disableLoading()
         this.output.put(data)
         this.output.select(data.inputId)
+    }
+    onCodeSubmitFinished () {
+        this.isInHardLoading = false
+        this.output.disableLoading()
     }
     onTimeSync (seconds) {
         if (typeof seconds == 'string') {
@@ -57,6 +63,7 @@ class Socket {
                 code: this.app.editor.value,
                 lang: this.editor.language
             })
+            this.isInHardLoading = true
             this.output.enableLoading()
         } else {
             console.error(`You cannot submit your code when you are offline`)
@@ -71,9 +78,11 @@ class Socket {
         this._connected = shouldConnect
     }
     onConnectionFound () {
+        this.app.ui.turnOffDisableMode()
         $('footer .connection').classList.remove('fail')
     }
     onConnectionLost () {
+        this.app.ui.turnOnDisableMode()
         $('footer .connection').classList.add('fail')
     }
     onScoreChanged (data) {

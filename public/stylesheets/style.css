@@ -51,7 +51,19 @@ body > footer {
     min-width: 20px;
     z-index: 5;
 }
-
+body > footer > select.language-choose {
+    background: #444;
+    font-size: 12px;
+    padding-left: 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    outline: none;
+    width: 150px;
+    color: white;
+    border: none;
+}
 body > main {
     flex-grow: 1;
     display: flex;
@@ -182,6 +194,10 @@ body > main > section > nav > li.submit {
     border-bottom: none;
     flex-grow: 0.3;
 }
+body.disable-mode > main > section > nav > li.submit {
+    pointer-events: none;
+    background: #bbb;
+}
 body > main > section > nav > li.submit:hover {
     background: #15ad67;
 }
@@ -269,6 +285,7 @@ body > main > section > #output > section > div > pre {
     padding: 30px;
     font-size: 20px;
     overflow: auto;
+    white-space: pre-wrap;
 }
 body > main > section > #output > section > div > pre.error-mode {
     color: #b30000;
@@ -293,11 +310,15 @@ body > main > section > #output > section > div.submit-container > button {
     background: #0088ff;
     border: 0;
     cursor: pointer;
+    outline: none;
 }
 body > main > section > #output > section > div.submit-container > button:hover {
-    opacity: 0.9;
+    opacity: 0.8;
 }
-
+body.disable-mode > main > section > #output > section > div.submit-container > button {
+    pointer-events: none;
+    background: #bbb;
+}
 @media (max-width: 600px) {
     body > main {
         flex-direction: column;

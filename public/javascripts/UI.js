@@ -6,6 +6,8 @@ class UI {
         this.tabs = new Tabs(app)
         this.usernameTxt = $('header .team .name')
         this.scoreTxt = $('header .team .score')
+        this.languageChoose = $('body > footer > select.language-choose')
+        this.languageChoose.addEventListener('change', this.onLanguageChanged.bind(this))
     }
     initProfile (myTeam) {
         this.usernameTxt.innerHTML = myTeam.name
@@ -24,12 +26,22 @@ class UI {
             this.writeInTimer("Time's up!")
         }
     }
+    onLanguageChanged () {
+        console.log(this.languageChoose.value)
+        this.app.editor.language = this.languageChoose.value
+    }
     writeInTimer (text) {
         $("header > time").innerHTML = text
     }
     announceHighScore () {
         document.body.classList.add('highscore-mode')
         setTimeout(() => document.body.classList.remove('highscore-mode'), 2500)
+    }
+    turnOnDisableMode () {
+        document.body.classList.add('disable-mode')
+    }
+    turnOffDisableMode () {
+        document.body.classList.remove('disable-mode')
     }
 }
 
