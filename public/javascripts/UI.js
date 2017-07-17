@@ -15,7 +15,17 @@ class UI {
         let secs = seconds % 60
         let mins = (seconds - secs) / 60
         if (secs < 10) secs = "0" + secs
-        $("header > time").innerHTML = seconds > 0 ? (mins + ":" + secs) : "Time's up!"
+        if (seconds > 0) {
+            this.app.canSubmit = true
+            $("header > time").innerHTML = mins + ":" + secs
+        }
+        else {
+            this.app.canSubmit = false
+            this.writeInTimer("Time's up!")
+        }
+    }
+    writeInTimer (text) {
+        $("header > time").innerHTML = text
     }
     announceHighScore () {
         document.body.classList.add('highscore-mode')

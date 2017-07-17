@@ -1,7 +1,7 @@
 module.exports = {
     time: {
-        start: {hour: 22, minute: 0, second: 0},
-        end: {hour: 23, minute: 0, second: 0}
+        start: {hour: 1, minute: 53, second: 0},
+        end: {hour: 3, minute: 30, second: 0}
     },
     teams: {
         choco: { name: "Hackers Team", connect: false, score: 90 },

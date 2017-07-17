@@ -35,7 +35,7 @@ class Output {
             if (data.solved) {
                 outputBoxMessage = `<span class='green'>Challenge solved!</span>\n`
                 outputBoxMessage += `<span class='green'> => Total Steps to Solve: ${data.steps} (Scores earned: ${data.scores.steps})</span>\n`
-                outputBoxMessage += `<span class='green'> => Executing Duration: ${data.duration} (Scores earned: ${data.scores.duration})</span>\n`
+                outputBoxMessage += `<span class='green'> => Executing Duration: ${data.duration}ms (Scores earned: ${data.scores.duration})</span>\n`
                 outputBoxMessage += `<span class='green'> => Estimated Total Score: ${data.scores.total}</span>\n`
             }
             else {

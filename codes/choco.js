@@ -1,12 +1,13 @@
 var INPUT = `5
------
---x--
------
------
-o----`
+r-d--
+n----
+-r---
+--ue-
+-----`
 
-console.log("UP")
-console.log("UP")
-console.log("UP")
+console.log("DOWN")
+console.log("RIGHT")
 console.log("SILENT")
 console.log("DOWN")
+console.log("RIGHT")
+console.log("RIGHT")

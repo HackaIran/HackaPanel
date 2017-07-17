@@ -10,6 +10,7 @@ class App {
         this.auth = auth
         this.username = username
         this.mode = 'coding'
+        this.canSubmit = false
         this.connection = {}
         this.editor = new Editor("editor")
         this.output = new Output(this)

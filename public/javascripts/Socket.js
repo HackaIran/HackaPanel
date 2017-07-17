@@ -25,9 +25,14 @@ class Socket {
         this.output.select(data.inputId)
     }
     onTimeSync (seconds) {
-        if (seconds < (10 * 60) && this.app.mode === 'coding') this.app.enterNitroMode()
-        if (seconds <= 0 && (this.app.mode === 'nitro' || this.app.mode === 'coding')) this.app.enterTimesUpMode()
-        this.app.ui.setTimer(seconds)
+        if (typeof seconds == 'string') {
+            this.app.canSubmit = false
+            this.app.ui.writeInTimer(seconds)
+        } else {
+            if (seconds < (10 * 60) && this.app.mode === 'coding') this.app.enterNitroMode()
+            if (seconds <= 0 && (this.app.mode === 'nitro' || this.app.mode === 'coding')) this.app.enterTimesUpMode()
+            this.app.ui.setTimer(seconds)
+        }
         this.checkConnectionOnTimerSynced()
     }
     checkConnectionOnTimerSynced () {
@@ -36,7 +41,7 @@ class Socket {
         this.testConnectionInterval = setTimeout(() => this.isConnected = false, 5000)
     }
     runTheCode () {
-        if (this.isConnected) {
+        if (this.isConnected && this.app.canSubmit) {
             this.socket.emit('user-run', {
                 code: this.app.editor.value,
                 lang: this.editor.language
@@ -47,7 +52,7 @@ class Socket {
         }
     }
     submitTheCode () {
-        if (this.isConnected) {
+        if (this.isConnected && this.app.canSubmit) {
             this.socket.emit('user-submit', {
                 code: this.app.editor.value,
                 lang: this.editor.language

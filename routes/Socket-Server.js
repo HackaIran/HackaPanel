@@ -4,13 +4,19 @@ const CodeCompiler = require('./CodeCompiler')
 
 const start = moment().set(config.time.start)
 const end = moment().set(config.time.end)
-const getRemainingTime = () => -moment().diff(end, 'seconds')
+
+const getRemainingTime = () => {
+    const timeSpent = moment().diff(start, 'seconds')
+    if (timeSpent < 0) return 'Starting in ' + -timeSpent + 's'
+    return -moment().diff(end, 'seconds')
+}
 
 class SocketServer {
     constructor (io, teamAuth) {
         this.io = io
         this.compiler = new CodeCompiler(this)
         this.teamAuth = teamAuth
+        this.allowSubmits = false
         this.io.on("connection", this.onUserConnected.bind(this))
         setInterval(() => { this.tick() }, 1000)
     }
@@ -30,21 +36,29 @@ class SocketServer {
         this.teamAuth.teams[data.username].id = data.id
     }
     onUserRequestRunTheCode (id, data) {
-        data.id = id
-        data.username = this.teamAuth.findTeamIndexById(id)
-        this.compiler.run(0, data, response => {
-            this.sendConsoleResponse(response)
-        })
+        if (this.allowSubmits) {
+            data.id = id
+            data.username = this.teamAuth.findTeamIndexById(id)
+            this.compiler.run(0, data, response => {
+                this.sendConsoleResponse(response)
+            })
+        }
     }
     onUserRequestedToSubmitTheCode (id, data) {
-        data.id = id
-        data.username = this.teamAuth.findTeamIndexById(id)
-        this.compiler.volly(data, result => {
-            this.setScore(result.username, result.score)
-        })
+        if (this.allowSubmits) {
+            data.id = id
+            data.username = this.teamAuth.findTeamIndexById(id)
+            this.compiler.volly(data, result => {
+                this.setScore(result.username, result.score)
+            })
+        }
     }
     tick () {
-        this.io.emit("time-sync", getRemainingTime())
+        const timeRemaining = getRemainingTime()
+        this.allowSubmits = true
+        if (typeof timeRemaining == 'string') this.allowSubmits = false
+        else if (timeRemaining < 0) this.allowSubmits = false
+        this.io.emit("time-sync", timeRemaining)
     }
     setScore (username, score) {
         if (config.teams[username].score < score) {
@@ -56,7 +70,9 @@ class SocketServer {
         }
     }
     sendConsoleResponse (response) {
-        this.io.to(response.id).emit("console-response", response)
+        try {
+            this.io.to(response.id).emit("console-response", response)
+        } catch (e) {}
     }
 }
 
