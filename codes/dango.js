@@ -5,6 +5,4 @@ var INPUT = `5
 -----
 o----`
 
-var lines = INPUT.split('\n')
-
-console.log(parseInt(lines[0]))
+for(let i of [1, 2, 3, 4, 5]) console.log(i

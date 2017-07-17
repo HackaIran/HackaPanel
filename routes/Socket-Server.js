@@ -33,8 +33,11 @@ class SocketServer {
         this.teamAuth.teams[data.username].id = data.id
     }
     onUserRequestRunTheCode (id, data) {
-        var username = this.teamAuth.findTeamIndexById(id)
-        this.compiler.run(id, username, data.code, data.lang)
+        data.id = id
+        data.username = this.teamAuth.findTeamIndexById(id)
+        this.compiler.run(0, data, response => {
+            this.sendConsoleResponse(response)
+        })
     }
     onUserRequestedToSubmitTheCode (data) {
         

@@ -21,7 +21,8 @@ class Socket {
         });
     }
     onConsoleResponse (data) {
-        this.output.putResponse(data)
+        this.output.put(data)
+        this.output.select(data.inputId)
     }
     onTimeSync (seconds) {
         if (seconds < (10 * 60) && this.app.mode === 'coding') this.app.enterNitroMode()

@@ -5,4 +5,3 @@ INPUT = """5
 -----
 o----"""
 
-print(INPUT)

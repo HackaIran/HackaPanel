@@ -58,7 +58,7 @@ body > main {
 body > main > aside {
     background: #EEE;
     flex-grow: 1;
-    min-width: 150px;
+    flex-basis: 100%;
     box-shadow: 0 0 30px rgba(0,0,0,0.3);
     z-index: 2;
     display: flex;
@@ -142,7 +142,8 @@ body > main > aside > header > img {
 }
 body > main > section {
     background: white;
-    flex-grow: 6;
+    flex-grow: 4;
+    flex-basis: 350%;
     display: flex;
     flex-direction: column;
 }
@@ -202,26 +203,8 @@ body > main > section > #challenge > iframe {
 }
 body > main > section > #output {
     flex-grow: 1;
-    display: flex;
-    align-items: stretch;
     position: relative;
-}
-
-body > main > section > #output > div:not(.cssload-container) {
-    flex-grow: 1;
-    margin: 40px;
-    margin-right: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    flex-basis: 100%;
-    min-width: 200px;
-}
-body > main > section > #output > div:not(.cssload-container).output {
-    margin: 40px;
-    margin-left: 20px;
-    flex-grow: 2;
-    flex-basis: 200%;
+    display: block;
 }
 body > main > section > #output > .cssload-container {
     position: absolute;
@@ -237,10 +220,45 @@ body > main > section > #output > .cssload-container > span {
     left: 50%;
     transform: translate(-50%, -50%) translateY(50px);
 }
-body > main > section > #output > div > h1 {
+body > main > section > #output > aside {
+    background: #DDD;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+body > main > section > #output > aside li {
+    width: 50px;
+    height: 50px;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 21px;
+    color: #222;
+    background: rgba(255,252,255,0.4);
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+body > main > section > #output > aside li:hover {
+    background: rgba(255,252,255,0.8);
+}
+body > main > section > #output > aside li.active {
+    background: white;
+    pointer-events: none;
+}
+body > main > section > #output > section {
+    flex-grow: 1;
+    overflow: auto;
+}
+body > main > section > #output > section > div {
+    margin: 40px;
+    display: block;
+}
+body > main > section > #output > section > div > h1 {
     margin: 5px 10px;
 }
-body > main > section > #output > div > pre {
+body > main > section > #output > section > div > pre {
     flex-grow: 1;
     background: #EEE;
     text-align: left;
@@ -249,13 +267,13 @@ body > main > section > #output > div > pre {
     font-size: 20px;
     overflow: auto;
 }
-body > main > section > #output > div > pre.error-mode {
+body > main > section > #output > section > div > pre.error-mode {
     color: #b30000;
 }
-body > main > section > #output > div > pre span.green {
+body > main > section > #output > section > div > pre span.green {
     color: green;
 }
-body > main > section > #output > div > pre span.red {
+body > main > section > #output > section > div > pre span.red {
     color: red;
 }
 
@@ -269,6 +287,7 @@ body > main > section > #output > div > pre span.red {
 }
 body > footer {
     color: #DDD;
+    min-height: 20px;
     text-align: center;
     font-size: 12px;
     padding: 5px 0;

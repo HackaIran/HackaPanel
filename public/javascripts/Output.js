@@ -2,9 +2,22 @@ class Output {
     constructor (app) {
         this.app = app
         this.loader = $('body > main > section > #output > .cssload-container')
-        this.inputBox = $('body > main > section > #output > div.input > pre')
-        this.outputBox = $('body > main > section > #output > div.output > pre')
+        this.inputBox = $('body > main > section > #output > section > div.input > pre')
+        this.outputBox = $('body > main > section > #output > section > div.output > pre')
+        this.selectItems = $$('body > main > section > #output > aside li')
+        for (let item of this.selectItems) item.addEventListener('click', e => {
+            this.select(parseInt(e.target.innerHTML) - 1)
+        })
+        this.outputsData = []
         this.disableLoading()
+    }
+    select (i) {
+        for (let item of this.selectItems) item.classList.remove('active')
+        this.selectItems[i].classList.add('active')
+        this.putResponse(this.outputsData[i] || {stdout: '', input: ''})
+    }
+    put (data) {
+        this.outputsData[data.inputId] = data
     }
     putResponse (data) {
         this.disableLoading()
@@ -24,6 +37,8 @@ class Output {
             outputBoxMessage += data.stdout
             this.changeOutputBox(outputBoxMessage)
         }
+        console.log(data)
+        this.changeInputBox(data.input)
     }
     clear () {
         this.changeInputBox("")

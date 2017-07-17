@@ -12,7 +12,7 @@ class ScoreChecker {
             total: 0
         }
         if (response.solved) response.scores.total = response.scores.steps + response.scores.duration
-        this.socketServer.sendConsoleResponse(response)
+        return response
     }
     setScore (username, score) {
         this.socketServer.setScore(username, score)

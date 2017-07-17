@@ -28,49 +28,58 @@ class CodeCompiler {
         this.socketServer = socketServer
         this.scoreChecker = new ScoreChecker(this)
     }
-    run (id, username, code, lang) {
-        if (config.teams.hasOwnProperty(username)) {
-            const filepath = './codes/' + username + '.' + languages[lang].ext
-            const exepath = './codes/' + username + '.exe'
-            code = this.addInputToCode(inputs[0], code, lang)
-            fs.writeFile(filepath, code, 'utf8', (err) => {
+    run (i, data, callback) {
+        if (config.teams.hasOwnProperty(data.username)) {
+            const filepath = './codes/' + data.username + '.' + languages[data.lang].ext
+            const exepath = './codes/' + data.username + '.exe'
+            data.code = this.addInputToCode(inputs[i], data.code, data.lang)
+            fs.writeFile(filepath, data.code, 'utf8', (err) => {
                 if (err) throw err;
-                console.log(username + ' submited a new file!');
+                console.log(data.username + ' submited a new file!');
                 var childProcessDone = false
-                var timeStampBeforeRunTheCode = Date.now()
-                const child = exec(util.format(languages[lang].runPattern, filepath), (err, stdout, stderr) => {
+                const timeStampBeforeRunTheCode = Date.now()
+                const shellCommand = util.format(languages[data.lang].runPattern, filepath)
+                const child = exec(shellCommand, (err, stdout, stderr) => {
                     childProcessDone = true
                     const ret = {
+                        inputId: i,
+                        input: inputs[i],
                         hasCompileError: false,
                         hasCodeError: err ? true : false,
-                        id: id,
-                        username: username,
+                        id: data.id,
+                        username: data.username,
                         stdout: stdout,
                         stderr: stderr,
                         duration: Date.now() - timeStampBeforeRunTheCode,
                         err: err == null ? null : err.message
                     }
-                    if (!child.killed) this.checkCompiledCode(ret)
+                    if (!child.killed) {
+                        callback(this.checkCompiledCode(ret))
+                    }
                 })
                 setTimeout(() => {
                     if (!childProcessDone) {
                         child.kill()
-                        this.checkCompiledCode({
+                        callback(this.checkCompiledCode({
+                            inputId: i,
+                            input: inputs[i],
                             hasCompileError: false,
                             hasCodeError: true,
-                            id: id,
-                            username: username,
+                            id: data.id,
+                            username: data.username,
                             err: 'Your process killed because it was running too long!'
-                        })
+                        }))
                     }
                 }, 2000)
             })
         } else {
-            this.checkCompiledCode({
-                id: id,
+            callback(this.checkCompiledCode({
+                inputId: i,
+                input: inputs[i],
+                id: data.id,
                 hasCompileError: true,
                 message: 'No username received'
-            })
+            }))
         }
     }
     addInputToCode (input, code, lang) {
@@ -78,7 +87,7 @@ class CodeCompiler {
     }
     checkCompiledCode (response) {
         if (!response.hasCompileError) {
-            this.scoreChecker.check(response)
+            return this.scoreChecker.check(response)
         }
         else {
             if (response.username === undefined) {
