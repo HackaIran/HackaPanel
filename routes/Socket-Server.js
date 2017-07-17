@@ -1,6 +1,7 @@
 const moment = require("moment");
 const config = require("../panel.config")
 const CodeCompiler = require('./CodeCompiler')
+const DB = require('./DB')
 
 const start = moment().set(config.time.start)
 const end = moment().set(config.time.end)
@@ -14,6 +15,7 @@ const getRemainingTime = () => {
 class SocketServer {
     constructor (io, teamAuth) {
         this.io = io
+        this.db = new DB
         this.compiler = new CodeCompiler(this)
         this.teamAuth = teamAuth
         this.allowSubmits = false
