@@ -56,10 +56,10 @@ class Leaderboard {
             if(A.rank > B.rank) return 1;
             return 0;
         })
-        this.hightscore = this.teams[0].score
+        this.highscore = this.teams[0].score
         for (let team of this.teams) {
             team.place = place++
-            if (this.hightscore !== 0) team.progress = team.score / this.hightscore
+            if (this.highscore !== 0) team.progress = team.score / this.highscore
             else team.progress = 0
         }
     }

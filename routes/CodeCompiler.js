@@ -28,14 +28,32 @@ class CodeCompiler {
         this.socketServer = socketServer
         this.scoreChecker = new ScoreChecker(this)
     }
+    volly (data, callback, index = 0, result = {score: 0, duration: 0, steps: 0}) {
+        const vollyFinished = index === inputs.length
+        if (vollyFinished) {
+            console.log(data.username + ' has new submited code, the score is ' + result.score);
+            result.id = data.id
+            result.username = data.username
+            callback(result)
+        }
+        else {
+            this.run(index, data, (response) => {
+                this.socketServer.sendConsoleResponse(response)
+                this.volly(data, callback, index + 1, {
+                    score: result.score + response.scores.total,
+                    duration: result.duration + response.duration,
+                    steps: result.steps + response.steps,
+                })
+            })
+        }
+    }
     run (i, data, callback) {
         if (config.teams.hasOwnProperty(data.username)) {
             const filepath = './codes/' + data.username + '.' + languages[data.lang].ext
             const exepath = './codes/' + data.username + '.exe'
-            data.code = this.addInputToCode(inputs[i], data.code, data.lang)
-            fs.writeFile(filepath, data.code, 'utf8', (err) => {
+            const code = this.addInputToCode(inputs[i], data.code, data.lang)
+            fs.writeFile(filepath, code, 'utf8', (err) => {
                 if (err) throw err;
-                console.log(data.username + ' submited a new file!');
                 var childProcessDone = false
                 const timeStampBeforeRunTheCode = Date.now()
                 const shellCommand = util.format(languages[data.lang].runPattern, filepath)

@@ -20,13 +20,10 @@ class SocketServer {
             time: getRemainingTime(),
             teams: config.teams
         })
-        socket.on('disconnect', () => {
-            this.teamAuth.disconnect(socket.id)
-        })
+        socket.on('disconnect', () => this.teamAuth.disconnect(socket.id))
         socket.on("user-connect", this.onUserRequestedToConnect.bind(this))
-        socket.on("user-run", (data) => {
-            this.onUserRequestRunTheCode(socket.id, data)
-        })
+        socket.on("user-run", data => this.onUserRequestRunTheCode(socket.id, data))
+        socket.on("user-submit", data => this.onUserRequestedToSubmitTheCode(socket.id, data))
     }
     onUserRequestedToConnect (data) {
         this.teamAuth.teams[data.username].connect = true
@@ -39,8 +36,12 @@ class SocketServer {
             this.sendConsoleResponse(response)
         })
     }
-    onUserRequestedToSubmitTheCode (data) {
-        
+    onUserRequestedToSubmitTheCode (id, data) {
+        data.id = id
+        data.username = this.teamAuth.findTeamIndexById(id)
+        this.compiler.volly(data, result => {
+            this.setScore(result.username, result.score)
+        })
     }
     tick () {
         this.io.emit("time-sync", getRemainingTime())

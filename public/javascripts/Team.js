@@ -1,6 +1,7 @@
 class Team {
     constructor (leaderboard, id, username, name, score) {
         this.leaderboard = leaderboard
+        this.ui = this.leaderboard.app.ui
         this.id = id
         this._rank = 1
         this._place = 0
@@ -30,7 +31,10 @@ class Team {
     set score (score) {
         this._score = score
         this.scoreElement.innerHTML = score
-        if (this.isMe) $('header .team .score').innerHTML = score
+        if (this.isMe) {
+            $('header .team .score').innerHTML = $('body > dialog > span').innerHTML = score
+            this.ui.announceHighScore()
+        }
         this.leaderboard.updateTeams()
     }
     get place () {

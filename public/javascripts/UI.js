@@ -17,6 +17,10 @@ class UI {
         if (secs < 10) secs = "0" + secs
         $("header > time").innerHTML = seconds > 0 ? (mins + ":" + secs) : "Time's up!"
     }
+    announceHighScore () {
+        document.body.classList.add('highscore-mode')
+        setTimeout(() => document.body.classList.remove('highscore-mode'), 2500)
+    }
 }
 
 module.exports = UI

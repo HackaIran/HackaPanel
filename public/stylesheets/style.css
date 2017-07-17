@@ -28,6 +28,7 @@ body > header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition-duration: 0.3s;
 }
 body > header > time {
     text-align: center;
@@ -44,6 +45,7 @@ body > header > div > h3 {
     margin: 0;
 }
 body > footer {
+    transition-duration: 0.3s;
     background: #333;
     flex-basis: 20px;
     min-width: 20px;
@@ -54,6 +56,7 @@ body > main {
     flex-grow: 1;
     display: flex;
     flex-direction: row-reverse;
+    transition-duration: 0.3s;
 }
 body > main > aside {
     background: #EEE;
@@ -316,6 +319,36 @@ body > footer > .connection.fail {
     background: #ff2424;
     box-shadow: 0 0 10px #ff2424;
 }
+body > dialog {
+    z-index: 999;
+    border: none;
+    top: 50%;
+    transform: translateY(-50%) scale(0.9);
+    opacity: 0;
+    text-align: center;
+    display: block;
+    background: transparent;
+    transition-duration: 0.3s;
+}
+body > dialog > img {
+    margin-bottom: -35px;
+}
+body > dialog > h2 {
+    margin-bottom: 5px;
+}
+body > dialog > span {
+    font-size: 30px;
+}
+body.highscore-mode > header, body.highscore-mode > main, body.highscore-mode > footer {
+    filter: blur(15px);
+    pointer-events: none;
+}
+body.highscore-mode > dialog {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(-50%) scale(1)
+}
+
 .float-box {
     position: fixed;
     top: 0;

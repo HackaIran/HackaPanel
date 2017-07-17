@@ -42,6 +42,13 @@ class Socket {
         })
         this.output.enableLoading()
     }
+    submitTheCode () {
+        this.socket.emit('user-submit', {
+            code: this.app.editor.value,
+            lang: this.editor.language
+        })
+        this.output.enableLoading()
+    }
     get isConnected () {
         return this._connected
     }
