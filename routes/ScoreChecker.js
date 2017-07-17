@@ -1,4 +1,4 @@
-var Solver = require('./Solver')
+var Solver = require('../challenge/Solver')
 
 class ScoreChecker {
     constructor (codeCompiler) {
@@ -17,7 +17,7 @@ class ScoreChecker {
                 response.scores.duration =  Math.floor(Math.random() * 300)
                 response.scores.total = response.scores.steps + response.scores.duration
             } else {
-                
+                response.failingReason = solver.failingReason
             }
             // Garbaging solver
             this.solver = null

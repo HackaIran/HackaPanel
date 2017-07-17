@@ -10,6 +10,8 @@ class Solver {
         this.data = data
         this.character = {x: 0, y: 0}
         this.soldierInDoubt = false
+        this.failingReason = ''
+        this.currentStep = 0
         this.solved = this.solve()
     }
 
@@ -60,18 +62,32 @@ class Solver {
         this.exit = this.getExitPosition()
         this.character = this.getCharacterFirstPosition()
         for (let move of this.moves) {
+            this.currentStep++
             const situation = this.checkMove(move)
             if (situation === 'win') return true
-            if (situation === 'fail') return false
+            if (situation === 'fail') {
+                this.failingReason += ` [STEP=${this.currentStep}] [X: ${this.character.x}, y: ${this.character.y}]`
+                return false
+            }
         }
+        this.failingReason = `You stopped moving before getting into exit door. [STEP=${this.currentStep}] [X: ${this.character.x}, y: ${this.character.y}]`
         return false
     }
     checkMove (move) {
+        const prevCharacterPosition = {x: this.character.x, y: this.character.y}
         this.moveCharacter(move)
+        if (move != 'silent' && prevCharacterPosition.x == this.character.x && prevCharacterPosition.y == this.character.y) return 'nothing'
         if (move == 'silent') this.silentThisBlock()
         if (this.hasWon()) return 'win'
-        if (this.soldierInDoubt) return 'fail'
-        if (this.isBlockDangerous(this.character).inDanger) return 'fail'
+        if (this.soldierInDoubt) {
+            this.failingReason = `Doubted soldier detected you!`
+            return 'fail'
+        }
+        const blockDanger = this.isBlockDangerous(this.character)
+        if (blockDanger.inDanger) {
+            this.failingReason = `You have detected from this direction: "${blockDanger.from}"!`
+            return 'fail'
+        }
         return 'nothing'
     }
     silentThisBlock () {

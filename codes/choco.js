@@ -1,10 +1,12 @@
 var INPUT = `5
-r-d--
-n----
--r---
---ue-
------`
+-----
+--x--
+-----
+-----
+o----`
 
-var grid = INPUT.split("\n").slice(1)
-
-console.log(grid[0][0])
+console.log("UP")
+console.log("UP")
+console.log("UP")
+console.log("SILENT")
+console.log("DOWN")

@@ -253,12 +253,10 @@ body > main > section > #output > aside li.active {
 body > main > section > #output > section {
     flex-grow: 1;
     overflow: auto;
-    text-align: center;
 }
 body > main > section > #output > section > div {
     margin: 40px;
     display: block;
-    text-align: left;
 }
 body > main > section > #output > section > div > h1 {
     margin: 5px 10px;
@@ -281,14 +279,23 @@ body > main > section > #output > section > div > pre span.green {
 body > main > section > #output > section > div > pre span.red {
     color: red;
 }
-body > main > section > #output > section > button {
+body > main > section > #output > section > div.submit-container {
+    padding: 30px;
+    text-align: center;
+}
+body > main > section > #output > section > div.submit-container:hover {
+    text-align: left;
+}
+body > main > section > #output > section > div.submit-container > button {
     color: #fff;
     font-size: 18px;
     padding: 14px 25px;
     background: #0088ff;
     border: 0;
     cursor: pointer;
-    margin-bottom: 30px;
+}
+body > main > section > #output > section > div.submit-container > button:hover {
+    opacity: 0.9;
 }
 
 @media (max-width: 600px) {

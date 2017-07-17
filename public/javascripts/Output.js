@@ -1,6 +1,8 @@
 class Output {
     constructor (app) {
         this.app = app
+        this.submitButton = $('body > main > section > #output > section > div.submit-container > button')
+        this.submitButton.addEventListener('click', this.onSubmitRequested.bind(this))
         this.loader = $('body > main > section > #output > .cssload-container')
         this.inputBox = $('body > main > section > #output > section > div.input > pre')
         this.outputBox = $('body > main > section > #output > section > div.output > pre')
@@ -8,6 +10,7 @@ class Output {
         for (let item of this.selectItems) item.addEventListener('click', e => {
             this.select(parseInt(e.target.innerHTML) - 1)
         })
+    
         this.outputsData = []
         this.disableLoading()
         this.select(0)
@@ -27,19 +30,29 @@ class Output {
             this.changeOutputBox(data.err, true)
         }
         else {
-            let outputBoxMessage = ''
-            outputBoxMessage += data.solved ? `<span class='green'>Challenge solved!</span>\n` : `<span class='red'>Challenge not solved!</span>\n`
+            let outputBoxMessage
+
             if (data.solved) {
+                outputBoxMessage = `<span class='green'>Challenge solved!</span>\n`
                 outputBoxMessage += `<span class='green'> => Total Steps to Solve: ${data.steps} (Scores earned: ${data.scores.steps})</span>\n`
                 outputBoxMessage += `<span class='green'> => Executing Duration: ${data.duration} (Scores earned: ${data.scores.duration})</span>\n`
                 outputBoxMessage += `<span class='green'> => Estimated Total Score: ${data.scores.total}</span>\n`
             }
+            else {
+                outputBoxMessage = `<span class='red'>Challenge not solved!</span>\n`
+                console.log(data.failingReason)
+                if (data.failingReason !== null) outputBoxMessage += `<span class='red'> => ${data.failingReason} </span>\n`
+            }
+
             outputBoxMessage += `\nYour Output:\n===============================\n`
             outputBoxMessage += data.stdout
             this.changeOutputBox(outputBoxMessage)
         }
         console.log(data)
         this.changeInputBox(data.input)
+    }
+    onSubmitRequested () {
+        this.app.socket.submitTheCode()
     }
     clear () {
         this.changeInputBox("")

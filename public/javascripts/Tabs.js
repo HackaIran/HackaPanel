@@ -28,11 +28,7 @@ class Tabs {
         this.storeLastTabSelected(which)
     }
     runTheCode () {
-        if (this.app.socket.isConnected) {
-            this.app.socket.runTheCode()
-        } else {
-            console.error(`You cannot run your code when you are offline`)
-        }
+        this.app.socket.runTheCode()
     }
 }
 

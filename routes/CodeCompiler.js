@@ -39,6 +39,12 @@ class CodeCompiler {
         else {
             this.run(index, data, (response) => {
                 this.socketServer.sendConsoleResponse(response)
+                // Some corrections
+                response.scores = response.scores || {}
+                response.scores.total = response.scores.total || 0
+                response.duration = response.duration || 0
+                response.steps = response.steps || 0
+                // Returnal functions
                 this.volly(data, callback, index + 1, {
                     score: result.score + response.scores.total,
                     duration: result.duration + response.duration,

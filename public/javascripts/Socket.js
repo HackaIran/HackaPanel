@@ -36,18 +36,26 @@ class Socket {
         this.testConnectionInterval = setTimeout(() => this.isConnected = false, 5000)
     }
     runTheCode () {
-        this.socket.emit('user-run', {
-            code: this.app.editor.value,
-            lang: this.editor.language
-        })
-        this.output.enableLoading()
+        if (this.isConnected) {
+            this.socket.emit('user-run', {
+                code: this.app.editor.value,
+                lang: this.editor.language
+            })
+            this.output.enableLoading()
+        } else {
+            console.error(`You cannot run your code when you are offline`)
+        }
     }
     submitTheCode () {
-        this.socket.emit('user-submit', {
-            code: this.app.editor.value,
-            lang: this.editor.language
-        })
-        this.output.enableLoading()
+        if (this.isConnected) {
+            this.socket.emit('user-submit', {
+                code: this.app.editor.value,
+                lang: this.editor.language
+            })
+            this.output.enableLoading()
+        } else {
+            console.error(`You cannot submit your code when you are offline`)
+        }
     }
     get isConnected () {
         return this._connected
