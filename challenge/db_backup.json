@@ -3,27 +3,27 @@
         "choco": {
             "name": "Hackers Team",
             "connect": false,
-            "score": 2496
+            "score": 90 
         },
         "buban": {
             "name": "C.A.T Team",
-            "connect": false,
-            "score": 88
-        },
+            "connect": false, 
+            "score": 88 
+            },
         "sushi": {
             "name": "Gelobi Team",
-            "connect": false,
-            "score": 80
-        },
+            "connect": false, 
+            "score": 80 
+            },
         "dango": {
             "name": "PyLovers Team",
-            "connect": false,
-            "score": 45
-        },
+            "connect": false, 
+            "score": 45 
+            },
         "chichi": {
             "name": "JS-Eaters Team",
-            "connect": false,
-            "score": 30
+            "connect": false, 
+            "score": 30 
         }
     }
 }

@@ -1,8 +1,8 @@
-const config = require("../panel.config")
+const db = require("./db-handler")
 
 class TeamAuth {
     constructor () {
-        this.teams = config.teams
+        this.teams = db.json.teams
     }
     login (username, id) {
         const team = this.teams[username]
@@ -29,6 +29,7 @@ class TeamAuth {
             this.teams[teamIndex].id = undefined
             this.teams[teamIndex].connect = false
         }
+        db.save()
     }
 }
 

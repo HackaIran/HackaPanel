@@ -1,7 +1,7 @@
 const moment = require("moment");
 const config = require("../panel.config")
 const CodeCompiler = require('./CodeCompiler')
-const DB = require('./DB')
+const db = require('./db-handler')
 
 const start = moment().set(config.time.start)
 const end = moment().set(config.time.end)
@@ -15,7 +15,7 @@ const getRemainingTime = () => {
 class SocketServer {
     constructor (io, teamAuth) {
         this.io = io
-        this.db = new DB
+        this.db = db
         this.compiler = new CodeCompiler(this)
         this.teamAuth = teamAuth
         this.allowSubmits = false
@@ -26,7 +26,7 @@ class SocketServer {
         this.io.to(socket.id).emit("initial-settings", {
             id: socket.id,
             time: getRemainingTime(),
-            teams: config.teams
+            teams: db.json.teams
         })
         socket.on('disconnect', () => this.teamAuth.disconnect(socket.id))
         socket.on("user-connect", this.onUserRequestedToConnect.bind(this))
@@ -34,8 +34,10 @@ class SocketServer {
         socket.on("user-submit", data => this.onUserRequestedToSubmitTheCode(socket.id, data))
     }
     onUserRequestedToConnect (data) {
-        this.teamAuth.teams[data.username].connect = true
-        this.teamAuth.teams[data.username].id = data.id
+        db.json.teams[data.username].connect = true
+        db.json.teams[data.username].id = data.id
+        console.log(this.teamAuth.teams)
+        db.save()
     }
     onUserRequestRunTheCode (id, data) {
         if (this.allowSubmits) {
@@ -63,8 +65,9 @@ class SocketServer {
         this.io.emit("time-sync", timeRemaining)
     }
     setScore (username, score) {
-        if (config.teams[username].score < score) {
-            config.teams[username].score = score
+        if (db.json.teams[username].score < score) {
+            db.json.teams[username].score = score
+            db.save()
             this.io.emit("score-changed", {
                 username: username,
                 score: score

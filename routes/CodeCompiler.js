@@ -1,7 +1,7 @@
 const { spawn, exec } = require('child_process')
 const fs = require('fs')
 const util = require('util')
-const config = require("../panel.config")
+const db = require("./db-handler")
 const ScoreChecker = require('./ScoreChecker')
 const inputs = require('../challenge/inputs')
 
@@ -54,7 +54,7 @@ class CodeCompiler {
         }
     }
     run (i, data, callback) {
-        if (config.teams.hasOwnProperty(data.username)) {
+        if (db.json.teams.hasOwnProperty(data.username)) {
             const filepath = './codes/' + data.username + '.' + languages[data.lang].ext
             const exepath = './codes/' + data.username + '.exe'
             const code = this.addInputToCode(inputs[i], data.code, data.lang)

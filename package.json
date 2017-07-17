@@ -33,6 +33,7 @@
     "express": "~4.14.0",
     "express-session": "^1.14.2",
     "framesflow": "^1.0.4",
+    "json-beautify": "^1.0.1",
     "log4js": "^1.0.1",
     "moment": "^2.18.1",
     "moments": "0.0.2",
