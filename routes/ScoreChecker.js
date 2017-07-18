@@ -13,8 +13,8 @@ class ScoreChecker {
             response.scores = {steps: 0, duration: 0, total: 0}
             if (response.solved) {
                 response.steps = response.stdout.split('\n').length - 1
-                response.scores.steps = Math.floor(Math.random() * 400)
-                response.scores.duration =  Math.floor(Math.random() * 300)
+                response.scores.steps = this.calcStepsScore(response, solver)
+                response.scores.duration =  this.calcDurationScore(response, solver)
                 response.scores.total = response.scores.steps + response.scores.duration
             } else {
                 response.failingReason = solver.failingReason
@@ -23,6 +23,15 @@ class ScoreChecker {
             this.solver = null
         }
         return response
+    }
+    calcStepsScore (response, solver) {
+        const size = parseInt(response.input.split("\n")[0])
+        const maxMove = size * size
+        console.log(solver)
+        const minMove = solver.exit
+    }
+    calcDurationScore (response, solver) {
+        console.log(response.duration)
     }
     setScore (username, score) {
         this.socketServer.setScore(username, score)

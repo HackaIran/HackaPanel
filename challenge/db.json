@@ -3,13 +3,14 @@
         "choco": {
             "name": "Hackers Team",
             "connect": true,
-            "score": 3229,
-            "id": "c3xdiNZpemP69dHCAAAE"
+            "score": 0,
+            "id": "Q1SkitGEnoWQgmiUAAAF"
         },
         "buban": {
             "name": "C.A.T Team",
-            "connect": false,
-            "score": 2383
+            "connect": true,
+            "score": 0,
+            "id": "a9eA6OHnmvB7mxVGAAAE"
         },
         "sushi": {
             "name": "Gelobi Team",

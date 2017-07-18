@@ -64,6 +64,10 @@ class Solver {
         this.moves = this.getMoves()
         this.exit = this.getExitPosition()
         this.character = this.getCharacterFirstPosition()
+        this.characterFirstPosition = {
+            x: this.character.x,
+            y: this.character.y
+        }
         for (let move of this.moves) {
             this.currentStep++
             const situation = this.checkMove(move)

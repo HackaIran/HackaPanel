@@ -368,6 +368,7 @@ body > dialog {
     display: block;
     background: transparent;
     transition-duration: 0.3s;
+    pointer-events: none;
 }
 body > dialog > img {
     margin-bottom: -35px;
