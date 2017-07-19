@@ -72,6 +72,9 @@ class Leaderboard {
     disable () {
         this.board.classList.add('disable')
     }
+    enable () {
+        this.board.classList.remove('disable')
+    }
 }
 
 module.exports = Leaderboard

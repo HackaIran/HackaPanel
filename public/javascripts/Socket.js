@@ -43,6 +43,7 @@ class Socket {
             this.app.canSubmit = false
             this.app.ui.writeInTimer(seconds)
         } else {
+            this.app.exitNitroMode()
             if (seconds < (10 * 60)) this.app.enterNitroMode()
             if (seconds <= 0) this.app.enterTimesUpMode()
             if (seconds <= 0 && seconds >= -14) this.app.countDown(seconds)

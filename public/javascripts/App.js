@@ -29,6 +29,10 @@ class App {
         this.mode = 'nitro'
         this.leaderboard.disable()
     }
+    exitNitroMode () {
+        this.mode = 'coding'
+        this.leaderboard.enable()
+    }
     enterTimesUpMode () {
         $('body > .final-box').classList.add("show")
         this.mode = 'timesup'
