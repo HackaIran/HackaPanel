@@ -8,10 +8,9 @@
         },
         "buban": {
             "name": "C.A.T Team",
-            "connect": true,
+            "connect": false,
             "score": 569,
-            "submits": 4,
-            "id": "9GbjNs8Uc6GojvLYAAAB"
+            "submits": 4
         }
     }
 }

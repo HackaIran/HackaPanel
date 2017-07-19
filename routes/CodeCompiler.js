@@ -14,7 +14,7 @@ const languages = {
     python: {
         ext: 'py',
         input: 'INPUT = """%s"""',
-        runPattern: 'py %s'
+        runPattern: 'python %s'
     }
 }
 
