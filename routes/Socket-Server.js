@@ -17,6 +17,7 @@ class SocketServer {
         this.io = io
         this.db = db
         this.resetAllConnections()
+        this.winner = ''
         this.compiler = new CodeCompiler(this)
         this.teamAuth = teamAuth
         this.allowSubmits = false
@@ -32,7 +33,8 @@ class SocketServer {
         this.io.to(socket.id).emit("initial-settings", {
             id: socket.id,
             time: getRemainingTime(),
-            teams: db.json.teams
+            teams: db.json.teams,
+            winner: this.winner
         })
         socket.on('disconnect', () => this.teamAuth.disconnect(socket.id))
         socket.on("user-connect", this.onUserRequestedToConnect.bind(this))
@@ -73,6 +75,9 @@ class SocketServer {
         if (timeRemaining < 60 * 10) {
             this.nitroMode = true
         }
+        if (timeRemaining <= 0) {
+            this.sendTheWinner()
+        }
         this.io.emit("time-sync", timeRemaining)
     }
     setScore (username, score) {
@@ -91,6 +96,19 @@ class SocketServer {
                 })
             }
         }
+    }
+    sendTheWinner () {
+        let highestScore = 0
+        let winnerUsername = ''
+        for (let username in db.json.teams) {
+            const team = db.json.teams[username]
+            if (team.score >= highestScore) {
+                highestScore = team.score
+                winnerUsername = username
+            }
+        }
+        this.winner = winnerUsername
+        this.io.emit("winner-is", winnerUsername)
     }
     hiddenize (response) {
         if (response.inputId > 3) {

@@ -594,6 +594,7 @@ body.highscore-mode > dialog {
 }
 .final-box h1 span {
     font-size: 150px;
+    white-space: nowrap;
 }
 .final-box h1.show {
     transition-duration: 0.5s;
@@ -601,17 +602,32 @@ body.highscore-mode > dialog {
     transform: translate(-50%, -50%);
 }
 .final-box.result {
-    background: rgba(212, 242, 255, 0.95)
+    background: linear-gradient(rgba(212,242,255,.95), rgb(225, 212, 255))
 }
 .final-box.result h1 span {
     font-size: 50px;
+    color: #004674;
 }
 .final-box.winner {
-    background: rgba(30, 186, 147, 0.9)
+    background: linear-gradient(rgba(222, 255, 212, 0.95),#9edb81);
+    animation: lightdancer 5s linear infinite;
 }
 .final-box.winner h1 img {
     display: block;
 }
 .final-box.winner h1 span {
     color: white;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+.winning-song {
+    display: none;
+}
+
+@keyframes lightdancer {
+    0% {
+        filter: hue-rotate(0deg)
+    }
+    100% {
+        filter: hue-rotate(360deg)
+    }
 }

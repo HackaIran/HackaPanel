@@ -1,100 +1,55 @@
-<h1>Challenge</h1>
+<h1>یک بازی نینجایی</h1>
 
-<p>y default, pipes for stdin, stdout and stderr are established between the parent Node.js process and the spawned child. It is possible to stream data through these pipes in a non-blocking way. Note, however, that some programs use line-buffered I/O internally. While that does not affect Node.js, it can mean that data sent to the child process may not be immediately consumed.
+<pre><b>داستان بازی:</b>
+در یک شب تاریک یک نینجا تصمیم به فرار از یک منطقه نظامی میگیرد، در این منطقه تعدادی سرباز و یک راه خروج وجود دارد و شما موظف به راهنمایی نینجا برای خروج از منطقه میباشید. به علت تاریکی هوا هر سرباز قادر به دیده بانی محدوده ی روبروی خود میباشد و نینجا در تمامی این مسیر نباید توسط سربازان شناسایی شود.
+قوانین بازی :
+این چالش به صورت یک بازی تیمی طراحی شده و در انتها ، تیمی که قادر به کسب بالاترین امتیاز در بین سایر تیم های شرکت کننده شده ، به عنوان تیم اول این چالش تیمی برنده این بازی خواهد بود.
+زمین بازی شامل خانه های -, n, e, r, l, u, d میباشد که در غالب متغیر <b>INPUT</b> به شما داده میشود، مثلا:
+</pre>
+<div class="console-show">
+5<br />
+r-d--<br />
+n----<br />
+-r---<br />
+--ue-<br />
+-----<br />
+</div>
+<pre>
+ <b>-</b> به معنای خانه ی تهی
+ <b>n</b> به معنای نینجا
+ <b>e</b> به معنای درب خروجی
+ و باقی سربازهای بازی میباشند.
 
-The child_process.spawn() method spawns the child process asynchronously, without blocking the Node.js event loop. The child_process.spawnSync() function provides equivalent functionality in a synchronous manner that blocks the event loop until the spawned process either exits or is terminated.
+</pre>
+<pre>نمونه خروجی برای سوال بالا میتواند این خروجی باشد:</pre>
+<div class="console-show">
+DOWN<br />
+RIGHT<br />
+SILENT<br />
+DOWN<br />
+RIGHT<br />
+RIGHT
+</div>
+<pre>
+<b>قوانین بازی:</b>
+    • در زمین بازی تعدادی سرباز ایستاند که هر کدام در جهت خود تا جایی که مانعی وجود نداشته باشد را دیده بانی می کند (خود سرباز ها یک نوع مانع محسوب میشوند)
+         <b>u: </b>سربازی که به سمت بالا ایستاده.
+         <b>r: </b>سربازی که به سمت راست ایستاده.
+         <b>d: </b>سربازی که به سمت پایین ایستاده.
+         <b>l: </b>سربازی که به سمت چپ ایستاده.
+    • شما میتوانید با استفاده از کلمات RIGHT, LEFT, UP, DOWN نینجای بازی را که با حرفn در زمین بازی نشان داده شده جابجا کنید
+    • شما میتوانید با قرار گیری بر روی خانه یک سرباز با کلمه SILENT سرباز را مهار کنید
+    • هر حرکتی که منجر به دیده شدن نینجا توسط یک سرباز شود، باعث باخت شما میشود
+    • اگر بر روی خانه سربازی قرار گیرید او را به حالت شک درآورده و تنها باید او را SILENT کنید، در غیر اینصورت اگر سرباز را مهار نکرده و حرکت دیگری انجام دهید شما شناسایی خواهید شد
+    • اگر سرباز به حالت شک درآمده و حرکت بعدی شما خانه ی Exit یا e باشد، پیش از شناسایی شدن شما بازی را برده اید
 
-For convenience, the child_process module provides a handful of synchronous and asynchronous alternatives to child_process.spawn() and child_process.spawnSync(). Note that each of these alternatives are implemented on top of child_process.spawn() or child_process.spawnSync().
+<b>قوانین امتیازبندی:</b>
+    • در تمامی مراحل فقط قادر به استفاده از یک کد خواهید بود
+    • به تعداد بی نهایت امکان تست کد خود بر روی مرحله اول بازی را دارید اما به ازای هربار اجرای کد بروی تمامی مراحل 10 امتیاز از بانک امتیاز شما کسر میشود
+    • بعد از اجرای کد بروی تمامی مراحل، مجموع امتیازات کسب شده در هر مرحله به عنوان امتیاز تیم شما در سیستم محاسبه و ثبت می شود.
+    • امتیاز بندی در هر مرحله بر اساس دو پارامتر سرعت اجرای کد شما در سرور و تعداد قدم های شما برای حل مرحله موردنظر محاسبه می شود.
+    • مرحله ای منجر به شکست شده باشد دارای صفر امتیاز میباشد
 
-child_process.exec(): spawns a shell and runs a command within that shell, passing the stdout and stderr to a callback function when complete.
-child_process.execFile(): similar to child_process.exec() except that it spawns the command directly without first spawning a shell.
-child_process.fork(): spawns a new Node.js process and invokes a specified module with an IPC communication channel established that allows sending messages between parent and child.
-child_process.execSync(): a synchronous version of child_process.exec() that will block the Node.js event loop.
-child_process.execFileSync(): a synchronous version of child_process.execFile() that will block the Node.js event loop.
-For certain use cases, such as automating shell scripts, the synchronous counterparts may be more convenient. </p>
-<p>y default, pipes for stdin, stdout and stderr are established between the parent Node.js process and the spawned child. It is possible to stream data through these pipes in a non-blocking way. Note, however, that some programs use line-buffered I/O internally. While that does not affect Node.js, it can mean that data sent to the child process may not be immediately consumed.
-
-The child_process.spawn() method spawns the child process asynchronously, without blocking the Node.js event loop. The child_process.spawnSync() function provides equivalent functionality in a synchronous manner that blocks the event loop until the spawned process either exits or is terminated.
-
-For convenience, the child_process module provides a handful of synchronous and asynchronous alternatives to child_process.spawn() and child_process.spawnSync(). Note that each of these alternatives are implemented on top of child_process.spawn() or child_process.spawnSync().
-
-child_process.exec(): spawns a shell and runs a command within that shell, passing the stdout and stderr to a callback function when complete.
-child_process.execFile(): similar to child_process.exec() except that it spawns the command directly without first spawning a shell.
-child_process.fork(): spawns a new Node.js process and invokes a specified module with an IPC communication channel established that allows sending messages between parent and child.
-child_process.execSync(): a synchronous version of child_process.exec() that will block the Node.js event loop.
-child_process.execFileSync(): a synchronous version of child_process.execFile() that will block the Node.js event loop.
-For certain use cases, such as automating shell scripts, the synchronous counterparts may be more convenient. </p>
-<p>y default, pipes for stdin, stdout and stderr are established between the parent Node.js process and the spawned child. It is possible to stream data through these pipes in a non-blocking way. Note, however, that some programs use line-buffered I/O internally. While that does not affect Node.js, it can mean that data sent to the child process may not be immediately consumed.
-
-The child_process.spawn() method spawns the child process asynchronously, without blocking the Node.js event loop. The child_process.spawnSync() function provides equivalent functionality in a synchronous manner that blocks the event loop until the spawned process either exits or is terminated.
-
-For convenience, the child_process module provides a handful of synchronous and asynchronous alternatives to child_process.spawn() and child_process.spawnSync(). Note that each of these alternatives are implemented on top of child_process.spawn() or child_process.spawnSync().
-
-child_process.exec(): spawns a shell and runs a command within that shell, passing the stdout and stderr to a callback function when complete.
-child_process.execFile(): similar to child_process.exec() except that it spawns the command directly without first spawning a shell.
-child_process.fork(): spawns a new Node.js process and invokes a specified module with an IPC communication channel established that allows sending messages between parent and child.
-child_process.execSync(): a synchronous version of child_process.exec() that will block the Node.js event loop.
-child_process.execFileSync(): a synchronous version of child_process.execFile() that will block the Node.js event loop.
-For certain use cases, such as automating shell scripts, the synchronous counterparts may be more convenient. </p>
-<p>y default, pipes for stdin, stdout and stderr are established between the parent Node.js process and the spawned child. It is possible to stream data through these pipes in a non-blocking way. Note, however, that some programs use line-buffered I/O internally. While that does not affect Node.js, it can mean that data sent to the child process may not be immediately consumed.
-
-The child_process.spawn() method spawns the child process asynchronously, without blocking the Node.js event loop. The child_process.spawnSync() function provides equivalent functionality in a synchronous manner that blocks the event loop until the spawned process either exits or is terminated.
-
-For convenience, the child_process module provides a handful of synchronous and asynchronous alternatives to child_process.spawn() and child_process.spawnSync(). Note that each of these alternatives are implemented on top of child_process.spawn() or child_process.spawnSync().
-
-child_process.exec(): spawns a shell and runs a command within that shell, passing the stdout and stderr to a callback function when complete.
-child_process.execFile(): similar to child_process.exec() except that it spawns the command directly without first spawning a shell.
-child_process.fork(): spawns a new Node.js process and invokes a specified module with an IPC communication channel established that allows sending messages between parent and child.
-child_process.execSync(): a synchronous version of child_process.exec() that will block the Node.js event loop.
-child_process.execFileSync(): a synchronous version of child_process.execFile() that will block the Node.js event loop.
-For certain use cases, such as automating shell scripts, the synchronous counterparts may be more convenient. </p>
-<p>y default, pipes for stdin, stdout and stderr are established between the parent Node.js process and the spawned child. It is possible to stream data through these pipes in a non-blocking way. Note, however, that some programs use line-buffered I/O internally. While that does not affect Node.js, it can mean that data sent to the child process may not be immediately consumed.
-
-The child_process.spawn() method spawns the child process asynchronously, without blocking the Node.js event loop. The child_process.spawnSync() function provides equivalent functionality in a synchronous manner that blocks the event loop until the spawned process either exits or is terminated.
-
-For convenience, the child_process module provides a handful of synchronous and asynchronous alternatives to child_process.spawn() and child_process.spawnSync(). Note that each of these alternatives are implemented on top of child_process.spawn() or child_process.spawnSync().
-
-child_process.exec(): spawns a shell and runs a command within that shell, passing the stdout and stderr to a callback function when complete.
-child_process.execFile(): similar to child_process.exec() except that it spawns the command directly without first spawning a shell.
-child_process.fork(): spawns a new Node.js process and invokes a specified module with an IPC communication channel established that allows sending messages between parent and child.
-child_process.execSync(): a synchronous version of child_process.exec() that will block the Node.js event loop.
-child_process.execFileSync(): a synchronous version of child_process.execFile() that will block the Node.js event loop.
-For certain use cases, such as automating shell scripts, the synchronous counterparts may be more convenient. </p>
-<p>y default, pipes for stdin, stdout and stderr are established between the parent Node.js process and the spawned child. It is possible to stream data through these pipes in a non-blocking way. Note, however, that some programs use line-buffered I/O internally. While that does not affect Node.js, it can mean that data sent to the child process may not be immediately consumed.
-
-The child_process.spawn() method spawns the child process asynchronously, without blocking the Node.js event loop. The child_process.spawnSync() function provides equivalent functionality in a synchronous manner that blocks the event loop until the spawned process either exits or is terminated.
-
-For convenience, the child_process module provides a handful of synchronous and asynchronous alternatives to child_process.spawn() and child_process.spawnSync(). Note that each of these alternatives are implemented on top of child_process.spawn() or child_process.spawnSync().
-
-child_process.exec(): spawns a shell and runs a command within that shell, passing the stdout and stderr to a callback function when complete.
-child_process.execFile(): similar to child_process.exec() except that it spawns the command directly without first spawning a shell.
-child_process.fork(): spawns a new Node.js process and invokes a specified module with an IPC communication channel established that allows sending messages between parent and child.
-child_process.execSync(): a synchronous version of child_process.exec() that will block the Node.js event loop.
-child_process.execFileSync(): a synchronous version of child_process.execFile() that will block the Node.js event loop.
-For certain use cases, such as automating shell scripts, the synchronous counterparts may be more convenient. </p>
-<p>y default, pipes for stdin, stdout and stderr are established between the parent Node.js process and the spawned child. It is possible to stream data through these pipes in a non-blocking way. Note, however, that some programs use line-buffered I/O internally. While that does not affect Node.js, it can mean that data sent to the child process may not be immediately consumed.
-
-The child_process.spawn() method spawns the child process asynchronously, without blocking the Node.js event loop. The child_process.spawnSync() function provides equivalent functionality in a synchronous manner that blocks the event loop until the spawned process either exits or is terminated.
-
-For convenience, the child_process module provides a handful of synchronous and asynchronous alternatives to child_process.spawn() and child_process.spawnSync(). Note that each of these alternatives are implemented on top of child_process.spawn() or child_process.spawnSync().
-
-child_process.exec(): spawns a shell and runs a command within that shell, passing the stdout and stderr to a callback function when complete.
-child_process.execFile(): similar to child_process.exec() except that it spawns the command directly without first spawning a shell.
-child_process.fork(): spawns a new Node.js process and invokes a specified module with an IPC communication channel established that allows sending messages between parent and child.
-child_process.execSync(): a synchronous version of child_process.exec() that will block the Node.js event loop.
-child_process.execFileSync(): a synchronous version of child_process.execFile() that will block the Node.js event loop.
-For certain use cases, such as automating shell scripts, the synchronous counterparts may be more convenient. </p>
-<p>y default, pipes for stdin, stdout and stderr are established between the parent Node.js process and the spawned child. It is possible to stream data through these pipes in a non-blocking way. Note, however, that some programs use line-buffered I/O internally. While that does not affect Node.js, it can mean that data sent to the child process may not be immediately consumed.
-
-The child_process.spawn() method spawns the child process asynchronously, without blocking the Node.js event loop. The child_process.spawnSync() function provides equivalent functionality in a synchronous manner that blocks the event loop until the spawned process either exits or is terminated.
-
-For convenience, the child_process module provides a handful of synchronous and asynchronous alternatives to child_process.spawn() and child_process.spawnSync(). Note that each of these alternatives are implemented on top of child_process.spawn() or child_process.spawnSync().
-
-child_process.exec(): spawns a shell and runs a command within that shell, passing the stdout and stderr to a callback function when complete.
-child_process.execFile(): similar to child_process.exec() except that it spawns the command directly without first spawning a shell.
-child_process.fork(): spawns a new Node.js process and invokes a specified module with an IPC communication channel established that allows sending messages between parent and child.
-child_process.execSync(): a synchronous version of child_process.exec() that will block the Node.js event loop.
-child_process.execFileSync(): a synchronous version of child_process.execFile() that will block the Node.js event loop.
-For certain use cases, such as automating shell scripts, the synchronous counterparts may be more convenient. </p>
+</pre>
 
 <link rel="stylesheet" href="/css/challenge.css">

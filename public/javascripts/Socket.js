@@ -9,11 +9,13 @@ class Socket {
         this.socket.on('score-changed', this.onScoreChanged.bind(this))
         this.socket.on('console-response', this.onConsoleResponse.bind(this))
         this.socket.on('code-submit-finished', this.onCodeSubmitFinished.bind(this))
+        this.socket.on('winner-is', this.setWinner.bind(this))
         this._connected = true
         this.testConnectionInterval = setTimeout(() => this.isConnected = false, 5000)
     }
     onInitialSettings (data) {
         this.app.connection.id = data.id
+        this.app.winner = data.winner
         this.onTimeSync(data.time)
         if (data.time > 60 * 10) {
             this.app.leaderboard.initializeTeams(data.teams)
@@ -44,7 +46,8 @@ class Socket {
             if (seconds < (10 * 60)) this.app.enterNitroMode()
             if (seconds <= 0) this.app.enterTimesUpMode()
             if (seconds <= 0 && seconds >= -14) this.app.countDown(seconds)
-            if (seconds < -15) this.app.showWinner()
+            if (seconds <= -15) this.app.showWinner()
+            if (seconds == -15) this.app.playWinningSong()
             this.app.ui.setTimer(seconds)
         }
         this.checkConnectionOnTimerSynced()
@@ -76,6 +79,9 @@ class Socket {
         } else {
             console.error(`You cannot submit your code when you are offline`)
         }
+    }
+    setWinner (data) {
+        this.app.winner = data
     }
     get isConnected () {
         return this._connected

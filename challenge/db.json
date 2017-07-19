@@ -2,16 +2,17 @@
     "teams": {
         "choco": {
             "name": "Hackers Team",
-            "connect": false,
+            "connect": true,
             "score": 569,
-            "submits": 1
+            "submits": 1,
+            "id": "9rOQhUAE9czooMwBAAAA"
         },
         "buban": {
             "name": "C.A.T Team",
             "connect": true,
             "score": 569,
             "submits": 4,
-            "id": "EqIcpsZjD_U6KrwpAAAC"
+            "id": "-2liwE56MCZiYHKXAAAB"
         }
     }
 }
