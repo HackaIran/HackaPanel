@@ -1,13 +1,14 @@
-var INPUT = `5
-r-d--
---n--
--r---
---ue-
------`
+var INPUT = `8
+d-----n-
+-u------
+--d-----
+---u----
+----d---
+-----u--
+------d-
+-e-----u`
 
 console.log("DOWN")
-console.log("RIGHT")
-console.log("SILENT")
 console.log("DOWN")
 console.log("RIGHT")
 console.log("RIGHT")

@@ -78,6 +78,10 @@ body > main > aside {
     z-index: 2;
     display: flex;
     flex-direction: column;
+    transition-duration: 1s;
+}
+body > main > aside.disable {
+    filter: grayscale(100%) blur(5px);
 }
 body > main > aside > header {
     text-align: center;
@@ -531,8 +535,6 @@ body.highscore-mode > dialog {
 		-moz-animation: cssload-rotate 2300ms linear infinite;
 }
 
-
-
 @keyframes cssload-rotate {
 	100% {
 		transform: rotate(360deg);
@@ -561,4 +563,55 @@ body.highscore-mode > dialog {
 	100% {
 		-moz-transform: rotate(360deg);
 	}
+}
+
+
+.final-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    opacity: 0;
+    background: rgba(255,255,255,0.95);
+    pointer-events: none;
+}
+.final-box.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+.final-box h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    text-align: center;
+    opacity: 0;
+}
+.final-box h1 img {
+    margin: auto;
+    display: none;
+    margin-bottom: 15px;
+}
+.final-box h1 span {
+    font-size: 150px;
+}
+.final-box h1.show {
+    transition-duration: 0.5s;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
+.final-box.result {
+    background: rgba(212, 242, 255, 0.95)
+}
+.final-box.result h1 span {
+    font-size: 50px;
+}
+.final-box.winner {
+    background: rgba(30, 186, 147, 0.9)
+}
+.final-box.winner h1 img {
+    display: block;
+}
+.final-box.winner h1 span {
+    color: white;
 }

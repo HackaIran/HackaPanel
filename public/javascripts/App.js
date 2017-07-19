@@ -27,7 +27,14 @@ class App {
         this.leaderboard.disable()
     }
     enterTimesUpMode () {
+        $('body > .final-box').classList.add("show")
         this.mode = 'timesup'
+    }
+    countDown (seconds) {
+        this.ui.writeInFinalBox(15 + seconds)
+    }
+    showWinner () {
+        console.log('Winner')
     }
 }
 

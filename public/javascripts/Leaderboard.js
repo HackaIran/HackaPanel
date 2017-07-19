@@ -3,6 +3,7 @@ const Team = require("./Team")
 class Leaderboard {
     constructor (app, query) {
         this.app = app
+        this.board = $('body > main > aside')
         this.list = $(query)
         this.teams = []
         this.hightscore = 0
@@ -32,12 +33,17 @@ class Leaderboard {
     getThisTeam () {
         return this.getTeamByUsername(this.app.username)
     }
-    initializeTeams (teams) {
+    initializeTeams (teams, hidden = false) {
         this.clearAll()
         for (let username in teams) {
             const team = teams[username]
             if (username === this.app.username) team.id = this.app.connection.id
-            this.addTeam(team.id, username, team.name, team.score, false)
+            this.addTeam(
+                team.id,
+                username,
+                team.name,
+                hidden && (username !== this.app.username) ? 0 : team.score,
+                false)
         }
         this.app.ui.initProfile(this.getThisTeam())
         this.updateTeams()
@@ -64,7 +70,7 @@ class Leaderboard {
         }
     }
     disable () {
-
+        this.board.classList.add('disable')
     }
 }
 

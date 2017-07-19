@@ -16,11 +16,17 @@ class SocketServer {
     constructor (io, teamAuth) {
         this.io = io
         this.db = db
+        this.resetAllConnections()
         this.compiler = new CodeCompiler(this)
         this.teamAuth = teamAuth
         this.allowSubmits = false
+        this.nitroMode = false
         this.io.on("connection", this.onUserConnected.bind(this))
         setInterval(() => { this.tick() }, 1000)
+    }
+    resetAllConnections () {
+        for (let username in this.db.json.teams) this.db.json.teams[username].connect = false
+        db.save()
     }
     onUserConnected (socket) {
         this.io.to(socket.id).emit("initial-settings", {
@@ -53,6 +59,8 @@ class SocketServer {
             data.username = this.teamAuth.findTeamIndexById(id)
             this.compiler.volly(data, result => {
                 this.io.to(result.id).emit('code-submit-finished', true)
+                db.json.teams[result.username].submits++
+                db.save()
                 this.setScore(result.username, result.score)
             })
         }
@@ -62,16 +70,26 @@ class SocketServer {
         this.allowSubmits = true
         if (typeof timeRemaining == 'string') this.allowSubmits = false
         else if (timeRemaining < 0) this.allowSubmits = false
+        if (timeRemaining < 60 * 10) {
+            this.nitroMode = true
+        }
         this.io.emit("time-sync", timeRemaining)
     }
     setScore (username, score) {
         if (db.json.teams[username].score < score) {
             db.json.teams[username].score = score
             db.save()
-            this.io.emit("score-changed", {
-                username: username,
-                score: score
-            })
+            if (!this.nitroMode) {
+                this.io.emit("score-changed", {
+                    username: username,
+                    score: score
+                })
+            } else {
+                this.io.to(db.json.teams[username].id).emit("score-changed", {
+                    username: username,
+                    score: score
+                })
+            }
         }
     }
     hiddenize (response) {

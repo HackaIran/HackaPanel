@@ -2,30 +2,16 @@
     "teams": {
         "choco": {
             "name": "Hackers Team",
-            "connect": true,
-            "score": 0,
-            "id": "Q1SkitGEnoWQgmiUAAAF"
+            "connect": false,
+            "score": 569,
+            "submits": 1
         },
         "buban": {
             "name": "C.A.T Team",
             "connect": true,
-            "score": 0,
-            "id": "a9eA6OHnmvB7mxVGAAAE"
-        },
-        "sushi": {
-            "name": "Gelobi Team",
-            "connect": false,
-            "score": 80
-        },
-        "dango": {
-            "name": "PyLovers Team",
-            "connect": false,
-            "score": 45
-        },
-        "chichi": {
-            "name": "JS-Eaters Team",
-            "connect": false,
-            "score": 30
+            "score": 569,
+            "submits": 4,
+            "id": "EqIcpsZjD_U6KrwpAAAC"
         }
     }
 }

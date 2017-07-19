@@ -15,7 +15,13 @@ class Socket {
     onInitialSettings (data) {
         this.app.connection.id = data.id
         this.onTimeSync(data.time)
-        this.app.leaderboard.initializeTeams(data.teams)
+        if (data.time > 60 * 10) {
+            this.app.leaderboard.initializeTeams(data.teams)
+        }
+        else {
+            this.app.leaderboard.initializeTeams(data.teams, true)
+            this.app.enterNitroMode()
+        }
         this.socket.emit('user-connect', {
             username: this.app.username,
             id: this.app.connection.id
@@ -35,8 +41,10 @@ class Socket {
             this.app.canSubmit = false
             this.app.ui.writeInTimer(seconds)
         } else {
-            if (seconds < (10 * 60) && this.app.mode === 'coding') this.app.enterNitroMode()
-            if (seconds <= 0 && (this.app.mode === 'nitro' || this.app.mode === 'coding')) this.app.enterTimesUpMode()
+            if (seconds < (10 * 60)) this.app.enterNitroMode()
+            if (seconds <= 0) this.app.enterTimesUpMode()
+            if (seconds <= 0 && seconds >= -14) this.app.countDown(seconds)
+            if (seconds < -15) this.app.showWinner()
             this.app.ui.setTimer(seconds)
         }
         this.checkConnectionOnTimerSynced()

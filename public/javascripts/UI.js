@@ -6,6 +6,7 @@ class UI {
         this.tabs = new Tabs(app)
         this.usernameTxt = $('header .team .name')
         this.scoreTxt = $('header .team .score')
+        this.finalBox = $('body > .final-box')
         this.languageChoose = $('body > footer > select.language-choose')
         this.languageChoose.addEventListener('change', this.onLanguageChanged.bind(this))
     }
@@ -24,6 +25,18 @@ class UI {
         else {
             this.app.canSubmit = false
             this.writeInTimer("Time's up!")
+        }
+    }
+    writeInFinalBox (what, isResult = false, isWinner = false) {
+        this.finalBox.querySelector('h1 span').innerHTML = what
+        this.finalBox.querySelector('h1').classList.add('show')
+        if (!isResult) {
+            setTimeout(() => {
+                this.finalBox.querySelector('h1').classList.remove('show')
+            }, 950)
+        } else {
+            this.finalBox.classList.add('result')
+            if (isWinner) this.finalBox.classList.add('winner')
         }
     }
     onLanguageChanged () {
