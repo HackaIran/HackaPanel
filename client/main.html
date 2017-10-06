@@ -1,25 +1,89 @@
 <head>
-  <title>HackaPanel</title>
+    <title>Hacka{Karaj} | The Largest Global Community of Developers</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-  {{> info}}
+    <header>
+        <div class="team">
+            <h3 class="name"></h3>
+            <span>score: <span class="score"></span></span>
+        </div>
+        <time></time>
+    </header>
+    <main>
+        <aside>
+            <header>
+                <img src="./assets/images/leaderboard.png" alt="leaderboard icon">
+            </header>
+            <ol class="ranks"></ol>
+        </aside>
+        <section>
+            <nav>
+                <li data-page="challenge">Challenge</li>
+                <li data-page="editor">Code</li>
+                <li data-page="output">Output</li>
+                <li data-page="output" class="submit">Run The Code<em>(F5)</em></li>
+            </nav>
+            <div class="tab-page" id="challenge"><iframe src="/challenge"></iframe></div>
+            <div class="tab-page" id="editor"></div>
+            <div class="tab-page" id="output">
+                <div class="cssload-container">
+                    <div class="cssload-whirlpool"></div>
+                    <span>Running The Code...</span>
+                </div>
+                <aside>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li>10</li>
+                </aside>
+                <section>
+                    <div class="input">
+                        <h1>Input:</h1>
+                        <pre></pre>
+                    </div>
+                    <div class="output">
+                        <h1>Output:</h1>
+                        <pre></pre>
+                    </div>
+                    <div class="submit-container"><button>Submit The Code</button></div>
+                </section>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="connection"></div>
+        <span>All right reserved by <a href="http://hackaglobal.com/" title="HackaGlobal - The largest global community of developers!" target="_blank">HackaGlobal</a></span>
+        <select class="language-choose">
+            <option value="javascript">Javascript</option>
+            <option value="python">Python</option>
+        </select>
+    </footer>
+    <dialog>
+        <img src="./assets/images/check.svg" alt="highscore" width="100px">
+        <h2>Congrats! New Highscore</h2>
+        <span>3200</span>
+    </dialog>
+    <div class="final-box">
+        <h1>
+            <img src="./assets/images/leaderboard.png" alt="leaderboard icon">
+            <span>YOU WON THE GAME!</span>
+        </h1>
+    </div>
+    <div class="float-box">
+        <div>
+            <span>Welcome to <b>Hacka{Karaj}!</b>:)</span>
+            <input class="username" placeholder="Username here" tabindex="1">
+            <button>Enter</button>
+        </div>
+    </div>
+    <audio class="winning-song" src="./assets/sounds/winning.mp3"></audio>
+    <script src="./javascripts/socket.io/socket.io.js"></script>
+    <script src="./javascripts/ace/ace.js" charset="utf-8"></script>
 </body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
-
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
-</template>
