@@ -1,9 +1,9 @@
-const { spawn, exec } = require('child_process')
-const fs = require('fs')
-const util = require('util')
-const db = require("./db-handler")
-const ScoreChecker = require('./ScoreChecker')
-const inputs = require('../challenge/inputs')
+const { spawn, exec } = require('child_process');
+const fs = require('fs');
+const util = require('util');
+const db = require("./db-handler");
+const ScoreChecker = require('./ScoreChecker');
+const inputs = require('../challenge/inputs');
 
 const languages = {
     javascript: {
@@ -20,25 +20,25 @@ const languages = {
 
 class CodeCompiler {
     constructor (socketServer) {
-        this.socketServer = socketServer
+        this.socketServer = socketServer;
         this.scoreChecker = new ScoreChecker(this)
     }
     volly (data, callback, index = 0, result = {score: 0, duration: 0, steps: 0}) {
-        const vollyFinished = index === inputs.length
+        const vollyFinished = index === inputs.length;
         if (vollyFinished) {
             console.log(data.username + ' has new submited code, the score is ' + result.score);
-            result.id = data.id
-            result.username = data.username
+            result.id = data.id;
+            result.username = data.username;
             callback(result)
         }
         else {
             this.run(index, data, (response) => {
-                this.socketServer.sendConsoleResponse(response)
+                this.socketServer.sendConsoleResponse(response);
                 // Some corrections
-                response.scores = response.scores || {}
-                response.scores.total = response.scores.total || 0
-                response.duration = response.duration || 0
-                response.steps = response.steps || 0
+                response.scores = response.scores || {};
+                response.scores.total = response.scores.total || 0;
+                response.duration = response.duration || 0;
+                response.steps = response.steps || 0;
                 // Returnal functions
                 this.volly(data, callback, index + 1, {
                     score: result.score + response.scores.total,
@@ -50,35 +50,35 @@ class CodeCompiler {
     }
     run (i, data, callback) {
         if (db.json.teams.hasOwnProperty(data.username)) {
-            const filepath = './codes/' + data.username + '.' + languages[data.lang].ext
-            const exepath = './codes/' + data.username + '.exe'
-            const code = this.addInputToCode(inputs[i], data.code, data.lang)
+            const filepath = './codes/' + data.username + '.' + languages[data.lang].ext;
+            const exepath = './codes/' + data.username + '.exe';
+            const code = this.addInputToCode(inputs[i], data.code, data.lang);
             fs.writeFile(filepath, code, 'utf8', (err) => {
                 if (err) throw err;
-                var childProcessDone = false
-                const timeStampBeforeRunTheCode = Date.now()
-                const shellCommand = util.format(languages[data.lang].runPattern, filepath)
+                let childProcessDone = false;
+                const timeStampBeforeRunTheCode = Date.now();
+                const shellCommand = util.format(languages[data.lang].runPattern, filepath);
                 const child = exec(shellCommand, (err, stdout, stderr) => {
-                    childProcessDone = true
+                    childProcessDone = true;
                     const ret = {
                         inputId: i,
                         input: inputs[i],
                         hasCompileError: false,
-                        hasCodeError: err ? true : false,
+                        hasCodeError: !!err,
                         id: data.id,
                         username: data.username,
                         stdout: stdout,
                         stderr: stderr,
                         duration: Date.now() - timeStampBeforeRunTheCode,
-                        err: err == null ? null : err.message
-                    }
+                        err: err === null ? null : err.message
+                    };
                     if (!child.killed) {
                         callback(this.checkCompiledCode(ret))
                     }
-                })
+                });
                 setTimeout(() => {
                     if (!childProcessDone) {
-                        child.kill()
+                        child.kill();
                         callback(this.checkCompiledCode({
                             inputId: i,
                             input: inputs[i],
@@ -117,4 +117,4 @@ class CodeCompiler {
     
 }
 
-module.exports = CodeCompiler
+module.exports = CodeCompiler;
