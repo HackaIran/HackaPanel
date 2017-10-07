@@ -2,16 +2,20 @@ import React from 'react'
 
 class ChallengeTab extends React.Component {
 
+    constructor (props) {
+        super(props);
+        const challengeElement = document.querySelector('body > .challenge');
+        this.challengeHTML = challengeElement.innerHTML;
+        challengeElement.remove()
+    }
+
     get tabStyle () {
         return { display: this.props.hidden ? 'none' : 'inherit' };
     }
 
     render() {
-        console.log('Challenge', this.props.hidden)
         return (
-            <div style={this.tabStyle} className="tab-page" id="challenge">
-
-            </div>
+            <div style={this.tabStyle} className="tab-page" id="challenge" dangerouslySetInnerHTML={{__html: this.challengeHTML}} />
         )
     }
 }

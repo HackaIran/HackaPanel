@@ -11,11 +11,12 @@ class Main extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            tab: 'challenge'
+            tab: window.localStorage['hacka-tab'] || 'challenge'
         }
     }
 
     changeTab (to) {
+        window.localStorage['hacka-tab'] = to
         this.setState({ tab: to })
     }
 
@@ -32,7 +33,7 @@ class Main extends React.Component {
                     </nav>
                     <ChallengeTab hidden={this.state.tab !== 'challenge'} />
                     <EditorTab hidden={this.state.tab !== 'editor'} />
-                    <OutputTab hidden={this.state.tab !== 'output'} />
+                    <OutputTab inputsCount={5} hidden={this.state.tab !== 'output'} />
                 </section>
             </main>
         )

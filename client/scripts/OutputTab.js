@@ -5,14 +5,27 @@ class OutputTab extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            input: '',
-            output: ''
-        }
+            question: 0,
+            loading: false
+        };
+        this.QAs = [
+            { input: 'A',  output: 'B' },
+            { input: 'C',  output: 'D' },
+            { input: 'E',  output: 'F' }
+        ]
+    }
+
+    changeQuestionTo (i) {
+        this.setState({ question: i })
+    }
+
+    submitTheCode () {
+
     }
 
     get questionItems () {
         const ret = [];
-        for (let i = 0; i < 10; i++) ret.push(<li key={i}>i</li>)
+        for (let i = 1; i <= this.props.inputsCount; i++) ret.push(<li key={i} onClick={() => this.changeQuestionTo(i - 1)}>{i}</li>)
         return ret;
     }
 
@@ -20,24 +33,33 @@ class OutputTab extends React.Component {
         return { display: this.props.hidden ? 'none' : 'inherit' };
     }
 
+    get current () {
+        const question = this.QAs[this.state.question];
+        if (question) return question;
+        return { input: '', output: '' }
+    }
+
     render() {
+
+        const loader = this.state.loading ? (<div className="cssload-container">
+            <div className="cssload-whirlpool" />
+            <span>Running The Code...</span>
+        </div>) : null;
+
         return (
             <div style={this.tabStyle} className="tab-page" id="output">
-                <div className="cssload-container">
-                    <div className="cssload-whirlpool" />
-                    <span>Running The Code...</span>
-                </div>
+                {loader}
                 <aside>{this.questionItems}</aside>
                 <section>
                     <div className="input">
                         <h1>Input:</h1>
-                        <pre>{this.state.input}</pre>
+                        <pre>{ this.current.input }</pre>
                     </div>
                     <div className="output">
                         <h1>Output:</h1>
-                        <pre>{this.state.output}</pre>
+                        <pre>{ this.current.output }</pre>
                     </div>
-                    <div className="submit-container"><button>Submit The Code</button></div>
+                    <div className="submit-container"><button onClick={this.submitTheCode.bind(this)}>Submit The Code</button></div>
                 </section>
             </div>
         )
