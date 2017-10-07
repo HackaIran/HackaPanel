@@ -30,9 +30,9 @@ class Main extends React.Component {
                 <Leaderboard />
                 <section>
                     <nav>
-                        <li onClick={() => this.changeTab('challenge')}>Challenge</li>
-                        <li onClick={() => this.changeTab('editor')}>Code</li>
-                        <li onClick={() => this.changeTab('output')}>Output</li>
+                        <li className={this.state.tab === 'challenge' ? 'active' : ''} onClick={() => this.changeTab('challenge')}>Challenge</li>
+                        <li className={this.state.tab === 'editor' ? 'active' : ''} onClick={() => this.changeTab('editor')}>Code</li>
+                        <li className={this.state.tab === 'output' ? 'active' : ''} onClick={() => this.changeTab('output')}>Output</li>
                         <li data-page="output" className="submit" onClick={this.runCode.bind(this)}>Run The Code<em>(F5)</em></li>
                     </nav>
                     <ChallengeTab hidden={this.state.tab !== 'challenge'} />
