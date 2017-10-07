@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Aside from './Aside'
+import Leaderboard from './Leaderboard'
 
 import ChallengeTab from './ChallengeTab'
 import EditorTab from './EditorTab'
@@ -16,20 +16,24 @@ class Main extends React.Component {
     }
 
     changeTab (to) {
-        window.localStorage['hacka-tab'] = to
+        window.localStorage['hacka-tab'] = to;
         this.setState({ tab: to })
+    }
+
+    runCode () {
+
     }
 
     render () {
         return (
             <main>
-                <Aside />
+                <Leaderboard />
                 <section>
                     <nav>
                         <li onClick={() => this.changeTab('challenge')}>Challenge</li>
                         <li onClick={() => this.changeTab('editor')}>Code</li>
                         <li onClick={() => this.changeTab('output')}>Output</li>
-                        <li data-page="output" className="submit">Run The Code<em>(F5)</em></li>
+                        <li data-page="output" className="submit" onClick={this.runCode.bind(this)}>Run The Code<em>(F5)</em></li>
                     </nav>
                     <ChallengeTab hidden={this.state.tab !== 'challenge'} />
                     <EditorTab hidden={this.state.tab !== 'editor'} />
