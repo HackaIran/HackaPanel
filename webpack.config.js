@@ -1,10 +1,10 @@
 module.exports = {
     devtool: 'inline-source-map',
-    entry: './client/scripts/index.js',
+    entry: './client/index.js',
     watch: true,
     output: {
-        filename: './public/javascripts/index.js',
-        sourceMapFilename: './public/javascripts/index.js.map'
+        filename: './public/javascripts/bundle.js',
+        sourceMapFilename: './public/javascripts/bundle.js.map'
     },
     module: {
         loaders: [{
@@ -14,6 +14,9 @@ module.exports = {
             query: {
                 presets: ['es2015' ]
             }
+        }, {
+            test: /\.sass$/,
+            use: [{ loader: "style-loader" }, { loader: "css-loader" }, { loader: "sass-loader" }]
         }]
     }
 };
