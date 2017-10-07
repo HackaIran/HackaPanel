@@ -1,21 +1,31 @@
 import React from 'react'
 
+import Team from './Team'
+
 class Leaderboard extends React.Component {
 
     constructor (props) {
         super(props);
         this.teams = [
-            { username: 'folan', name: 'Klug Team', point: 552 },
-            { username: 'bisar', name: 'Pug Team', point: 1000 },
-            { username: 'bhamn', name: 'Ngino Team', point: 800 },
+            { username: 'folan', name: 'Klug Team', score: 552 },
+            { username: 'bisar', name: 'Pug Team', score: 1000 },
+            { username: 'bhamn', name: 'Ngino Team', score: 800 },
         ]
     }
 
     get teamsList () {
-        this.teams.sort((team1, team2) => team2.point - team1.point);
+        this.teams.sort((team1, team2) => team2.score - team1.score);
         const items = [];
-        for (let team of this.teams) {
-            items.push(<li key={team.username}>{team.name}</li>);
+        const topScore = this.teams[0].score;
+        for (let i = 0; i < this.teams.length; i++) {
+            const team = this.teams[i];
+            items.push(
+                <Team key={team.username}
+                      rank={i}
+                      name={team.name}
+                      score={team.score}
+                      percent={team.score / topScore * 100} />
+            );
         }
         return items;
     }
