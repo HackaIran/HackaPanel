@@ -11,13 +11,16 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "moment": "^2.18.1",
     "morgan": "~1.9.0",
     "mousetrap": "^1.6.1",
     "pug": "2.0.0-beta11",
     "react": "^16.0.0",
     "react-ace": "^5.2.2",
     "react-dom": "^16.0.0",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
