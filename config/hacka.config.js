@@ -1,14 +1,18 @@
 module.exports = {
     time: {
         start: {
-            hours: 20,
-            minutes: 50,
+            hours: 0,
+            minutes: 0,
             seconds: 0
         },
         end: {
-            hours: 22,
-            minutes: 0,
+            hours: 2,
+            minutes: 10,
             seconds: 0
         }
+    },
+    db: {
+        host: 'mongodb://localhost/',
+        dbname: 'hacka'
     }
 };

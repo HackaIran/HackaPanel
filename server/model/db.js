@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
+const config = require('../../config/hacka.config')
 
-mongoose.connect('mongodb://localhost/hacka', { useMongoClient: true });
+mongoose.connect(`${config.db.host}${config.db.dbname}`, { useMongoClient: true });
 
-module.exports = mongoose
+module.exports = mongoose;
