@@ -1,8 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import Main from './Main'
-
-import socket from '../model/socket'
+import Login from './Login'
 
 class App extends React.Component {
 
@@ -13,6 +12,7 @@ class App extends React.Component {
     render () {
         return (
             <div className="app">
+                <Login />
                 <Header />
                 <Main />
             </div>

@@ -409,7 +409,7 @@
     opacity: 0;
     pointer-events: none;
 }
-.float-box > div {
+.float-box > form {
     display: inline-block;
     position: absolute;
     top: 50%;
@@ -420,17 +420,17 @@
     pointer-events: none;
     transition-duration: 1.5s;
 }
-.float-box > div > span {
+.float-box > form > span {
     font-size: 50px;
     font-weight: 100;
     display: block;
     margin-bottom: -30px;
     transition-duration: 1.5s;
 }
-.float-box > div > span > b {
+.float-box > form > span > b {
     font-weight: normal;
 }
-.float-box > div > input {
+.float-box > form > input {
     border: none;
     font-size: 23px;
     width: 250px;
@@ -443,15 +443,15 @@
     border-bottom: 1px solid #555;
     transition-duration: 0.3s;
 }
-.float-box > div > input:focus {
+.float-box > form > input:focus {
     opacity: 1;
     width: 300px;
 }
-.float-box > div > input.wrong {
+.float-box > form > input.wrong {
     border-bottom-color: red;
     color: red;
 }
-.float-box > div > button {
+.float-box > form > button {
     display: block;
     width: 150px;
     margin: auto;
@@ -466,17 +466,17 @@
     transition-duration: 0.1s;
     outline: none;
 }
-.float-box > div > button:hover, .float-box > div > button:focus {
+.float-box > form > button:hover, .float-box > div > button:focus {
     background: #333;
 }
-.float-box > div > button:active {
+.float-box > form > button:active {
     transform: scale(0.9)
 }
-.float-box.animate > div {
+.float-box.animate > form {
     opacity: 1;
     pointer-events: auto;
 }
-.float-box.animate > div > span {
+.float-box.animate > form > span {
     margin-bottom: 20px;
 }
 
