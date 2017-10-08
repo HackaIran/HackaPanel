@@ -5,14 +5,15 @@ class Server {
     set io (io) {
         io.on('connection', onUserConnected);
         setInterval(() => { io.emit('time sync', time) }, 60 * 1000);
-        this.resetAllConnections();
     }
-    resetAllConnections () {
+
+    static resetAllConnections () {
         Team.update({}, { socketId: '' }, { multi: true }, function () {})
     }
+
     get (url) {}
+
     login (form, socket) {
-        console.log('Login');
         Team.findOne({ username: form.username, password: form.password, socketId: '' }, (err, team) => {
 
             // Send error message if user doesn't exist
@@ -28,8 +29,8 @@ class Server {
             team.save();
         })
     }
+
     logout (socket) {
-        console.log('Logout');
         Team.findOneAndUpdate({ socketId: socket.id }, { socketId: '' }, function () {})
     }
 }
@@ -41,6 +42,7 @@ const onUserConnected = socket => {
     socket.on('disconnect', () => server.logout(socket));
 };
 
+Server.resetAllConnections();
 const server = new Server;
 
 module.exports = server;

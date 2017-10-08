@@ -3,7 +3,6 @@ import Header from './Header'
 import Main from './Main'
 import Login from './Login'
 
-import user from '../model/user'
 import socket from '../model/socket'
 
 class App extends React.Component {
@@ -13,11 +12,7 @@ class App extends React.Component {
         this.state = {
             showLoginPage: true
         };
-        socket.on('user info', info => {
-            user.name = info.name;
-            user.username = info.username;
-            user.score = info.score;
-            user.loggedIn = true;
+        socket.on('user info', () => {
             this.setState({ showLoginPage: false })
         })
     }

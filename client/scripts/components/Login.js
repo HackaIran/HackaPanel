@@ -3,11 +3,21 @@ import socket from '../model/socket'
 
 class Login extends React.Component {
 
+    login () {
+        const username = window.localStorage['hacka-username'] = this.refs.username.value;
+        const password = window.localStorage['hacka-password'] = this.refs.password.value;
+        socket.emit('user login', { username, password })
+    }
+
+    componentDidMount () {
+        this.refs.username.value = window.localStorage['hacka-username'] || '';
+        this.refs.password.value = window.localStorage['hacka-password'] || '';
+        if (!!this.refs.username.value && !!this.refs.password.value) this.login();
+    }
+
     onLoginRequest (event) {
         event.preventDefault();
-        const username = this.refs.username.value;
-        const password = this.refs.password.value;
-        socket.emit('user login', { username, password })
+        this.login()
     }
 
     render() {
