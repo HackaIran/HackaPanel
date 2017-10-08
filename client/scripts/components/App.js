@@ -8,9 +8,6 @@ class App extends React.Component {
 
     constructor (props) {
         super(props);
-        socket.on('initial-config', data => {
-            console.log(data)
-        })
     }
 
     render () {
