@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/hacka');
+const db = require('./db');
 
-const teamSchema = mongoose.Schema({
+const teamSchema = db.Schema({
     username: String,
     password: String,
     name: String,
@@ -12,6 +11,6 @@ teamSchema.methods.introduce = function () {
     console.log(`Hey! we're ${this.name}, with score ${this.score}! this is our user/pass: ${this.username}/${this.password}`)
 };
 
-const Team = mongoose.model('Team', teamSchema);
+const Team = db.model('Team', teamSchema);
 
 module.exports = Team;

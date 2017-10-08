@@ -1,4 +1,9 @@
-const time = require('./time');
+const time = require('./model/time');
+const Team = require('./model/Team');
+
+Team.find(function(err, teams){
+    console.log(err, teams)
+});
 
 class Server {
     set io (io) {
