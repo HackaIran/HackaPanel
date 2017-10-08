@@ -12,7 +12,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="float-box animate">
+            <div className={"float-box animate " + (this.props.show ? '' : 'hidden')}>
                 <form onSubmit={this.onLoginRequest.bind(this)}>
                     <span>Welcome to <b>Hacka{'{Karaj}'}!</b>:)</span>
                     <input ref="username" placeholder="Username here" />

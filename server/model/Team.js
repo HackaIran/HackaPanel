@@ -4,7 +4,8 @@ const teamSchema = db.Schema({
     username: String,
     password: String,
     name: String,
-    score: Number
+    score: Number,
+    socketId: String
 });
 
 teamSchema.methods.introduce = function () {
