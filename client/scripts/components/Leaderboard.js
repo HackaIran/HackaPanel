@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Team from './Team'
+import Team from '../../../server/Team'
 
 class Leaderboard extends React.Component {
 
