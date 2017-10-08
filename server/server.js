@@ -2,13 +2,6 @@ const time = require('./time');
 
 let io = null;
 
-const onUserConnected = socket => {
-    socket.emit('time sync', time);
-    socket.emit('user name', 'Alireza');
-    socket.emit('user score', 50);
-    setInterval(() => socket.emit('time sync', time), 60 * 1000)
-};
-
 class Server {
     set io (to) {
         io = to;
@@ -22,6 +15,14 @@ class Server {
 
     }
 }
+
+const onUserConnected = socket => {
+    socket.emit('time sync', time);
+    socket.emit('user username', 'alireza29675');
+    socket.emit('user name', 'Alireza');
+    socket.emit('user score', 50);
+    setInterval(() => socket.emit('time sync', time), 5 * 1000)
+};
 
 const server = new Server;
 
