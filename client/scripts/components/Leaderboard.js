@@ -1,4 +1,5 @@
 import React from 'react'
+import socket from '../model/socket'
 
 import Team from './Team'
 
@@ -6,19 +7,29 @@ class Leaderboard extends React.Component {
 
     constructor (props) {
         super(props);
-        this.teams = [
-            { username: 'folan', name: 'Klug Team', score: 12000 },
-            { username: 'bisar', name: 'Pug Team', score: 1000 },
-            { username: 'bhamn', name: 'Ngino Team', score: 800 },
-        ]
+        this.state = {
+            teams: [
+                { username: 'klug', name: 'Klug Team', score: 12000 },
+                { username: 'pug', name: 'Pug Team', score: 1000 },
+                { username: 'bhamn', name: 'Ngino Team', score: 800 },
+            ]
+        };
+        socket.on('team score update', info => {
+            console.log(info)
+            const teams = this.state.teams;
+            for (let team of teams) if (team.username === info.username) team.score = info.score;
+            this.setState({ teams })
+        })
     }
 
     get teamsList () {
-        this.teams.sort((team1, team2) => team2.score - team1.score);
+        const teams = this.state.teams;
+        console.log(teams);
+        teams.sort((team1, team2) => team2.score - team1.score);
         const items = [];
-        const topScore = this.teams[0].score;
-        for (let i = 0; i < this.teams.length; i++) {
-            const team = this.teams[i];
+        const topScore = teams[0].score;
+        for (let i = 0; i < teams.length; i++) {
+            const team = teams[i];
             items.push(
                 <Team key={team.username}
                       rank={i}

@@ -9,8 +9,25 @@ class Server {
 
     set io (io) {
         this._io = io;
+        this.init();
+    }
+
+    get io () {
+        return this._io;
+    }
+
+    init () {
+        const io = this.io;
         io.on('connection', onUserConnected);
         setInterval(() => { io.emit('time sync', time) }, 60 * 1000);
+        setInterval(() => this.updateTeamScore('pug', Math.floor(Math.random() * 3000) + 5000), 3000)
+    }
+
+    updateTeamScore (teamUserName, score) {
+        Team.findOneAndUpdate({ username: teamUserName }, { score: score }, (err) => {
+            if (err) return console.error(`Could not update ${teamUserName}'s score to ${score}`);
+            this.io.emit('team score update', { username: teamUserName,  score: score })
+        });
     }
 
     static resetAllConnections () {
@@ -20,14 +37,14 @@ class Server {
     get (url) {}
 
     login (form, socket) {
-        console.log(form);
-        if (!!this._io) Team.findOne({ username: form.username, password: form.password }, (err, team) => {
+
+        if (!!this.io) Team.findOne({ username: form.username, password: form.password }, (err, team) => {
 
             // Send error message if user doesn't exist
             if (!team) return socket.emit('user login error', 'Ops! re-check your username or password;)');
 
             // Check if last saved socket id is still alive
-            if (team.socketId !== '' && !!this._io.sockets.sockets[team.socketId]) {
+            if (team.socketId !== '' && !!this.io.sockets.sockets[team.socketId]) {
                 return socket.emit('user login error', 'You are logged in another device! check it again');
             }
 
