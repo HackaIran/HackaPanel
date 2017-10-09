@@ -26,6 +26,7 @@ class Server {
             // Send error message if user doesn't exist
             if (!team) return socket.emit('user login error', 'Ops! re-check your username or password;)');
 
+            // Check if last saved socket id is still alive
             if (team.socketId !== '' && !!this._io.sockets.sockets[team.socketId]) {
                 return socket.emit('user login error', 'You are logged in another device! check it again');
             }

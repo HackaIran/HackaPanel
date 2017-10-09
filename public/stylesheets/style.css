@@ -358,7 +358,7 @@
     right: 15px;
     transform: translateY(-50%);
 }
-.app > footer > .connection.fail {
+.app > footer > .connection.offline {
     background: #ff2424;
     box-shadow: 0 0 10px #ff2424;
 }

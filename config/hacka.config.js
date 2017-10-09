@@ -6,8 +6,8 @@ module.exports = {
             seconds: 0
         },
         end: {
-            hours: 18,
-            minutes: 10,
+            hours: 17,
+            minutes: 30,
             seconds: 0
         }
     },

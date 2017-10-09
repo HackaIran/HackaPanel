@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import Main from './Main'
+import Footer from './Footer'
 import Login from './Login'
 
 import socket from '../model/socket'
@@ -23,6 +24,7 @@ class App extends React.Component {
                 <Login show={this.state.showLoginPage} />
                 <Header />
                 <Main />
+                <Footer />
             </div>
         )
     }
