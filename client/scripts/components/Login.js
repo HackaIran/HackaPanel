@@ -3,6 +3,11 @@ import socket from '../model/socket'
 
 class Login extends React.Component {
 
+    constructor (props) {
+        super(props);
+        socket.on('user login error', message => console.error('LOGIN ERROR:', message))
+    }
+
     login () {
         const username = window.localStorage['hacka-username'] = this.refs.username.value;
         const password = window.localStorage['hacka-password'] = this.refs.password.value;

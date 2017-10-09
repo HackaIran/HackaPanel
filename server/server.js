@@ -2,7 +2,13 @@ const time = require('./model/time');
 const Team = require('./model/Team');
 
 class Server {
+
+    constructor () {
+        this._io = null;
+    }
+
     set io (io) {
+        this._io = io;
         io.on('connection', onUserConnected);
         setInterval(() => { io.emit('time sync', time) }, 60 * 1000);
     }
@@ -14,10 +20,15 @@ class Server {
     get (url) {}
 
     login (form, socket) {
-        Team.findOne({ username: form.username, password: form.password, socketId: '' }, (err, team) => {
+        console.log(form);
+        if (!!this._io) Team.findOne({ username: form.username, password: form.password }, (err, team) => {
 
             // Send error message if user doesn't exist
             if (!team) return socket.emit('user login error', 'Ops! re-check your username or password;)');
+
+            if (team.socketId !== '' && !!this._io.sockets.sockets[team.socketId]) {
+                return socket.emit('user login error', 'You are logged in another device! check it again');
+            }
 
             // if Username and Password was OK
             socket.emit('user info', {
