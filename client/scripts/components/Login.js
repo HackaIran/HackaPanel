@@ -5,7 +5,7 @@ class Login extends React.Component {
 
     constructor (props) {
         super(props);
-        socket.on('user login error', message => console.error('LOGIN ERROR:', message))
+        socket.on('user login error', message => console.error('LOGIN ERROR:', message));
         socket.on('are you connected', () => socket.emit('i am connected'))
     }
 

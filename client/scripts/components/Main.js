@@ -5,6 +5,7 @@ import Leaderboard from './Leaderboard'
 import ChallengeTab from './ChallengeTab'
 import EditorTab from './EditorTab'
 import OutputTab from './OutputTab'
+import socket from "../model/socket";
 
 class Main extends React.Component {
 
@@ -34,8 +35,14 @@ class Main extends React.Component {
     }
 
     runCode () {
-        this.changeTab('output')
-
+        this.changeTab('output');
+        const code = window.localStorage['hacka-editor-code'] || '';
+        const language = window.localStorage['hacka-editor-language'] || '';
+        socket.emit('user run code', {
+            type: 'run',
+            language: language,
+            code: code
+        })
     }
 
     render () {

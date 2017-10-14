@@ -474,7 +474,6 @@
 }
 .float-box.animate > form {
     opacity: 1;
-    pointer-events: auto;
 }
 .float-box.animate > form > span {
     margin-bottom: 20px;

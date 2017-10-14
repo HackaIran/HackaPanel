@@ -1,5 +1,9 @@
-class Javascript {
+class JavascriptCompiler {
+    run () {
 
+    }
 }
 
-module.exports = Javascript;
+const javascriptCompiler = new JavascriptCompiler();
+
+module.exports = javascriptCompiler;

@@ -1,6 +1,8 @@
 const time = require('./model/time');
 const Team = require('./model/Team');
 
+const compiler = require('./compiler');
+
 let allAvailableConnections = [];
 
 class Server {
@@ -74,6 +76,17 @@ class Server {
     logout (socket) {
         Team.findOneAndUpdate({ socketId: socket.id }, { socketId: '' }, function () {})
     }
+
+    runCodeFor (socket, codeData) {
+        Team.findOne({ socketId: socket.id }, function (err, team) {
+
+            if (err) return console.error(err);
+
+            if (!team) return socket.emit('user login error', 'login first then run your code');
+
+            compiler.submit(socket, codeData)
+        });
+    }
 }
 
 const onUserConnected = socket => {
@@ -81,7 +94,8 @@ const onUserConnected = socket => {
     socket.on('user login', form => server.login(form, socket));
     socket.on('user logout', () => server.logout(socket));
     socket.on('disconnect', () => server.logout(socket));
-    socket.on('i am connected', () => allAvailableConnections.push(socket.id))
+    socket.on('i am connected', () => allAvailableConnections.push(socket.id));
+    socket.on('user run code', codeData => server.runCodeFor(socket, codeData));
 };
 
 Server.resetAllConnections();

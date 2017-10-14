@@ -1,5 +1,9 @@
-class Python {
+class PythonCompiler {
+    run () {
 
+    }
 }
 
-module.exports = Python;
+const pythonCompiler = new PythonCompiler();
+
+module.exports = pythonCompiler;
