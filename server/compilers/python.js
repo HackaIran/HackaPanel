@@ -1,4 +1,6 @@
-class PythonCompiler {
+const Compiler = require('./Compiler');
+
+class PythonCompiler extends Compiler {
     run () {
 
     }
