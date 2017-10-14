@@ -29,7 +29,6 @@ class Server {
     }
 
     checkConnections () {
-        console.log(allAvailableConnections.length + ` sockets are open right now`);
         this.io.emit('are you connected');
         allAvailableConnections = [];
     }
@@ -78,7 +77,7 @@ class Server {
     }
 
     runCodeFor (socket, codeData) {
-        Team.findOne({ socketId: socket.id }, function (err, team) {
+        Team.findOne({ username: codeData.username, password: codeData.password }, function (err, team) {
 
             if (err) return console.error(err);
 

@@ -1,8 +1,16 @@
 const Compiler = require('./Compiler');
 
 class JavascriptCompiler extends Compiler {
-    run (code) {
 
+    constructor () {
+        super();
+        this.ext = 'js';
+    }
+
+    run (socket, username, code) {
+        this.store(username, code).then(file => {
+            this.execute(socket, `node ${file}`)
+        })
     }
 }
 

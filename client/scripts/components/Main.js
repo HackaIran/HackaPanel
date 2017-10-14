@@ -36,9 +36,15 @@ class Main extends React.Component {
 
     runCode () {
         this.changeTab('output');
+
         const code = window.localStorage['hacka-editor-code'] || '';
         const language = window.localStorage['hacka-editor-language'] || '';
+        const username = window.localStorage['hacka-username'] || '';
+        const password = window.localStorage['hacka-password'] || '';
+
         socket.emit('user run code', {
+            username: username,
+            password: password,
             type: 'run',
             language: language,
             code: code

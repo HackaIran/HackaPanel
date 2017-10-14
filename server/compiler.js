@@ -3,16 +3,26 @@ const pythonCompiler = require('./compilers/python');
 
 class Compiler {
     run (socket, codeData) {
-        socket.emit('code running');
-
         const language = codeData.language;
-        const code = codeData.code;
+        const username = codeData.username;
+        const input = `1 2 3`;
+        let code = codeData.code;
 
+        // JAVASCRIPT
         if (language === 'javascript') {
-            javascriptCompiler.run(code);
+            code = `const INPUT = '${input}';\n` + code;
+            javascriptCompiler.run(socket, username, code);
         }
+
+        // PYTHON
         else if (language === 'python') {
-            pythonCompiler.run(code);
+            code = `INPUT = '${input}'\n`;
+            pythonCompiler.run(socket, username, code);
+        }
+
+        // if code's language was none of defined languages
+        else {
+
         }
     }
 
