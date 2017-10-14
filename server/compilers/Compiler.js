@@ -9,9 +9,9 @@ class Compiler {
         this.ext = 'nothing'
     }
 
-    store (username, code) {
+    store (filename, code) {
         return new Promise((resolve, reject) => {
-            const fileDir = `${STORE_DIRECTORY}/${username}.${this.ext}`;
+            const fileDir = `${STORE_DIRECTORY}/${filename}`;
             fs.writeFile(fileDir, code, (err) => {
                 if (err) return reject(err);
                 return resolve(fileDir);
@@ -19,28 +19,23 @@ class Compiler {
         });
     }
 
-    execute (socket, command) {
-        const ret = {
+    execute (command, cb) {
+        const result = {
             hasErrors: false,
             hasMistakes: false,
             error: '',
             mistake: '',
-            result: ''
+            output: ''
         };
-        return new Promise((resolve, reject, err) => {
-            exec(command, function(err, stdout, stderr) {
-                if (stderr) {
-                    ret.hasErrors = true;
-                    ret.error = stderr;
-                    return resolve(ret);
-                }
-                ret.result = stdout;
-                return resolve(ret)
-            })
+        exec(command, (err, stdout, stderr) => {
+            if (stderr) {
+                result.hasErrors = true;
+                result.error = stderr;
+            }
+            result.output = stdout;
+            return cb(result)
         })
     }
-
-    on
 
 }
 

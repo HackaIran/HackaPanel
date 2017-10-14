@@ -1,4 +1,7 @@
 import React from 'react'
+import renderHTML from 'react-render-html';
+
+import socket from '../model/socket'
 
 class OutputTab extends React.Component {
 
@@ -6,13 +9,27 @@ class OutputTab extends React.Component {
         super(props);
         this.state = {
             question: 0,
-            loading: false
+            loading: false,
+            QAs: [
+                { input: 'A',  output: 'B' },
+                { input: 'C',  output: 'D' },
+                { input: 'E',  output: 'F' }
+            ]
         };
-        this.QAs = [
-            { input: 'A',  output: 'B' },
-            { input: 'C',  output: 'D' },
-            { input: 'E',  output: 'F' }
-        ]
+        socket.on('user code result', this.onResult.bind(this));
+    }
+
+    onResult (result) {
+        const QAs = this.state.QAs;
+        const qa = QAs[result.inputId];
+
+        qa.input = result.input;
+
+        if (result.hasErrors) {
+            qa.output = `<span class="red">${result.error}</span>`;
+        }
+
+        this.setState({ QAs, loading: false });
     }
 
     changeQuestionTo (i) {
@@ -21,6 +38,10 @@ class OutputTab extends React.Component {
 
     submitTheCode () {
 
+    }
+
+    startLoading () {
+        this.setState({ loading: true })
     }
 
     get questionItems () {
@@ -42,7 +63,7 @@ class OutputTab extends React.Component {
     }
 
     get current () {
-        const question = this.QAs[this.state.question];
+        const question = this.state.QAs[this.state.question];
         if (question) return question;
         return { input: '', output: '' }
     }
@@ -65,7 +86,7 @@ class OutputTab extends React.Component {
                     </div>
                     <div className="output">
                         <h1>Output:</h1>
-                        <pre>{ this.current.output }</pre>
+                        <pre>{ renderHTML(this.current.output) }</pre>
                     </div>
                     <div className="submit-container"><button onClick={this.submitTheCode.bind(this)}>Submit The Code</button></div>
                 </section>

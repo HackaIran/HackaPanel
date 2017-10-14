@@ -37,6 +37,8 @@ class Main extends React.Component {
     runCode () {
         this.changeTab('output');
 
+        this.refs.output.startLoading();
+
         const code = window.localStorage['hacka-editor-code'] || '';
         const language = window.localStorage['hacka-editor-language'] || '';
         const username = window.localStorage['hacka-username'] || '';
@@ -62,7 +64,7 @@ class Main extends React.Component {
                     </nav>
                     <ChallengeTab hidden={this.state.tab !== 'challenge'} />
                     <EditorTab hidden={this.state.tab !== 'editor'} />
-                    <OutputTab inputsCount={10} hidden={this.state.tab !== 'output'} />
+                    <OutputTab ref='output' inputsCount={10} hidden={this.state.tab !== 'output'} />
                 </section>
             </main>
         )

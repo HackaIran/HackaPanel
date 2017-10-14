@@ -2,14 +2,16 @@ const Compiler = require('./Compiler');
 
 class PythonCompiler extends Compiler {
 
-    constructor () {
-        super();
-        this.ext = 'py';
+    run (socket, username, code) {
+
+        const filename = `${username}.py`;
+
+        this.store(filename, code).then(file => {
+            this.execute(socket, `python ${file}`)
+        })
+
     }
 
-    run () {
-
-    }
 }
 
 const pythonCompiler = new PythonCompiler();
