@@ -1,6 +1,8 @@
 const time = require('./model/time');
 const Team = require('./model/Team');
 
+let allAvailableConnections = [];
+
 class Server {
 
     constructor () {
@@ -20,13 +22,23 @@ class Server {
         const io = this.io;
         io.on('connection', onUserConnected);
         setInterval(() => { io.emit('time sync', time) }, 60 * 1000);
-        setInterval(() => this.updateTeamScore('pug', Math.floor(Math.random() * 3000) + 5000), 3000)
+        setInterval(() => this.checkConnections(), 15 * 1000);
+        this.checkConnections()
+    }
+
+    checkConnections () {
+        console.log(allAvailableConnections.length + ` sockets are open right now`);
+        this.io.emit('are you connected');
+        allAvailableConnections = [];
     }
 
     updateTeamScore (teamUserName, score) {
-        Team.findOneAndUpdate({ username: teamUserName }, { score: score }, (err) => {
+        Team.findOne({ username: teamUserName, score: { $lt: score } }, (err, team) => {
             if (err) return console.error(`Could not update ${teamUserName}'s score to ${score}`);
-            this.io.emit('team score update', { username: teamUserName,  score: score })
+            if (!team) return;
+            team.score = score;
+            team.save();
+            this.io.emit('team score update', { username: teamUserName,  score: score });
         });
     }
 
@@ -44,7 +56,7 @@ class Server {
             if (!team) return socket.emit('user login error', 'Ops! re-check your username or password;)');
 
             // Check if last saved socket id is still alive
-            if (team.socketId !== '' && !!this.io.sockets.sockets[team.socketId]) {
+            if (!!team.socketId && allAvailableConnections.includes(team.socketId)) {
                 return socket.emit('user login error', 'You are logged in another device! check it again');
             }
 
@@ -69,6 +81,7 @@ const onUserConnected = socket => {
     socket.on('user login', form => server.login(form, socket));
     socket.on('user logout', () => server.logout(socket));
     socket.on('disconnect', () => server.logout(socket));
+    socket.on('i am connected', () => allAvailableConnections.push(socket.id))
 };
 
 Server.resetAllConnections();
