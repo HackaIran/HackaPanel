@@ -1,4 +1,5 @@
 import React from 'react'
+import renderHTML from 'react-render-html';
 
 class ChallengeTab extends React.Component {
 
@@ -15,7 +16,9 @@ class ChallengeTab extends React.Component {
 
     render() {
         return (
-            <div style={this.tabStyle} className="tab-page" id="challenge" dangerouslySetInnerHTML={{__html: this.challengeHTML}} />
+            <div style={this.tabStyle} className="tab-page" id="challenge">
+                { renderHTML(this.challengeHTML) }
+            </div>
         )
     }
 }
