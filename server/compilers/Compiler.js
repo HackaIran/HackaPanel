@@ -5,10 +5,6 @@ const STORE_DIRECTORY = './server/compilers/temp_files';
 
 class Compiler {
 
-    constructor () {
-        this.ext = 'nothing'
-    }
-
     store (filename, code) {
         return new Promise((resolve, reject) => {
             const fileDir = `${STORE_DIRECTORY}/${filename}`;

@@ -2,7 +2,7 @@ const Compiler = require('./Compiler');
 
 class JavascriptCompiler extends Compiler {
 
-    run (username, code, cb) {
+    run (username, code, callback) {
         // first step is storing the code:
         this.store(`${username}.js`, code).then(file => {
             // then we should exec file using this command:
@@ -10,11 +10,11 @@ class JavascriptCompiler extends Compiler {
                 // if code has errors returns result
                 if (result.hasErrors) {
                     result.error = result.error.substring(result.error.indexOf("\n") + 1);
-                    return cb(result);
+                    return callback(result);
                 }
 
                 // if code has no errors tries to analyze it
-
+                return callback(result)
             })
         })
     }

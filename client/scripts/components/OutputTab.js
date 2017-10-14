@@ -25,8 +25,14 @@ class OutputTab extends React.Component {
 
         qa.input = result.input;
 
+        qa.output = '';
+
+        if (result.output) {
+            qa.output += `<span>${result.output}</span>\n`
+        }
+
         if (result.hasErrors) {
-            qa.output = `<span class="red">${result.error}</span>`;
+            qa.output += `<span class="red">${result.error}</span>`;
         }
 
         this.setState({ QAs, loading: false });

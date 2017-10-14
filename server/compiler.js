@@ -7,6 +7,8 @@ class Compiler {
         // if code has errors
         if (result.hasErrors) return socket.emit('user code result', result)
 
+
+        return socket.emit('user code result', result)
     }
 
     run (socket, codeData) {
