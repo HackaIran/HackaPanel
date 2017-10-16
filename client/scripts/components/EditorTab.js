@@ -34,7 +34,7 @@ class EditorTab extends React.Component {
 
     get tabStyle () {
         return {
-            display: this.props.hidden ? 'none' : 'inherit',
+            display: this.props.hidden ? 'none' : 'initial',
             position: 'relative'
         };
     }

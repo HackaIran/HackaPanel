@@ -1,13 +1,17 @@
+const fs = require('fs');
 const express = require('express');
 const router = express.Router();
 const server = require('../server/server');
+const marked = require('marked');
+
+let challenge = fs.readFileSync('./contest/challenge.md', 'utf-8');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
     server.get('/');
     const city = 'Karaj';
     res.render('index', {
-        challenge: `<h1>ABCDEFGHIJKLMNOP</h1>`,
+        challenge: marked(challenge),
         title: `Hacka{${city}} | The Largest Community Of Developers`,
     });
 });

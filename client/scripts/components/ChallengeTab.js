@@ -11,7 +11,7 @@ class ChallengeTab extends React.Component {
     }
 
     get tabStyle () {
-        return { display: this.props.hidden ? 'none' : 'inherit' };
+        return { display: this.props.hidden ? 'none' : 'initial' };
     }
 
     render() {
