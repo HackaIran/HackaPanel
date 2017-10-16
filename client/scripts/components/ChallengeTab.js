@@ -11,13 +11,13 @@ class ChallengeTab extends React.Component {
     }
 
     get tabStyle () {
-        return { display: this.props.hidden ? 'none' : 'initial' };
+        return { display: this.props.hidden ? 'none' : 'inherit' };
     }
 
     render() {
         return (
             <div style={this.tabStyle} className="tab-page" id="challenge">
-                { renderHTML(this.challengeHTML) }
+                <div>{ renderHTML(this.challengeHTML) }</div>
             </div>
         )
     }
