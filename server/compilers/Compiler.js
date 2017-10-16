@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { exec } = require('child_process');
 
-const STORE_DIRECTORY = './server/compilers/temp_files';
+const STORE_DIRECTORY = './contest/user_codes';
 
 class Compiler {
 
