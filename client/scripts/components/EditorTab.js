@@ -12,17 +12,20 @@ import 'brace/mode/c_cpp';
 import 'brace/theme/monokai';
 import 'brace/ext/language_tools';
 
+import languageStore from '../stores/language'
+
 class EditorTab extends React.Component {
 
     constructor (props) {
         super(props);
         this.state = {
-            language: window.localStorage['hacka-editor-language'] || 'javascript',
+            language: languageStore.getState().language,
             theme: 'monokai',
             fontSize: parseInt(window.localStorage['hacka-editor-font-size']) || 20,
         };
         MouseTrap.bind('alt+up', () => this.zoom(1));
         MouseTrap.bind('alt+down', () => this.zoom(-1));
+        languageStore.subscribe(() => this.setState({ language: languageStore.getState().language }))
     }
 
     zoom (to) {

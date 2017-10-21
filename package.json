@@ -21,6 +21,7 @@
     "react-ace": "^5.2.2",
     "react-dom": "^16.0.0",
     "react-render-html": "^0.5.2",
+    "redux": "^3.7.2",
     "serve-favicon": "~2.4.5",
     "socket.io": "^2.0.3",
     "socket.io-client": "^2.0.3"

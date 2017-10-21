@@ -1,11 +1,13 @@
 import React from 'react'
 
+import languageStore from '../stores/language'
+
 class LanguageSelect extends React.Component {
 
     constructor (props) {
         super(props);
         this.state = {
-            selected: 'javascript',
+            selected: languageStore.getState().language,
             open: false,
             languages: {
                 javascript: 'Javascript',
@@ -18,10 +20,11 @@ class LanguageSelect extends React.Component {
 
     select (language) {
         this.setState({ selected: language, open: false });
+        languageStore.dispatch({ type: 'change', language: language })
     }
 
     generateListItem (language, label) {
-        return (<li onClick={() => this.select(language)}>
+        return (<li key={language} onClick={() => this.select(language)}>
             <img src={`/assets/images/languages/${language}.png`} />
             <span>{label}</span>
         </li>)
@@ -30,7 +33,7 @@ class LanguageSelect extends React.Component {
     get langList () {
         const items = [];
         for (let language in this.state.languages) {
-            items.push(this.generateListItem(language, this.state.langs[language]))
+            items.push(this.generateListItem(language, this.state.languages[language]))
         }
         return items;
     }

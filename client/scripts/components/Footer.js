@@ -1,5 +1,6 @@
 import React from 'react'
 import socket from '../model/socket'
+
 import LanguageSelect from "./LanguageSelect";
 
 class Footer extends React.Component {
@@ -7,21 +8,10 @@ class Footer extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            online: false,
-            language: window.localStorage['hacka-editor-language'] || 'javascript',
-            languageOptions: [
-                { key: 'javascript', text: 'Javascript', value: 'javascript' },
-                { key: 'python', text: 'Python', value: 'python' },
-            ]
+            online: false
         };
         socket.on('connect', () => this.setState({ online: true }));
         socket.on('disconnect', () => this.setState({ online: false }));
-    }
-
-    onChooseLanguage (e) {
-        const language = e.target.value;
-        window.localStorage['hacka-editor-language'] = language;
-        this.setState({ language: language })
     }
 
     render() {
