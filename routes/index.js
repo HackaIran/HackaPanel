@@ -1,30 +1,19 @@
-'use strict';
-
-const express = require('express');
-const SocketServer = require('./Socket-Server');
-const TeamAuth = require('./TeamAuth');
 const fs = require('fs');
+const express = require('express');
+const router = express.Router();
+const server = require('../server/server');
+const marked = require('marked');
 
-module.exports = (io) => {
-  const router = express.Router();
-  const teamAuth = new TeamAuth;
-  const socketServer = new SocketServer(io, teamAuth);
-  
-  /* GET home page. */
-  router.get('/', function(req, res, next) {
-    res.render('index');
-  });
+let challenge = fs.readFileSync('./contest/challenge.md', 'utf-8');
 
-  /* GET challenge page. */
-  router.get('/challenge', function(req, res, next) {
-    res.render('challenge');
-  });
+/* GET home page. */
+router.get('/', function(req, res, next) {
+    server.get('/');
+    const city = 'Karaj';
+    res.render('index', {
+        challenge: marked(challenge),
+        title: `Hacka{${city}} | The Largest Community Of Developers`,
+    });
+});
 
-  /* POST login request. */
-  router.post('/login', function(req, res, next) {
-    const username = req.body.username;
-    res.json(teamAuth.login(username))
-  });
-    
-  return router
-};
+module.exports = router;

@@ -1,25 +1,20 @@
-//webpack.config.js
-var webpack = require("webpack");
-
 module.exports = {
-  context: __dirname + '/public/javascripts',
-  entry: {
-    'main': './main.js'
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /(node_modules|libs)/,
-        loader: 'babel', // 'babel-loader' is also a valid name to reference
-        query: {
-          presets: ['es2015']
-        }
-      }
-    ]
-  },
-  output: {
-    filename: './dist/[name].bundle.js'
-  },
-  devtool: '#inline-source-map'
+    devtool: 'inline-source-map',
+    entry: './client/index.js',
+    watch: true,
+    output: {
+        filename: './public/javascripts/bundle.js',
+        sourceMapFilename: './public/javascripts/bundle.js.map'
+    },
+    module: {
+        loaders: [{
+            test: /\.jsx?$/,
+            exclude: /(node_modules|bower_components)/,
+            loader: 'babel-loader',
+            query: { presets: ['es2015', 'react'] }
+        }, {
+            test: /\.sass$/,
+            use: [{ loader: "style-loader" }, { loader: "css-loader" }, { loader: "sass-loader" }]
+        }]
+    }
 };
