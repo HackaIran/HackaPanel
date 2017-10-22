@@ -2,16 +2,22 @@ const Compiler = require('./Compiler');
 
 class PythonCompiler extends Compiler {
 
-    run (socket, username, code) {
+    run (username, code, callback) {
+        // first step is storing the code:
+        this.store(`${username}.py`, code).then(file => {
+            // then we should exec file using this command:
+            this.execute(`python ${file}`, result => {
+                // if code has errors returns result
+                if (result.hasErrors) {
+                    result.error = result.error.substring(result.error.indexOf("\n") + 1);
+                    return callback(result);
+                }
 
-        const filename = `${username}.py`;
-
-        this.store(filename, code).then(file => {
-            this.execute(socket, `python ${file}`)
+                // if code has no errors tries to analyze it
+                return callback(result)
+            })
         })
-
     }
-
 }
 
 const pythonCompiler = new PythonCompiler();

@@ -24,11 +24,21 @@ class Compiler {
             output: ''
         };
         exec(command, (err, stdout, stderr) => {
+            // adding errors into result object
             if (stderr) {
                 result.hasErrors = true;
                 result.error = stderr;
             }
+
+            // removing empty lines of output
+            stdout = stdout.split('\r\n').filter(line => line !== '').join('\n').split('\n').filter(line => line !== '').join('\n');
+
+            console.log(stdout);
+
+            // putting stdout to result
             result.output = stdout;
+
+            // returning result
             return cb(result)
         })
     }
