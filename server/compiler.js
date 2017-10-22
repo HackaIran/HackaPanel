@@ -33,10 +33,7 @@ class Compiler {
 
         // PYTHON
         else if (language === 'python') {
-            code = `
-                INPUT = """${input}"""
-                ${code}
-            `;
+            code = `INPUT = """${input}"""\n${code}`;
             pythonCompiler.run(username, code, (result) => {
                 result.inputId = inputId;
                 result.input = input;
