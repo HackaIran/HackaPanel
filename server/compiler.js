@@ -1,5 +1,6 @@
 const javascriptCompiler = require('./compilers/javascript');
 const pythonCompiler = require('./compilers/python');
+const csharpCompiler = require('./compilers/csharp');
 
 class Compiler {
 
@@ -20,7 +21,10 @@ class Compiler {
 
         // JAVASCRIPT
         if (language === 'javascript') {
-            code = `const INPUT = '${input}';\n` + code;
+            code = `
+                const INPUT = \`${input}\`;
+                ${code}
+            `;
             javascriptCompiler.run(username, code, (result) => {
                 result.inputId = inputId;
                 result.input = input;
@@ -30,8 +34,30 @@ class Compiler {
 
         // PYTHON
         else if (language === 'python') {
-            code = `INPUT = '${input}'\n` + code;
+            code = `
+                INPUT = """${input}"""
+                ${code}
+            `;
             pythonCompiler.run(username, code, (result) => {
+                result.inputId = inputId;
+                result.input = input;
+                this.onResult(socket, result);
+            });
+        }
+
+        // C#
+        else if (language === 'csharp') {
+            code = `
+                using System;
+                
+                public class HackaApp
+                {
+                    static public string INPUT = @"${input}";
+                    ${code}
+                }
+            `;
+            csharpCompiler.run(username, code, (result) => {
+                console.log(result);
                 result.inputId = inputId;
                 result.input = input;
                 this.onResult(socket, result);

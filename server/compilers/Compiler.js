@@ -30,10 +30,11 @@ class Compiler {
                 result.error = stderr;
             }
 
+            console.log(stdout)
+            console.log(stderr)
+
             // removing empty lines of output
             stdout = stdout.split('\r\n').filter(line => line !== '').join('\n').split('\n').filter(line => line !== '').join('\n');
-
-            console.log(stdout);
 
             // putting stdout to result
             result.output = stdout;
