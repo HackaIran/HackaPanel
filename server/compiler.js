@@ -6,8 +6,7 @@ class Compiler {
 
     onResult (socket, result) {
         // if code has errors
-        if (result.hasErrors) return socket.emit('user code result', result)
-
+        if (result.hasErrors) return socket.emit('user code result', result);
 
         return socket.emit('user code result', result)
     }
@@ -57,7 +56,6 @@ class Compiler {
                 }
             `;
             csharpCompiler.run(username, code, (result) => {
-                console.log(result);
                 result.inputId = inputId;
                 result.input = input;
                 this.onResult(socket, result);

@@ -8,16 +8,18 @@ class CSharpCompiler extends Compiler {
             // exe path
             const fileExe = file.substring(0, file.length - 3) + '.exe';
             // then we should exec file using this command:
-            this.execute(`mcs ${file}`, () => this.execute(`mono ${fileExe}`, result => {
-                // if code has errors returns result
-                if (result.hasErrors) {
-                    result.error = result.error.substring(result.error.indexOf("\n") + 1);
-                    return callback(result);
-                }
+            this.execute(`mcs ${file}`, result => {
 
-                // if code has no errors tries to analyze it
-                return callback(result)
-            }))
+                if (result.hasErrors) return callback(result);
+
+                this.execute(`mono ${fileExe}`, finalResult => {
+                    // if code has errors returns result
+                    if (finalResult.hasErrors) return callback(finalResult);
+
+                    // if code has no errors tries to analyze it
+                    return callback(finalResult)
+                })
+            })
         })
     }
 }
