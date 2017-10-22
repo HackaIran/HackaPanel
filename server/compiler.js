@@ -1,6 +1,7 @@
 const javascriptCompiler = require('./compilers/javascript');
 const pythonCompiler = require('./compilers/python');
 const csharpCompiler = require('./compilers/csharp');
+const javaCompiler = require('./compilers/java');
 
 class Compiler {
 
@@ -46,13 +47,28 @@ class Compiler {
             code = `
                 using System;
                 
-                public class HackaApp
+                public class ${username}
                 {
                     static public string INPUT = @"${input}";
                     ${code}
                 }
             `;
             csharpCompiler.run(username, code, (result) => {
+                result.inputId = inputId;
+                result.input = input;
+                this.onResult(socket, result);
+            });
+        }
+
+        // Java
+        else if (language === 'java') {
+            code = `
+                public class ${username} {
+                    public static String INPUT = "${input}";
+                    ${code}
+                }
+            `;
+            javaCompiler.run(username, code, (result) => {
                 result.inputId = inputId;
                 result.input = input;
                 this.onResult(socket, result);
