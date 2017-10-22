@@ -5,6 +5,7 @@ const initalLanguage = window.localStorage['hacka-editor-language'] || 'javascri
 function counter(state = { language: initalLanguage }, action) {
     switch (action.type) {
         case 'change':
+            window.localStorage['hacka-editor-language'] = action.language
             return { language: action.language };
         default:
             return state;
