@@ -2,6 +2,7 @@ const javascriptCompiler = require('./compilers/javascript');
 const pythonCompiler = require('./compilers/python');
 const csharpCompiler = require('./compilers/csharp');
 const javaCompiler = require('./compilers/java');
+const goCompiler = require('./compilers/go');
 
 class Compiler {
 
@@ -75,9 +76,26 @@ class Compiler {
             });
         }
 
+        // Go
+        else if (language === 'golang') {
+            code = `package main\nimport "fmt"\n${code}`;
+            goCompiler.run(username, code, (result) => {
+                result.inputId = inputId;
+                result.input = input;
+                this.onResult(socket, result);
+            });
+        }
+
         // if code's language was none of defined languages
         else {
+            const result = {
+                hasErrors: true,
+                error: `${language} language is not supported`
+            };
+            result.inputId = inputId;
+            result.input = input;
 
+            this.onResult(socket, result)
         }
     }
 
