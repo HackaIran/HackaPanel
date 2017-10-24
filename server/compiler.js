@@ -1,8 +1,16 @@
 const javascriptCompiler = require('./compilers/javascript');
 const pythonCompiler = require('./compilers/python');
 const csharpCompiler = require('./compilers/csharp');
-const javaCompiler = require('./compilers/java');
 const goCompiler = require('./compilers/go');
+const javaCompiler = require('./compilers/java');
+
+const untrustedPatterns = {
+    javascript: /require\s*\(.*\)|import\s+.*/,
+    python: /import\s+.*|from\s+.*import\s+.*/,
+    csharp: /using\s+.*/,
+    golang: /package\s+.*|import\s+.*/,
+    java: /import\s+.*|/,
+};
 
 class Compiler {
 
@@ -13,12 +21,30 @@ class Compiler {
         return socket.emit('user code result', result)
     }
 
+    static checkSecurity (language, code) {
+        if (!untrustedPatterns.hasOwnProperty(language)) return [`${language} language doesn't exist`];
+        return code.match(untrustedPatterns[language]);
+    }
+
     run (socket, codeData) {
         const language = codeData.language;
         const username = codeData.username;
         const inputId = 0;
-        const input = `1 2 3`;
+        const input = `1 2 3\n4 5 6\n7 8 9`;
         let code = codeData.code;
+
+        const hasUntrustedMatches = Compiler.checkSecurity(language, code);
+
+        if (hasUntrustedMatches) {
+            const result = {
+                hasErrors: true,
+                error: `This line is not allowed:\n\n> ${hasUntrustedMatches[0]}\n\nCode is not trusted! Please contact mentors about this`
+            };
+            result.inputId = inputId;
+            result.input = input;
+
+            return this.onResult(socket, result)
+        }
 
         // JAVASCRIPT
         if (language === 'javascript') {
@@ -65,7 +91,7 @@ class Compiler {
         else if (language === 'java') {
             code = `
                 public class ${username} {
-                    public static String INPUT = "${input}";
+                    public static String INPUT = "${input.split('\n').join('\\n')}";
                     ${code}
                 }
             `;
@@ -78,7 +104,7 @@ class Compiler {
 
         // Go
         else if (language === 'golang') {
-            code = `package main\nimport "fmt"\n${code}`;
+            code = `package main\nimport "fmt"\nINPUT := \`${input}\`\n${code}`;
             goCompiler.run(username, code, (result) => {
                 result.inputId = inputId;
                 result.input = input;

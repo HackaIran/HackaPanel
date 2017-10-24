@@ -3,6 +3,7 @@ const Compiler = require('./Compiler');
 class GoCompiler extends Compiler {
 
     run (username, code, callback) {
+
         // first step is storing the code:
         this.store(`${username}.go`, code).then(file => {
 
