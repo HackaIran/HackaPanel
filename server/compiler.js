@@ -4,6 +4,8 @@ const csharpCompiler = require('./compilers/csharp');
 const goCompiler = require('./compilers/go');
 const javaCompiler = require('./compilers/java');
 
+const scoreChecker = require('./scoreChecker');
+
 const untrustedPatterns = {
     javascript: /require\s*\(.*\)|import\s+.*/,
     python: /import\s+.*|from\s+.*import\s+.*/,
@@ -18,7 +20,10 @@ class Compiler {
         // if code has errors
         if (result.hasErrors) return socket.emit('user code result', result);
 
-        return socket.emit('user code result', result)
+        // checking scores and mistakes
+        scoreChecker.check(result)
+            .then(result => socket.emit('user code result', result))
+            .catch(error => console.error(error));
     }
 
     static checkSecurity (language, code) {
@@ -38,7 +43,7 @@ class Compiler {
         if (hasUntrustedMatches) {
             const result = {
                 hasErrors: true,
-                error: `This line is not allowed:\n\n> ${hasUntrustedMatches[0]}\n\nCode is not trusted! Please contact mentors about this`
+                error: `This line is not allowed:\n\n> ${hasUntrustedMatches[0]}\n\nCode is not trusted! Please tell mentors about this`
             };
             result.inputId = inputId;
             result.input = input;

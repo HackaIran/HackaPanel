@@ -21,14 +21,20 @@ class Compiler {
             hasMistakes: false,
             error: '',
             mistake: '',
-            output: ''
+            output: '',
+            duration: 0,
         };
+        const before = Date.now();
+
         exec(command, (err, stdout, stderr) => {
             // adding errors into result object
             if (stderr) {
                 result.hasErrors = true;
                 result.error = stderr;
             }
+
+            // estimating time
+            result.duration = Date.now() - before;
 
             // removing empty lines of output
             stdout = stdout.split('\r\n').filter(line => line !== '').join('\n').split('\n').filter(line => line !== '').join('\n');

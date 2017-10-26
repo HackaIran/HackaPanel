@@ -20,6 +20,8 @@ class OutputTab extends React.Component {
     }
 
     onResult (result) {
+        console.log(result);
+
         const QAs = this.state.QAs;
         const qa = QAs[result.inputId];
 
