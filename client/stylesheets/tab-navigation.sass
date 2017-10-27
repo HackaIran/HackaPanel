@@ -1,0 +1,40 @@
+& > nav
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    list-style-type: none
+    align-items: stretch
+    height: 45px
+    min-height: 45px
+
+    & > li
+        flex-grow: 1
+        text-align: center
+        display: flex
+        align-items: center
+        justify-content: center
+        background: #EFEFEF
+        cursor: pointer
+        border-bottom: 4px solid #cfcfcf
+
+        & > em
+            font-style: normal
+            font-size: 12px
+            margin-left: 5px
+            color: #EEE
+
+        &:hover
+            background: #DDD
+
+        &.active
+            pointer-events: none
+            border-bottom: 4px solid #9c6acf
+
+        &.submit
+            background: #39c484
+            color: white
+            border-bottom: none
+            flex-grow: 0.3
+
+            &:hover
+                background: #15ad67
