@@ -15,14 +15,18 @@
 
     @import "loading-spinner"
 
-    @import "challenge"
-
     @import "header"
 
     @import "main"
 
     @import "footer"
 
-    &.disable-mode > main > section > nav > li.submit
-        pointer-events: none
-        background: #bbb
+    &.disable-mode
+
+        & > main > section > nav > li.submit
+            pointer-events: none
+            background: #bbb
+
+        & > main > section > #output > section > div.submit-container > button
+            pointer-events: none
+            background: #bbb

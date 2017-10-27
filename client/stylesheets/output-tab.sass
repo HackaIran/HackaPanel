@@ -1,0 +1,96 @@
+#output
+    flex-grow: 1
+    position: relative
+    display: block
+
+    & > .cssload-container
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background: rgba(240, 240, 240, 0.8)
+
+        & > span
+            position: absolute
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%) translateY(50px)
+
+    & > aside
+        background: #DDD
+        display: flex
+        justify-content: flex-start
+        flex-direction: column
+
+        li
+            width: 50px
+            height: 50px
+            list-style-type: none
+            display: flex
+            justify-content: center
+            align-items: center
+            font-weight: bold
+            font-size: 21px
+            color: #222
+            background: rgba(255, 252, 255, 0.4)
+            margin-bottom: 2px
+            cursor: pointer
+
+            &:hover
+                background: rgba(255, 252, 255, 0.8)
+
+            &.active
+                background: white
+                pointer-events: none
+
+    & > section
+        flex-grow: 1
+        overflow: auto
+
+        & > div
+            margin: 40px
+            display: block
+
+            & > h1
+                margin: 5px 10px
+
+            pre
+                flex-grow: 1
+                background: #EEE
+                text-align: left
+                font-weight: bold
+                padding: 30px
+                font-size: 20px
+                overflow: auto
+                white-space: pre-wrap
+
+                &.error-mode
+                    color: #b30000
+
+                span
+
+                    &.green
+                        color: green
+
+                    &.red
+                        color: red
+
+            &.submit-container
+                padding: 30px
+                text-align: center
+
+                &:hover
+                    text-align: left
+
+                & > button
+                    color: #fff
+                    font-size: 18px
+                    padding: 14px 25px
+                    background: #0088ff
+                    border: 0
+                    cursor: pointer
+                    outline: none
+
+                    &:hover
+                        opacity: 0.8
