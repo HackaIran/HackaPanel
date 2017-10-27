@@ -21,7 +21,7 @@ class Compiler {
         if (result.hasErrors) return socket.emit('user code result', result);
 
         // checking scores and mistakes
-        scoreChecker.check(result)
+        scoreChecker.scoreThis(result)
             .then(result => socket.emit('user code result', result))
             .catch(error => console.error(error));
     }

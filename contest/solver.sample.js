@@ -17,6 +17,13 @@ class Solver {
         return {
             solved: true,
             steps: 5,
+
+            minSteps: 2,
+            maxSteps: 10,
+
+            minDuration: 200,
+            maxDuration: 1000,
+
             hasMistakes: false,
             mistake: ''
         }
