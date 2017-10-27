@@ -1,15 +1,3 @@
-
-@media (max-width: 600px) {
-    .app > main {
-        flex-direction: column;
-    }
-    .app > main > aside {
-        max-height: 250px;
-    }
-}
-
-
-
 .app > dialog {
     z-index: 999;
     border: none;
