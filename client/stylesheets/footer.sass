@@ -1,0 +1,37 @@
+& > footer
+    transition-duration: 0.3s
+    background: #333
+    flex-basis: 20px
+    min-width: 20px
+    z-index: 5
+    color: #DDD
+    min-height: 20px
+    text-align: center
+    font-size: 12px
+    padding: 5px 0
+    cursor: default
+    position: relative
+
+    & > span > a
+        color: white
+        text-decoration: none
+
+        &:hover
+            opacity: 0.5
+
+    & > .connection
+        background: lime
+        box-shadow: 0 0 10px lime
+        width: 8px
+        height: 8px
+        border-radius: 50%
+        position: absolute
+        top: 50%
+        right: 15px
+        transform: translateY(-50%)
+
+        &.offline
+            background: #ff2424
+            box-shadow: 0 0 10px #ff2424
+
+    @import "language-select"
