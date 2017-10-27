@@ -76,6 +76,28 @@
                     &.red
                         color: red
 
+            &.result
+                display: flex
+                background: #EEE
+                border-radius: 10px
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.2)
+
+                & > div
+                    flex-grow: 1
+                    text-align: center
+                    border-right: 1px solid #888
+                    padding: 30px
+                    font-size: 20px
+
+                    &:last-child
+                        border-right: none
+
+                    & > span
+                        display: block
+                        font-weight: bold
+                        font-size: 30px
+                        margin-top: 10px
+
             &.submit-container
                 padding: 30px
                 text-align: center

@@ -96,9 +96,11 @@ class OutputTab extends React.Component {
                         <h1>Output:</h1>
                         <pre>{ renderHTML(this.current.output) }</pre>
                     </div>
-                    <p>Steps: {this.current.steps || 'Not Loaded!'}</p>
-                    <p>Duration: {this.current.duration || 'Not Loaded!'}ms</p>
-                    <p>Score: {this.current.score || 'Not Loaded!'}</p>
+                    <div className="result">
+                        <div>Duration<span>{this.current.duration ? this.current.duration + 'ms' : '-'}</span></div>
+                        <div>Score<span>{this.current.score || '-'}</span></div>
+                        <div>Steps<span>{this.current.steps || '-'}</span></div>
+                    </div>
                     <div className="submit-container"><button onClick={this.submitTheCode.bind(this)}>Submit The Code</button></div>
                 </section>
             </div>
