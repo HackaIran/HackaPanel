@@ -3,3 +3,4 @@ node_modules/
 # Private contents of contest
 challenge.md
 solver.js
+user_codes/

@@ -3,6 +3,9 @@ const { exec } = require('child_process');
 
 const STORE_DIRECTORY = './contest/user_codes';
 
+// if store directory doesn't exist, let's make one!
+if (!fs.existsSync(STORE_DIRECTORY)) fs.mkdirSync(STORE_DIRECTORY);
+
 class Compiler {
 
     store (filename, code) {
