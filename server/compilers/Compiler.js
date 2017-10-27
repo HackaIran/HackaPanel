@@ -28,10 +28,12 @@ class Compiler {
             duration: 0,
         };
 
+        let processKilled = false;
         const before = Date.now();
 
         // if process worked more than a while, this timeout will kill it
         const killerTimeout = setTimeout(() => {
+            processKilled = true;
             process.kill();
             cb({
                 hasErrors: true,
@@ -40,6 +42,9 @@ class Compiler {
         }, 2500);
 
         const process = exec(command, (err, stdout, stderr) => {
+
+            // don't send stdout if process is killed
+            if (processKilled) return;
 
             // stopping killerTimeout first
             clearTimeout(killerTimeout);
