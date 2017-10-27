@@ -1,0 +1,88 @@
+& > aside
+    background: #EEE
+    flex-grow: 1
+    flex-basis: 100%
+    box-shadow: 0 0 30px rgba(0,0,0,0.3)
+    z-index: 2
+    display: flex
+    flex-direction: column
+    transition-duration: 1s
+
+    &.disable
+        filter: grayscale(100%) blur(5px)
+
+    & header
+        text-align: center
+
+    & > ol.ranks
+        margin: 0
+        padding: 0
+        list-style-type: none
+        flex-grow: 1
+        min-width: 180px
+        text-align: left
+        overflow-y: auto
+        position: relative
+
+        & > li
+            padding: 10px 0 10px 15px
+            font-weight: bold
+            border: 1px solid #DDD
+            margin: 5px 10px
+            overflow: hidden
+            position: absolute
+            width: calc(100% - 35px)
+            transition-duration: 0.5s
+            white-space: nowrap
+
+            & > .progress
+                position: absolute
+                top: 0
+                left: 0
+                width: 100%
+                height: 100%
+                background: linear-gradient(to right, #2b1174, #eba4e6)
+                z-index: -1
+                transition-duration: 0.5s
+
+            &.me
+                border-left: 8px solid #fbcb42
+                width: calc(100% - 43px)
+
+            & > .behind-progress
+                position: absolute
+                top: 0
+                left: 0
+                width: 100%
+                height: 100%
+                background: linear-gradient(to right, #777, #ddd)
+                z-index: -2
+
+            & > span
+
+                &.name
+                    color: white
+                    white-space: nowrap
+
+                &.rank
+                    color: orange
+                    font-size: 120%
+
+                &.score
+                    font-size: 70%
+                    font-weight: normal
+                    color: yellow
+                    margin-left: 7px
+                    white-space: nowrap
+
+                    &:before
+                        content: " (score: "
+
+                    &:after
+                        content: ")"
+
+                header > img
+                    width: 70px
+                    margin-top: 15px
+                    user-select: none
+                    -webkit-user-drag: none
