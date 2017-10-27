@@ -14,7 +14,7 @@ module.exports = {
             query: { presets: ['es2015', 'react'] }
         }, {
             test: /\.sass$/,
-            use: [{ loader: "style-loader" }, { loader: "css-loader" }, { loader: "sass-loader" }]
+            use: [{ loader: "style-loader" }, { loader: "css-loader?-url" }, { loader: "sass-loader" }]
         }]
     }
 };
