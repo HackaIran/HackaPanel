@@ -10,20 +10,16 @@ class OutputTab extends React.Component {
         this.state = {
             question: 0,
             loading: false,
-            QAs: [
-                { input: 'A',  output: 'B' },
-                { input: 'C',  output: 'D' },
-                { input: 'E',  output: 'F' }
-            ]
+            QAs: []
         };
         socket.on('user code result', this.onResult.bind(this));
     }
 
     onResult (result) {
-        console.log(result);
-
         const QAs = this.state.QAs;
-        const qa = QAs[result.inputId];
+        const qa = QAs[result.inputId] = {};
+
+        console.log(result);
 
         qa.input = result.input;
 
@@ -36,6 +32,10 @@ class OutputTab extends React.Component {
         if (result.hasErrors) {
             qa.output += `<span class="red">${result.error}</span>`;
         }
+
+        qa.score = result.score;
+        qa.duration = result.duration;
+        qa.steps = result.steps;
 
         this.setState({ QAs, loading: false });
     }
@@ -96,6 +96,9 @@ class OutputTab extends React.Component {
                         <h1>Output:</h1>
                         <pre>{ renderHTML(this.current.output) }</pre>
                     </div>
+                    <p>Steps: {this.current.steps || 'Not Loaded!'}</p>
+                    <p>Duration: {this.current.duration || 'Not Loaded!'}ms</p>
+                    <p>Score: {this.current.score || 'Not Loaded!'}</p>
                     <div className="submit-container"><button onClick={this.submitTheCode.bind(this)}>Submit The Code</button></div>
                 </section>
             </div>

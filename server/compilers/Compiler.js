@@ -27,9 +27,23 @@ class Compiler {
             output: '',
             duration: 0,
         };
+
         const before = Date.now();
 
-        exec(command, (err, stdout, stderr) => {
+        // if process worked more than a while, this timeout will kill it
+        const killerTimeout = setTimeout(() => {
+            process.kill();
+            cb({
+                hasErrors: true,
+                error: 'Your process killed because it was running too long!'
+            })
+        }, 2500);
+
+        const process = exec(command, (err, stdout, stderr) => {
+
+            // stopping killerTimeout first
+            clearTimeout(killerTimeout);
+
             // adding errors into result object
             if (stderr) {
                 result.hasErrors = true;
