@@ -1,4 +1,4 @@
-An h1 header
+Remove .sample and enjoy!
 ============
 
 Paragraphs are separated by a blank line.
