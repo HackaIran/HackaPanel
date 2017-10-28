@@ -1,9 +1,11 @@
 node_modules/
 
 # Private contents of contest
-challenge.md
-solver.js
+/contest/challenge.md
+/contest/solver.js
+/contest/inputs.js
 user_codes/
 
 # Webpack bundles
 bundle.js
+
