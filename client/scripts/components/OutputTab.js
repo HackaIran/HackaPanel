@@ -45,7 +45,20 @@ class OutputTab extends React.Component {
     }
 
     submitTheCode () {
+        this.startLoading();
 
+        const code = window.localStorage['hacka-editor-code'] || '';
+        const language = window.localStorage['hacka-editor-language'] || '';
+        const username = window.localStorage['hacka-username'] || '';
+        const password = window.localStorage['hacka-password'] || '';
+
+        socket.emit('user run code', {
+            username: username,
+            password: password,
+            type: 'submit',
+            language: language,
+            code: code
+        })
     }
 
     startLoading () {

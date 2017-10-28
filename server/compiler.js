@@ -31,10 +31,9 @@ class Compiler {
         return code.match(untrustedPatterns[language]);
     }
 
-    run (socket, codeData) {
+    run (socket, codeData, inputId) {
         const language = codeData.language;
         const username = codeData.username;
-        const inputId = 0;
         const input = `1 2 3\n4 5 6\n7 8 9`;
         let code = codeData.code;
 
@@ -132,10 +131,10 @@ class Compiler {
 
     submit (socket, codeData) {
         // if request was just running the code:
-        if (codeData.type === 'run') return this.run(socket, codeData);
+        if (codeData.type === 'run') return this.run(socket, codeData, 0);
 
         // if code was submitted
-
+        if (codeData.type === 'submit') return this.run(socket, codeData);
     }
 }
 
