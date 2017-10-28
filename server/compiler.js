@@ -6,6 +6,8 @@ const javaCompiler = require('./compilers/java');
 
 const scoreChecker = require('./scoreChecker');
 
+const inputs = require('../contest/inputs');
+
 const untrustedPatterns = {
     javascript: /require\s*\(.*\)|import\s+.*/,
     python: /import\s+.*|from\s+.*import\s+.*/,
@@ -34,11 +36,11 @@ class Compiler {
     run (socket, codeData, inputId) {
         const language = codeData.language;
         const username = codeData.username;
-        const input = `1 2 3\n4 5 6\n7 8 9`;
+        const input = inputs[inputId];
         let code = codeData.code;
 
+        // security check for codes
         const hasUntrustedMatches = Compiler.checkSecurity(language, code);
-
         if (hasUntrustedMatches) {
             const result = {
                 hasErrors: true,
@@ -134,7 +136,7 @@ class Compiler {
         if (codeData.type === 'run') return this.run(socket, codeData, 0);
 
         // if code was submitted
-        if (codeData.type === 'submit') return this.run(socket, codeData);
+        if (codeData.type === 'submit') for (let inputId in inputs) this.run(socket, codeData, inputId);
     }
 }
 
