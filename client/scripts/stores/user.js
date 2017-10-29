@@ -2,17 +2,25 @@ import socket from '../model/socket'
 
 import { createStore } from 'redux'
 
-function reducer(state = { status: 'disable' }, action) {
+function reducer(state = { username: '-', score: 0, name: '-' }, action) {
     switch (action.type) {
         case 'change':
-            return { status: action.status };
+            return Object.assign({}, state, action.team);
         default:
             return state;
     }
 }
 
-const statusStore = createStore(reducer);
+const userStore = createStore(reducer);
 
-socket.on('status sync', status => statusStore.dispatch({ type: 'change', status: status }));
+socket.on('get teams score', teams => {
+    const username = localStorage['hacka-username'];
+    for (let team of teams) if (username === team.username) userStore.dispatch({ type: 'change', team });
+});
 
-export default statusStore
+socket.on('team score update', team => {
+    const username = localStorage['hacka-username'];
+    if (username === team.username) userStore.dispatch({ type: 'change', team });
+});
+
+export default userStore

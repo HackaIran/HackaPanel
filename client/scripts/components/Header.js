@@ -1,26 +1,22 @@
 import React from 'react'
 import socket from '../model/socket'
 
+import userStore from '../stores/user'
+
 class Header extends React.Component {
     constructor (props) {
         super(props);
         this.interval = null;
         this.state = {
-            name: '[loading]',
-            score: '[loading]',
-            toEnd: '[loading]',
-            toStart: '[loading]',
+            name: userStore.getState().name,
+            score: userStore.getState().score,
+            toEnd: '-',
+            toStart: '-',
         };
         socket.on('time sync', this.onTimeSync.bind(this));
-        socket.on('get teams score', teams => {
-            const username = localStorage['hacka-username'];
-            for (let team of teams) {
-                if (username === team.username) this.setState({ name: team.name, score: team.score });
-            }
-        });
-        socket.on('team score update', info => {
-            const username = localStorage['hacka-username'];
-            if (username === info.username) this.setState({ score: info.score });
+        userStore.subscribe(() => {
+            const user = userStore.getState();
+            this.setState({ name: user.name, score: user.score })
         })
     }
     onTimeSync (data) {
