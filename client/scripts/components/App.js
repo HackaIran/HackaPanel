@@ -5,6 +5,7 @@ import Footer from './Footer'
 import Login from './Login'
 
 import socket from '../model/socket'
+import HighScoreBox from "./HighScoreBox";
 
 class App extends React.Component {
 
@@ -21,6 +22,7 @@ class App extends React.Component {
     render () {
         return (
             <div className="app">
+                <HighScoreBox />
                 <Login show={this.state.showLoginPage} />
                 <Header />
                 <Main />

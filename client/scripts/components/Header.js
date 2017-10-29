@@ -12,9 +12,16 @@ class Header extends React.Component {
             toStart: '[loading]',
         };
         socket.on('time sync', this.onTimeSync.bind(this));
-        socket.on('user info', info => {
-            this.setState({ name: info.name, score: info.score })
+        socket.on('get teams score', teams => {
+            const username = localStorage['hacka-username'];
+            for (let team of teams) {
+                if (username === team.username) this.setState({ name: team.name, score: team.score });
+            }
         });
+        socket.on('team score update', info => {
+            const username = localStorage['hacka-username'];
+            if (username === info.username) this.setState({ score: info.score });
+        })
     }
     onTimeSync (data) {
         this.setState({ toEnd: data.toEnd, toStart: data.toStart });

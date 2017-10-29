@@ -69,7 +69,7 @@ class Server {
     }
 
     static resetAllConnections () {
-        Team.update({}, { socketId: '' }, { multi: true }, function () {})
+        Team.update({}, { socketId: '', score: 0 }, { multi: true }, function () {})
     }
 
     login (form, socket) {
