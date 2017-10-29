@@ -1,6 +1,10 @@
 import { createStore } from 'redux'
 
-const initalLanguage = window.localStorage['hacka-editor-language'] || 'javascript';
+if (!window.localStorage['hacka-editor-language']) {
+    window.localStorage['hacka-editor-language'] = 'javascript'
+}
+
+const initalLanguage = window.localStorage['hacka-editor-language'];
 
 function counter(state = { language: initalLanguage }, action) {
     switch (action.type) {
