@@ -61,7 +61,10 @@ class Server {
             if (!team) return;
             team.score = score;
             team.save();
-            this.io.emit('team score update', { username: teamUserName,  score: score });
+            // send score updates if leader-board is not invisible
+            if (getStatus() !== 'invisible') {
+                this.io.emit('team score update', { username: teamUserName,  score: score });
+            }
         });
     }
 
