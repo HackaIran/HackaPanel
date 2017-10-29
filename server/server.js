@@ -45,7 +45,7 @@ class Server {
     }
 
     static resetAllConnections () {
-        Team.update({}, { socketId: '', score: 0 }, { multi: true }, function () {})
+        Team.update({}, { socketId: '' }, { multi: true }, function () {})
     }
 
     login (form, socket) {
@@ -75,7 +75,7 @@ class Server {
         Team.findOneAndUpdate({ socketId: socket.id }, { socketId: '' }, function () {})
     }
 
-    sendAllTeamsTo (socket) {
+    sendAllTeamsInfoTo (socket) {
         Team.find({}, function (err, teams) {
             const data = teams.map(team => {
                 return {
@@ -101,13 +101,13 @@ class Server {
 }
 
 const onUserConnected = socket => {
+    server.sendAllTeamsInfoTo(socket);
     socket.emit('time sync', time);
     socket.on('user login', form => server.login(form, socket));
     socket.on('user logout', () => server.logout(socket));
     socket.on('disconnect', () => server.logout(socket));
     socket.on('i am connected', () => allAvailableConnections.push(socket.id));
     socket.on('user run code', codeData => server.runCodeFor(socket, codeData));
-    socket.on('send teams score', () => server.sendAllTeamsTo(socket));
 };
 
 Server.resetAllConnections();

@@ -10,8 +10,11 @@ class Leaderboard extends React.Component {
         this.state = {
             teams: []
         };
-        socket.emit('send teams score');
+
+        // if server sent us all teams scores
         socket.on('get teams score', teams => this.setState({ teams }));
+
+        // on one team's score got updated
         socket.on('team score update', info => {
             const teams = this.state.teams;
             for (let team of teams) if (team.username === info.username) team.score = info.score;
