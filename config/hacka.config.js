@@ -6,9 +6,9 @@ module.exports = {
             seconds: 0
         },
         end: {
-            hours: 7,
-            minutes: 52,
-            seconds: 0
+            hours: 23,
+            minutes: 31,
+            seconds: 30
         }
     },
     db: {

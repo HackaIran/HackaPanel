@@ -23,7 +23,6 @@ class HighScoreBox extends React.Component {
     }
 
     appear () {
-        console.log('apear')
         this.app.setState({ highScoreMode: true });
         setTimeout(() => this.app.setState({ highScoreMode: false }), 2000)
     }

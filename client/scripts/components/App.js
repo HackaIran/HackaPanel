@@ -8,6 +8,7 @@ import socket from '../model/socket'
 import HighScoreBox from './HighScoreBox'
 
 import userStore from '../stores/user'
+import FinalBox from "./FinalBox";
 
 class App extends React.Component {
 
@@ -32,6 +33,7 @@ class App extends React.Component {
 
         return (
             <div className={appClass}>
+                <FinalBox app={this} />
                 <HighScoreBox app={this} />
                 <Login show={this.state.showLoginPage} />
                 <Header />

@@ -46,6 +46,7 @@ class Server {
         if (lastStatus !== status) {
             // status changed
             lastStatus = status;
+            if (status === 'countdown 5') this.sendAllTeamsInfoTo(this.io);
             this.io.emit('status sync', lastStatus);
         }
     }
