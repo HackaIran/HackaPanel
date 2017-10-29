@@ -31,7 +31,7 @@ class Compiler {
         if (result.hasErrors) return socket.emit('user code result', result);
 
         // checking scores and mistakes
-        this.scoreChecker.scoreThis(result, codeData)
+        this.scoreChecker.scoreThis(result, codeData, socket)
             .then(result => {
                 if (result.inputId > 3) {
                     result.input = '(hidden)';

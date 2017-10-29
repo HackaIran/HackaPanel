@@ -23,4 +23,8 @@ socket.on('team score update', team => {
     if (username === team.username) userStore.dispatch({ type: 'change', team });
 });
 
+socket.on('user info', team => {
+    userStore.dispatch({ type: 'change', team });
+});
+
 export default userStore

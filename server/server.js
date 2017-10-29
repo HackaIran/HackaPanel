@@ -55,7 +55,7 @@ class Server {
         allAvailableConnections = [];
     }
 
-    updateTeamScore (teamUserName, score) {
+    updateTeamScore (teamUserName, score, socket) {
         Team.findOne({ username: teamUserName, score: { $lt: score } }, (err, team) => {
             if (err) return console.error(`Could not update ${teamUserName}'s score to ${score}`);
             if (!team) return;
@@ -64,6 +64,8 @@ class Server {
             // send score updates if leader-board is not invisible
             if (getStatus() !== 'invisible') {
                 this.io.emit('team score update', { username: teamUserName,  score: score });
+            } else {
+                socket.emit('team score update', { username: teamUserName,  score: score });
             }
         });
     }
@@ -103,13 +105,16 @@ class Server {
     }
 
     sendAllTeamsInfoTo (socket) {
-        if (getStatus() !== 'invisible') Team.find({}, function (err, teams) {
+        Team.find({}, function (err, teams) {
             const data = teams.map(team => {
-                return {
+                const ret = {
                     username: team.username,
-                    name: team.name,
-                    score: team.score
+                    name: team.name
+                };
+                if (getStatus() !== 'invisible') {
+                    ret.score = team.score;
                 }
+                return ret;
             });
             socket.emit('get teams score', data)
         })

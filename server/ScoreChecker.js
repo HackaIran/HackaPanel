@@ -33,7 +33,7 @@ class ScoreChecker {
      * @param codeData
      * @return {Promise}
      */
-    scoreThis (result, codeData) {
+    scoreThis (result, codeData, socket) {
         return new Promise (resolve => {
 
             // mixing solver result with current result object
@@ -72,7 +72,7 @@ class ScoreChecker {
                 const username = codeData.username;
                 const score = usersScore[username].totalScore;
                 // call update team score function
-                this.server.updateTeamScore(username, score);
+                this.server.updateTeamScore(username, score, socket);
             }
 
             resolve(result);
