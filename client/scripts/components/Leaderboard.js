@@ -31,6 +31,7 @@ class Leaderboard extends React.Component {
             items.push(
                 <Team key={team.username}
                       rank={sortedTeams.indexOf(team)}
+                      username={team.username}
                       name={team.name}
                       score={team.score}
                       highScore={sortedTeams[0].score} />
