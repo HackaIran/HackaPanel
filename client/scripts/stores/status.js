@@ -2,7 +2,7 @@ import socket from '../model/socket'
 
 import { createStore } from 'redux'
 
-function counter(state = { status: 'disable' }, action) {
+function reducer(state = { status: 'disable' }, action) {
     switch (action.type) {
         case 'change':
             return { status: action.status };
@@ -11,7 +11,7 @@ function counter(state = { status: 'disable' }, action) {
     }
 }
 
-const statusStore = createStore(counter);
+const statusStore = createStore(reducer);
 
 socket.on('status sync', status => statusStore.dispatch({ type: 'change', status: status }));
 
