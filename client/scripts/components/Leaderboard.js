@@ -1,15 +1,23 @@
 import React from 'react'
 import socket from '../model/socket'
+import statusStore from '../stores/status'
 
 import Team from './Team'
+
+const isLeaderboardDisabled = (status) => {
+    return status === 'invisible' || status.startsWith('countdown')
+};
 
 class Leaderboard extends React.Component {
 
     constructor (props) {
         super(props);
         this.state = {
+            disabled: isLeaderboardDisabled(statusStore.getState().status),
             teams: []
         };
+
+        statusStore.subscribe(() => this.setState({ disabled: isLeaderboardDisabled(statusStore.getState().status) }));
 
         // if server sent us all teams scores
         socket.on('get teams score', teams => this.setState({ teams }));
@@ -42,7 +50,7 @@ class Leaderboard extends React.Component {
 
     render() {
         return (
-            <aside>
+            <aside className={this.state.disabled ? 'disable' : ''}>
                 <header>
                     <img src="./assets/images/leaderboard.png" alt="leaderboard icon" />
                 </header>

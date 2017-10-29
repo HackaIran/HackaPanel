@@ -5,6 +5,16 @@ const Compiler = require('./Compiler');
 
 let allAvailableConnections = [];
 
+let lastStatus = 'disable';
+
+const getStatus = (time) => {
+    if (time.toStart > 0) return 'disable';
+    if (time.toEnd < 1) return 'winner';
+    if (time.toEnd < 15) return 'countdown ' + time.toEnd;
+    if (time.toEnd < 10 * 60) return 'invisible';
+    return 'normal'
+};
+
 class Server {
 
     constructor () {
@@ -26,7 +36,18 @@ class Server {
         io.on('connection', onUserConnected);
         setInterval(() => { io.emit('time sync', time) }, 60 * 1000);
         setInterval(() => this.checkConnections(), 15 * 1000);
+        setInterval(() => this.checkStatus(), 1000);
+        this.checkStatus();
         this.checkConnections()
+    }
+
+    checkStatus () {
+        const status = getStatus(time);
+        if (lastStatus !== status) {
+            // status changed
+            lastStatus = status;
+            this.io.emit('status sync', lastStatus);
+        }
     }
 
     checkConnections () {
@@ -59,6 +80,9 @@ class Server {
             if (!!team.socketId && allAvailableConnections.includes(team.socketId)) {
                 return socket.emit('user login error', 'You are logged in another device! check it again');
             }
+
+            // send all teams info with user info
+            this.sendAllTeamsInfoTo(socket);
 
             // if Username and Password was OK
             socket.emit('user info', {
@@ -103,6 +127,7 @@ class Server {
 const onUserConnected = socket => {
     server.sendAllTeamsInfoTo(socket);
     socket.emit('time sync', time);
+    socket.emit('status sync', lastStatus);
     socket.on('user login', form => server.login(form, socket));
     socket.on('user logout', () => server.logout(socket));
     socket.on('disconnect', () => server.logout(socket));
