@@ -33,6 +33,10 @@ class Compiler {
         // checking scores and mistakes
         this.scoreChecker.scoreThis(result, codeData)
             .then(result => {
+                if (result.inputId > 3) {
+                    result.input = '(hidden)';
+                    result.output = '(hidden)';
+                }
                 socket.emit('user code result', result)
             })
             .catch(error => console.error(error));
