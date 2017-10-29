@@ -8,7 +8,6 @@ let challenge = fs.readFileSync('./contest/challenge.md', 'utf-8');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    server.get('/');
     const city = 'Karaj';
     res.render('index', {
         challenge: marked(challenge),

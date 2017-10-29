@@ -1,13 +1,14 @@
 const time = require('./model/time');
 const Team = require('./model/Team');
 
-const compiler = require('./compiler');
+const Compiler = require('./Compiler');
 
 let allAvailableConnections = [];
 
 class Server {
 
     constructor () {
+        this.compiler = new Compiler(this);
         this._io = null;
     }
 
@@ -44,10 +45,8 @@ class Server {
     }
 
     static resetAllConnections () {
-        Team.update({}, { socketId: '' }, { multi: true }, function () {})
+        Team.update({}, { socketId: '', score: 0 }, { multi: true }, function () {})
     }
-
-    get (url) {}
 
     login (form, socket) {
 
@@ -76,14 +75,27 @@ class Server {
         Team.findOneAndUpdate({ socketId: socket.id }, { socketId: '' }, function () {})
     }
 
+    sendAllTeamsTo (socket) {
+        Team.find({}, function (err, teams) {
+            const data = teams.map(team => {
+                return {
+                    username: team.username,
+                    name: team.name,
+                    score: team.score
+                }
+            });
+            socket.emit('get teams score', data)
+        })
+    }
+
     runCodeFor (socket, codeData) {
-        Team.findOne({ username: codeData.username, password: codeData.password }, function (err, team) {
+        Team.findOne({ username: codeData.username, password: codeData.password }, (err, team) => {
 
             if (err) return console.error(err);
 
             if (!team) return socket.emit('user login error', 'login first then run your code');
 
-            compiler.submit(socket, codeData)
+            this.compiler.submit(socket, codeData)
         });
     }
 }
@@ -95,9 +107,11 @@ const onUserConnected = socket => {
     socket.on('disconnect', () => server.logout(socket));
     socket.on('i am connected', () => allAvailableConnections.push(socket.id));
     socket.on('user run code', codeData => server.runCodeFor(socket, codeData));
+    socket.on('send teams score', () => server.sendAllTeamsTo(socket));
 };
 
 Server.resetAllConnections();
+
 const server = new Server;
 
 module.exports = server;

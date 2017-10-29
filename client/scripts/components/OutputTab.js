@@ -10,6 +10,7 @@ class OutputTab extends React.Component {
         this.state = {
             question: 0,
             loading: false,
+            submitting: false,
             QAs: []
         };
         socket.on('user code result', this.onResult.bind(this));
@@ -18,8 +19,6 @@ class OutputTab extends React.Component {
     onResult (result) {
         const QAs = this.state.QAs;
         const qa = QAs[result.inputId] = {};
-
-        console.log(result);
 
         qa.input = result.input;
 
@@ -37,7 +36,9 @@ class OutputTab extends React.Component {
         qa.duration = result.duration;
         qa.steps = result.steps;
 
-        this.setState({ QAs, loading: false });
+        if (result.inputId === this.props.inputsCount - 1) this.setState({ submitting: false });
+
+        this.setState({ QAs, loading: false, question: result.inputId });
     }
 
     changeQuestionTo (i) {
@@ -46,6 +47,7 @@ class OutputTab extends React.Component {
 
     submitTheCode () {
         this.startLoading();
+        this.setState({ submitting: true });
 
         const code = window.localStorage['hacka-editor-code'] || '';
         const language = window.localStorage['hacka-editor-language'] || '';
@@ -91,7 +93,7 @@ class OutputTab extends React.Component {
 
     render() {
 
-        const loader = this.state.loading ? (<div className="cssload-container">
+        const loader = this.state.loading || this.state.submitting ? (<div className="cssload-container">
             <div className="cssload-whirlpool" />
             <span>Running The Code...</span>
         </div>) : null;

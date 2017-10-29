@@ -8,12 +8,10 @@ class Leaderboard extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            teams: [
-                { username: 'klug', name: 'Klug Team', score: 2000 },
-                { username: 'pug', name: 'Pug Team', score: 1000 },
-                { username: 'bhamn', name: 'Ngino Team', score: 800 },
-            ]
+            teams: []
         };
+        socket.emit('send teams score');
+        socket.on('get teams score', teams => this.setState({ teams }));
         socket.on('team score update', info => {
             const teams = this.state.teams;
             for (let team of teams) if (team.username === info.username) team.score = info.score;
