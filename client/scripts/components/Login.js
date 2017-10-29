@@ -12,7 +12,7 @@ class Login extends React.Component {
     login () {
         const username = window.localStorage['hacka-username'] = this.refs.username.value;
         const password = window.localStorage['hacka-password'] = this.refs.password.value;
-        socket.on('connect', () => socket.emit('user login', { username, password }))
+        socket.emit('user login', { username, password })
     }
 
     componentDidMount () {

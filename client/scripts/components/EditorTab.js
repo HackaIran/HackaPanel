@@ -47,7 +47,7 @@ class EditorTab extends React.Component {
     }
 
     get code () {
-        return window.localStorage['hacka-editor-code'] || ' ';
+        return window.localStorage['hacka-editor-code'] || '';
     }
 
     render() {
