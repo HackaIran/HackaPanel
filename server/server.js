@@ -7,7 +7,7 @@ let allAvailableConnections = [];
 
 let lastStatus = 'disable';
 
-const getStatus = (time) => {
+const getStatus = () => {
     if (time.toStart > 0) return 'disable';
     if (time.toEnd < 1) return 'winner';
     if (time.toEnd < 15) return 'countdown ' + time.toEnd;
@@ -42,7 +42,7 @@ class Server {
     }
 
     checkStatus () {
-        const status = getStatus(time);
+        const status = getStatus();
         if (lastStatus !== status) {
             // status changed
             lastStatus = status;
@@ -100,7 +100,7 @@ class Server {
     }
 
     sendAllTeamsInfoTo (socket) {
-        Team.find({}, function (err, teams) {
+        if (getStatus() !== 'invisible') Team.find({}, function (err, teams) {
             const data = teams.map(team => {
                 return {
                     username: team.username,
@@ -113,14 +113,26 @@ class Server {
     }
 
     runCodeFor (socket, codeData) {
-        Team.findOne({ username: codeData.username, password: codeData.password }, (err, team) => {
+        const status = getStatus();
+        if (status === 'normal' || status === 'invisible') {
 
-            if (err) return console.error(err);
+            Team.findOne({username: codeData.username, password: codeData.password}, (err, team) => {
 
-            if (!team) return socket.emit('user login error', 'login first then run your code');
+                if (err) return console.error(err);
 
-            this.compiler.submit(socket, codeData)
-        });
+                if (!team) return socket.emit('user login error', 'login first then run your code');
+
+                this.compiler.submit(socket, codeData)
+            });
+
+        } else {
+            socket.emit('user code result', {
+                input: '',
+                inputId: 0,
+                hasErrors: true,
+                error: `You're not allowed to run any kind of codes at this time!`,
+            });
+        }
     }
 }
 

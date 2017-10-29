@@ -1,8 +1,8 @@
 module.exports = {
     time: {
         start: {
-            hours: 5,
-            minutes: 46,
+            hours: 6,
+            minutes: 10,
             seconds: 0
         },
         end: {
