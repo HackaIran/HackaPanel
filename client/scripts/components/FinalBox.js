@@ -51,10 +51,15 @@ class FinalBox extends React.Component {
         }, 50)
     }
 
+    close () {
+        this.setState({ show: false })
+    }
+
     render () {
         const boxClass = "final-box" + (this.state.show ? ' show' : '') + (this.state.winnerMode ? ' winner-mode' : '');
         return (
             <div className={boxClass}>
+                <i className="close" onClick={this.close.bind(this)}>X</i>
                 <h1 className={this.state.appear ? 'show ' : ''}>{this.state.message}</h1>
             </div>
         )

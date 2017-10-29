@@ -8,6 +8,19 @@
     pointer-events: none
     transition-duration: 1s
 
+    i
+        position: absolute
+        right: 40px
+        top: 30px
+        font-size: 40px
+        font-style: normal
+        font-weight: bold
+        color: #333
+        cursor: pointer
+        transition-duration: 0.3s
+        opacity: 0
+        pointer-events: none
+
     &.show
         opacity: 1
         pointer-events: auto
@@ -30,6 +43,13 @@
     &.winner-mode
         background: rgba(200,200,200,0.95)
         transition-duration: 0.3s
+
+        i
+            opacity: 1
+            pointer-events: auto
+
+            &:hover
+                opacity: 0.8
 
         h1
             font-size: 110px
