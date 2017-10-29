@@ -141,6 +141,7 @@ class Server {
                 hasErrors: true,
                 error: `You're not allowed to run any kind of codes at this time!`,
             });
+            socket.emit('submit killed')
         }
     }
 }

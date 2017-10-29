@@ -14,6 +14,7 @@ class OutputTab extends React.Component {
             QAs: []
         };
         socket.on('user code result', this.onResult.bind(this));
+        socket.on('submit killed', () => this.setState({ loading: false, submitting: false }))
     }
 
     onResult (result) {
