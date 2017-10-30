@@ -5,7 +5,7 @@ class Team extends React.Component {
     render() {
 
         const isThisMe = localStorage['hacka-username'] === this.props.username;
-        const progressStyle = { width: (this.props.score / this.props.highScore) * 100 + '%' };
+        const progressStyle = { width: this.props.score === 0 ? 0 : (this.props.score / this.props.highScore) * 100 + '%' };
 
         return (
             <li style={{ top: this.props.rank * 60 }} className={isThisMe ? 'me' : ''}>
