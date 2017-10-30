@@ -99,6 +99,10 @@ class OutputTab extends React.Component {
             <span>Running The Code...</span>
         </div>) : null;
 
+        const submitButton = this.state.question === 0 ? (
+            <div className="submit-container"><button onClick={this.submitTheCode.bind(this)}>Submit The Code</button></div>
+        ) : null;
+
         return (
             <div style={this.tabStyle} className="tab-page" id="output">
                 {loader}
@@ -117,7 +121,7 @@ class OutputTab extends React.Component {
                         <div>Score<span>{this.current.score || '-'}</span></div>
                         <div>Steps<span>{this.current.steps || '-'}</span></div>
                     </div>
-                    <div className="submit-container"><button onClick={this.submitTheCode.bind(this)}>Submit The Code</button></div>
+                    { submitButton }
                 </section>
             </div>
         )

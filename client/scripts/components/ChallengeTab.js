@@ -16,7 +16,7 @@ class ChallengeTab extends React.Component {
 
     render() {
         return (
-            <div style={this.tabStyle} className="tab-page" id="challenge">
+            <div style={this.tabStyle} className="tab-page rtl" id="challenge">
                 <div>{ renderHTML(this.challengeHTML) }</div>
             </div>
         )

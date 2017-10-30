@@ -1,9 +1,15 @@
 #challenge
     flex-grow: 1
     display: flex
-    background: linear-gradient(#EEE, #FFF, #EEE)
+    background: #21252b
+    color: white
+
+    &.rtl
+        direction: rtl
+        font-family: 'IRANSans', 'IRANYekan', 'B Yekan', 'B Nazanin', 'Segoe UI', sans-serif
 
     div
         padding: 20px 40px
         overflow-y: auto
+        width: 100%
         @import "challenge-content"
