@@ -1,5 +1,5 @@
 & > aside
-    background: #EEE
+    background: #282c34
     flex-grow: 1
     flex-basis: 100%
     box-shadow: 0 0 30px rgba(0,0,0,0.3)
@@ -12,13 +12,12 @@
         filter: grayscale(100%) blur(5px)
 
     & > header
-        text-align: center
-
-        & > img
-            width: 70px
-            margin-top: 15px
-            user-select: none
-            -webkit-user-drag: none
+        background: #5693f0 url('./assets/images/trophy.png') no-repeat 13px center
+        height: 45px
+        color: white
+        display: flex
+        align-items: center
+        padding-left: 50px
 
     & > ol.ranks
         margin: 0
@@ -31,58 +30,61 @@
         position: relative
 
         & > li
-            padding: 10px 0 10px 15px
+            padding: 37px 0 14px 15px
             font-weight: bold
-            border: 1px solid #DDD
-            margin: 5px 10px
+            border-radius: 8px
+            margin: 18px
             overflow: hidden
             position: absolute
-            width: calc(100% - 35px)
+            width: calc(100% - 53px)
             transition-duration: 0.5s
             white-space: nowrap
-
-            & > .progress
-                position: absolute
-                top: 0
-                left: 0
-                width: 100%
-                height: 100%
-                background: linear-gradient(to right, #2b1174, #eba4e6)
-                z-index: -1
-                transition-duration: 0.5s
-
-            &.me
-                border-left: 8px solid #fbcb42
-                width: calc(100% - 43px)
+            background: #33373e
 
             & > .behind-progress
                 position: absolute
-                top: 0
-                left: 0
-                width: 100%
-                height: 100%
-                background: linear-gradient(to right, #777, #ddd)
-                z-index: -2
+                bottom: 11px
+                left: 20%
+                width: 74%
+                height: 6px
+                background: #21252b
+                overflow: hidden
+                border-radius: 10px
+
+                & > .progress
+                    position: absolute
+                    top: 0
+                    left: 0
+                    width: 0
+                    height: 100%
+                    border-radius: 10px
+                    background: linear-gradient(to right, #ffd944, #ffa309)
+                    transition-duration: 0.5s
 
             & > span
 
                 &.name
+                    font-weight: normal
+                    position: absolute
+                    font-size: 14px
+                    left: 20%
+                    bottom: 24px
                     color: white
-                    white-space: nowrap
+                    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5)
 
                 &.rank
-                    color: orange
-                    font-size: 120%
+                    color: #e0e0e0
+                    font-size: 20px
+                    position: absolute
+                    left: 21px
+                    top: 48%
+                    transform: translateY(-50%)
+                    font-weight: 100
 
                 &.score
-                    font-size: 70%
+                    font-size: 13px
                     font-weight: normal
-                    color: yellow
-                    margin-left: 7px
-                    white-space: nowrap
-
-                    &:before
-                        content: " (score: "
-
-                    &:after
-                        content: ")"
+                    color: #e0e0e0
+                    position: absolute
+                    right: 6%
+                    bottom: 25px

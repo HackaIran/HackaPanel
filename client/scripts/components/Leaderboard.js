@@ -51,9 +51,7 @@ class Leaderboard extends React.Component {
     render() {
         return (
             <aside className={this.state.disabled ? 'disable' : ''}>
-                <header>
-                    <img src="./assets/images/leaderboard.png" alt="leaderboard icon" />
-                </header>
+                <header>LeaderBoard</header>
                 <ol className="ranks">{this.teamsList}</ol>
             </aside>
         )
