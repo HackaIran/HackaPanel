@@ -23,7 +23,7 @@
         display: flex
         justify-content: flex-start
         flex-direction: column
-        background: #21252b
+        background: #272f3a
 
         li
             width: 50px
@@ -35,7 +35,6 @@
             font-weight: bold
             font-size: 21px
             background: rgba(0, 0, 0, 0.4)
-            background: rg
             margin-bottom: 2px
             cursor: pointer
             color: white
@@ -81,14 +80,14 @@
 
             &.result
                 display: flex
-                background: #EEE
+                background: #272f3a
                 border-radius: 10px
                 box-shadow: 0 0 30px rgba(0, 0, 0, 0.2)
 
                 & > div
                     flex-grow: 1
                     text-align: center
-                    border-right: 1px solid #888
+                    border-right: 1px solid rgba(255, 255, 255, 0.1)
                     padding: 30px
                     font-size: 20px
 
@@ -105,17 +104,21 @@
                 padding: 30px
                 text-align: center
 
-                &:hover
-                    text-align: left
-
                 & > button
                     color: #fff
                     font-size: 18px
-                    padding: 14px 25px
-                    background: #0088ff
+                    padding: 20px 75px
+                    background: #5693f0
                     border: 0
                     cursor: pointer
                     outline: none
+                    border-radius: 10px
+                    transition-duration: 0.3s
 
                     &:hover
+                        background: #7cb0ff
+
+                    &:active
+                        background: #344765
                         opacity: 0.8
+                        transform: scale(0.9)
