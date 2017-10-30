@@ -2,6 +2,8 @@
     flex-grow: 1
     position: relative
     display: block
+    background: #21252b
+    color: white
 
     & > .cssload-container
         position: absolute
@@ -18,10 +20,10 @@
             transform: translate(-50%, -50%) translateY(50px)
 
     & > aside
-        background: #DDD
         display: flex
         justify-content: flex-start
         flex-direction: column
+        background: #21252b
 
         li
             width: 50px
@@ -32,16 +34,17 @@
             align-items: center
             font-weight: bold
             font-size: 21px
-            color: #222
-            background: rgba(255, 252, 255, 0.4)
+            background: rgba(0, 0, 0, 0.4)
+            background: rg
             margin-bottom: 2px
             cursor: pointer
+            color: white
 
             &:hover
-                background: rgba(255, 252, 255, 0.8)
+                background: rgba(0, 0, 0, 0.8)
 
             &.active
-                background: white
+                background: #21252b
                 pointer-events: none
 
     & > section
@@ -57,7 +60,7 @@
 
             pre
                 flex-grow: 1
-                background: #EEE
+                background: #33373e
                 text-align: left
                 font-weight: bold
                 padding: 30px
