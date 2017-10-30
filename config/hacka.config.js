@@ -7,8 +7,8 @@ module.exports = {
         },
         end: {
             hours: 20,
-            minutes: 0,
-            seconds: 0
+            minutes: 43,
+            seconds: 40
         }
     },
     db: {

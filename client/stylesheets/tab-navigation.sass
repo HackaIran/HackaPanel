@@ -4,8 +4,9 @@
     justify-content: space-between
     list-style-type: none
     align-items: stretch
-    height: 45px
-    min-height: 45px
+    height: 60px
+    min-height: 60px
+    background: #32363e
 
     & > li
         flex-grow: 1
@@ -13,9 +14,13 @@
         display: flex
         align-items: center
         justify-content: center
-        background: #EFEFEF
+        background: #24282f
+        color: white
         cursor: pointer
-        border-bottom: 4px solid #cfcfcf
+        border-bottom: 4px solid #404040
+        margin: 6px 3px 0 3px
+        border-radius: 10px 10px 0 0
+        transition-duration: 0.3s
 
         & > em
             font-style: normal
@@ -24,17 +29,21 @@
             color: #EEE
 
         &:hover
-            background: #DDD
+            background: #21252b
 
         &.active
+            background: #21252b
             pointer-events: none
-            border-bottom: 4px solid #9c6acf
+            border-bottom: 4px solid #ffd944
 
         &.submit
-            background: #39c484
+            background: #15ba71
             color: white
             border-bottom: none
             flex-grow: 0.3
 
             &:hover
                 background: #15ad67
+
+            &:active
+                background: #0f6e3e
