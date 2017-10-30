@@ -60,8 +60,9 @@ class Header extends React.Component {
         return (
             <header>
                 <div className="team">
+                    <img src="./assets/images/terminal.png" />
                     <h3 className="name">{this.state.name}</h3>
-                    <span>score: <span className="score">{this.state.score}</span></span>
+                    <span className="score">Score: <span>{this.state.score}</span></span>
                 </div>
                 <time>{this.time}</time>
             </header>

@@ -1,8 +1,8 @@
 & > header
-    background: #444 url('../assets/images/hacka-logo-white.png') no-repeat center
+    background: #21252b url('../assets/images/hacka-logo-white.png') no-repeat center
     background-size: contain
-    flex-basis: 80px
-    min-height: 80px
+    flex-basis: 60px
+    min-height: 60px
     z-index: 5
     box-shadow: 0 0 50px rgba(0,0,0,0.2)
     display: flex
@@ -11,15 +11,31 @@
     transition-duration: 0.3s
 
     & > time
-        text-align: center
-        font-size: 30px
-        color: #FFF
-        margin-right: 20px
+        margin: 5px 10px 5px 5px
+        border-radius: 20px
+        padding: 3px 12px 6px 38px
+        background: #2c3036 url('../assets/images/clock.png') no-repeat 6px
+        color: #fff
+        font-size: 18px
 
     & > div
-        background: #CCC
-        align-self: stretch
-        padding: 12px 20px
+        display: flex
+        align-items: center
+        color: white
+
+        img
+            margin-left: 17px
+            width: 24px
 
         & > h3
-            margin: 0
+            margin: -4px 6px 0 15px
+            font-size: 22px
+            font-weight: normal
+            text-shadow: 0 0 21px rgba(255, 255, 255, 0.7)
+            
+        & > .score
+            margin: 5px
+            border-radius: 20px
+            padding: 3px 15px 6px 15px
+            background: #2c3036
+            color: rgba(217, 235, 255, 0.87)
