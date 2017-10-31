@@ -15,7 +15,7 @@ import 'brace/ext/language_tools';
 import languageStore from '../stores/language'
 
 const defaults = {
-    javascript: `// JavaScript: Making the world a better place, got easier with it\n\nconsole.log('Hello Hackers World')\n`,
+    javascript: `// JavaScript: Making the world a better place, just got easier with it\n\nconsole.log('Hello Hackers World')\n`,
     python: `# Python: Faster Than Your Imagination!\n\nprint('Hello Hackers World')\n`,
     csharp: `// C#: Feels Like Home!\n\nstatic public void Main () {\n\n\tConsole.WriteLine ("Hello Hackers World");\n\n}\n`,
     golang: `// Go: Absolutely Different From The Others!\n\nfunc main() {\n\n\tfmt.Println("Hello Hackers World");\n\n}\n`,
