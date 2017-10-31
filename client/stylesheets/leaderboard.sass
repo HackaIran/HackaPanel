@@ -9,7 +9,10 @@
     transition-duration: 1s
 
     &.disable
-        filter: grayscale(100%) blur(5px)
+        filter: grayscale(50%)
+
+        & > ol.ranks
+            filter: blur(5px)
 
     & > header
         background: #5693f0 url('./assets/images/trophy.png') no-repeat 20px center

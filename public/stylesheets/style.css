@@ -15,9 +15,11 @@
 }
 .app > dialog > h2 {
     margin-bottom: 5px;
+    color: white
 }
 .app > dialog > span {
     font-size: 30px;
+    color: #ffd944
 }
 .app.highscore-mode > header, .app.highscore-mode > main, .app.highscore-mode > footer {
     filter: blur(15px);

@@ -22,14 +22,18 @@ class HighScoreBox extends React.Component {
         }, 2500)
     }
 
-    appear () {
+    appear (time = 2000) {
         this.app.setState({ highScoreMode: true });
-        setTimeout(() => this.app.setState({ highScoreMode: false }), 2000)
+        setTimeout(this.disappear.bind(this), time)
+    }
+
+    disappear () {
+        this.app.setState({ highScoreMode: false })
     }
 
     render() {
         return (
-            <dialog>
+            <dialog onClick={this.disappear.bind(this)}>
                 <img src="./assets/images/check.svg" alt="Highscore" width="100px" />
                 <h2>Congrats! New Highscore</h2>
                 <span>{ this.state.score }</span>
