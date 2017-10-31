@@ -12,8 +12,8 @@ class ScoreChecker {
         this.server = compiler.server;
 
         // score checker properties
-        this.minScore = 50;
-        this.maxScore = 250
+        this.minScore = 100;
+        this.maxScore = 500
     }
 
     sandwichScore (current, min, max) {
@@ -31,6 +31,7 @@ class ScoreChecker {
      * Scores given result and returns score in a promise shell
      * @param result
      * @param codeData
+     * @param socket
      * @return {Promise}
      */
     scoreThis (result, codeData, socket) {
@@ -46,21 +47,17 @@ class ScoreChecker {
             if (result.solved) {
 
                 // important parameters for scoring
-                const steps = result.steps;
+                const rate = result.rate;
                 const duration = result.duration;
-
-                const minSteps = result.minSteps;
-                const maxSteps = result.maxSteps;
 
                 const minDuration = result.minDuration;
                 const maxDuration = result.maxDuration;
 
-                // calculating score details
-                const stepsScore = this.sandwichScore(steps, minSteps, maxSteps);
+                // calculating duration score
                 const durationScore = this.sandwichScore(duration, minDuration, maxDuration);
 
                 // calculating final score
-                result.score = stepsScore + durationScore;
+                result.score = durationScore * rate;
 
                 // calculating total score
                 usersScore[codeData.username].totalScore += result.score
