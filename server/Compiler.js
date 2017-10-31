@@ -13,7 +13,7 @@ const untrustedPatterns = {
     python: /import\s+.*|from\s+.*import\s+.*/,
     csharp: /using\s+.*/,
     golang: /package\s+.*|import\s+.*/,
-    java: /import\s+.*|/,
+    java: /import\s+.*/,
 };
 
 const runningQueue = [];
@@ -109,7 +109,7 @@ class Compiler {
 
             // Go
             else if (language === 'golang') {
-                code = `package main\nimport ("fmt", "strings")\nconst INPUT string = "${input.split('\n').join('\\n')}"\n${code}`;
+                code = `package main\nimport "fmt"\nconst INPUT string = "${input.split('\n').join('\\n')}"\n${code}`;
                 goCompiler.run(username, code, (result) => {
                     result.inputId = inputId;
                     result.input = input;

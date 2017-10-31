@@ -14,6 +14,14 @@ import 'brace/ext/language_tools';
 
 import languageStore from '../stores/language'
 
+const defaults = {
+    javascript: `// JavaScript: Making the world a better place, got easier with it\n\nconsole.log('Hello Hackers World')\n`,
+    python: `# Python: Faster Than Your Imagination!\n\nprint('Hello Hackers World')\n`,
+    csharp: `// C#: Feels Like Home!\n\nstatic public void Main () {\n\n\tConsole.WriteLine ("Hello Hackers World");\n\n}\n`,
+    golang: `// Go: Absolutely Different From The Others!\n\nfunc main() {\n\n\tfmt.Println("Hello Hackers World");\n\n}\n`,
+    java: `// Java: Old Fashioned But Still Sexy:)\n\npublic static void main(String[] args) {\n\n\tSystem.out.println("Hello Hackers World");\n\n}\n`,
+};
+
 class EditorTab extends React.Component {
 
     constructor (props) {
@@ -47,7 +55,9 @@ class EditorTab extends React.Component {
     }
 
     get code () {
-        return window.localStorage['hacka-editor-code'] || '';
+        let code = window.localStorage['hacka-editor-code'] || '';
+        if (code === '' && defaults[this.state.language]) code = defaults[this.state.language];
+        return code;
     }
 
     render() {
