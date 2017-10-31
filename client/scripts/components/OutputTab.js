@@ -30,12 +30,17 @@ class OutputTab extends React.Component {
         }
 
         if (result.hasErrors) {
-            qa.output += `<span class="red">${result.error}</span>`;
+            qa.output += `\n<span class="red">${result.error}</span>`;
+        }
+
+        if (result.hasMistakes) {
+            qa.output += `\n<span class="red">${result.mistake}</span>`;
         }
 
         qa.score = result.score;
         qa.duration = result.duration;
-        qa.steps = result.steps;
+        qa.rate = result.rate * 100 + '%';
+        qa.successful = result.rate > 0;
 
         if (result.inputId === this.props.inputsCount - 1) this.setState({ submitting: false });
 
@@ -103,6 +108,8 @@ class OutputTab extends React.Component {
             <div className="submit-container"><button onClick={this.submitTheCode.bind(this)}>Submit The Code</button></div>
         ) : null;
 
+        const rateStyle = { color: this.current.successful ? '#02de74' : 'red' };
+
         return (
             <div style={this.tabStyle} className="tab-page" id="output">
                 {loader}
@@ -119,7 +126,7 @@ class OutputTab extends React.Component {
                     <div className="result">
                         <div>Duration<span>{this.current.duration ? this.current.duration + 'ms' : '-'}</span></div>
                         <div>Score<span>{this.current.score || '-'}</span></div>
-                        <div>Steps<span>{this.current.steps || '-'}</span></div>
+                        <div>Success Rate<span style={rateStyle}>{this.current.rate || '-'}</span></div>
                     </div>
                     { submitButton }
                 </section>

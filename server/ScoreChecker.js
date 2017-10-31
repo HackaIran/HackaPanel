@@ -57,7 +57,7 @@ class ScoreChecker {
                 const durationScore = this.sandwichScore(duration, minDuration, maxDuration);
 
                 // calculating final score
-                result.score = durationScore * rate;
+                result.score = Math.floor(durationScore * rate);
 
                 // calculating total score
                 usersScore[codeData.username].totalScore += result.score
