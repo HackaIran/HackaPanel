@@ -2,13 +2,13 @@ module.exports = {
     time: {
         start: {
             hours: 0,
-            minutes: 10,
+            minutes: 0,
             seconds: 0
         },
         end: {
-            hours: 21,
-            minutes: 25,
-            seconds: 20
+            hours: 0,
+            minutes: 26,
+            seconds: 0
         }
     },
     db: {

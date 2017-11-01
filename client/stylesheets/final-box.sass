@@ -4,7 +4,7 @@
     height: 100%
     z-index: 999999
     opacity: 0
-    background: rgba(255,255,255,0.95)
+    background: linear-gradient(rgba(222, 44, 44, 0.74), #3dc6ff)
     pointer-events: none
     transition-duration: 1s
 
@@ -15,7 +15,9 @@
         font-size: 40px
         font-style: normal
         font-weight: bold
-        color: #333
+        color: rgba(255, 255, 255, 0.87)
+        text-shadow: 0 0 22px rgba(0, 0, 0, 0.42)
+        transform: scaleY(0.8)
         cursor: pointer
         transition-duration: 0.3s
         opacity: 0
@@ -29,11 +31,17 @@
         position: absolute
         top: 50%
         left: 50%
+        color: white
         transform: translate(-50%, -50%) scale(0.7)
         text-align: center
+        text-shadow: 0 0 40px rgba(0, 0, 0, 0.6)
         opacity: 0
         font-size: 150px
         margin: 0
+
+        span
+            color: #c2ff3e
+            text-shadow: 0 0 20px #59a847
 
         &.show
             transition-duration: 0.5s
@@ -41,7 +49,6 @@
             transform: translate(-50%, -50%)
 
     &.winner-mode
-        background: rgba(200,200,200,0.95)
         transition-duration: 0.3s
 
         i
@@ -52,8 +59,12 @@
                 opacity: 0.8
 
         h1
-            font-size: 110px
             transform: translate(-50%, -50%) scale(0.5)
+            color: white
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.6)
+            font-weight: normal
+            font-size: 80px
+            width: 90%
 
             &.show
                 transition-duration: 0.3s

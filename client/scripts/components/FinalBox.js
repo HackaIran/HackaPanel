@@ -3,6 +3,9 @@ import statusStore from "../stores/status";
 
 import socket from '../model/socket'
 
+import { makeRibbons } from '../tools/ribbons'
+import renderHTML from 'react-render-html';
+
 class FinalBox extends React.Component {
 
     constructor (props) {
@@ -18,7 +21,7 @@ class FinalBox extends React.Component {
         socket.on('get teams score', teams => {
             const sortedTeams = ([].concat(teams)).sort((team1, team2) => team2.score - team1.score);
             this.setState({ teams: sortedTeams });
-            if (this.state.winnerMode) this.setState({ message: `${sortedTeams[0].name} is the winner!` })
+            if (this.state.winnerMode) this.setState({ message: `<span>${sortedTeams[0].name}</span> is the winner!` })
         });
 
         statusStore.subscribe(() => {
@@ -37,9 +40,10 @@ class FinalBox extends React.Component {
             // Winner mode
             if (status === 'winner') {
                 this.setState({
-                    message: this.state.teams[0] ? `${this.state.teams[0].name} is the winner!` : '',
+                    message: this.state.teams[0] ? `<span>${this.state.teams[0].name}</span> is the winner!` : '',
                     winnerMode: true
-                })
+                });
+                makeRibbons(document.querySelector('.final-box'))
             }
         });
     }
@@ -60,7 +64,7 @@ class FinalBox extends React.Component {
         return (
             <div className={boxClass}>
                 <i className="close" onClick={this.close.bind(this)}>X</i>
-                <h1 className={this.state.appear ? 'show ' : ''}>{this.state.message}</h1>
+                <h1 className={this.state.appear ? 'show ' : ''}>{renderHTML(this.state.message)}</h1>
             </div>
         )
     }
