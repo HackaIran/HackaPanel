@@ -42,6 +42,8 @@ class OutputTab extends React.Component {
         qa.rate = result.rate * 100 + '%';
         qa.successful = result.rate > 0;
 
+        if (isNaN(result.rate)) qa.rate = '';
+
         if (result.inputId === this.props.inputsCount - 1) this.setState({ submitting: false });
 
         this.setState({ QAs, loading: false, question: result.inputId });
