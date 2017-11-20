@@ -27,8 +27,16 @@ class Compiler {
     }
 
     onResult (socket, codeData, result) {
+
         // if code has errors
-        if (result.hasErrors) return socket.emit('user code result', result);
+        if (result.hasErrors) {
+            if (result.inputId > 3) {
+                result.input = '(hidden)';
+                result.output = '(hidden)';
+                result.error = `Code has some errors and cannot run`;
+            }
+            return socket.emit('user code result', result);
+        }
 
         // checking scores and mistakes
         this.scoreChecker.scoreThis(result, codeData, socket)
@@ -89,7 +97,7 @@ class Compiler {
 
             // C#
             else if (language === 'csharp') {
-                code = `using System;\npublic class ${username} {\nstatic public string INPUT = @"${input}";\n${code}\n}`;
+                code = `using System;\nusing System.Collections.Generic;\npublic class ${username} {\nstatic public string INPUT = @"${input}";\n${code}\n}`;
                 csharpCompiler.run(username, code, (result) => {
                     result.inputId = inputId;
                     result.input = input;
