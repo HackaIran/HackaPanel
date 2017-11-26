@@ -59,7 +59,7 @@ class Compiler {
         return new Promise((resolve) => {
             const language = codeData.language;
             const username = codeData.username;
-            const input = inputs[inputId];
+            const input = inputs.get(inputId);
             let code = codeData.code;
 
             // security check for codes
@@ -97,7 +97,7 @@ class Compiler {
 
             // C#
             else if (language === 'csharp') {
-                code = `using System;\nusing System.Collections.Generic;\npublic class ${username} {\nstatic public string INPUT = @"${input}";\n${code}\n}`;
+                code = `using System;\nusing System.Collections.Generic;\nusing System.Linq;\npublic class ${username} {\nstatic public string INPUT = @"${input}";\n${code}\n}`;
                 csharpCompiler.run(username, code, (result) => {
                     result.inputId = inputId;
                     result.input = input;
