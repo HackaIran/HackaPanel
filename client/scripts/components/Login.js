@@ -27,10 +27,11 @@ class Login extends React.Component {
     }
 
     render() {
+        const city = document.title.match(/{[A-z]+}/)[0];
         return (
             <div className={"float-box animate " + (this.props.show ? '' : 'hidden')}>
                 <form onSubmit={this.onLoginRequest.bind(this)}>
-                    <span>Welcome to <b>Hacka{'{Karaj}'}!</b>:)</span>
+                    <span>Welcome to <b>Hacka{city}!</b>:)</span>
                     <input ref="username" placeholder="Username here" />
                     <input ref="password" type="password" placeholder="Password here" />
                     <button>Enter</button>
