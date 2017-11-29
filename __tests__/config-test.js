@@ -25,12 +25,15 @@ describe('Checking Necessary Properties', function () {
         expect(config.time.end).toBeDefined();
 
         // Check time range
-        expect(config.time.start.hours).toBeLessThan(24);
-        expect(config.time.start.hours).toBeGreaterThanOrEqual(0);
-        expect(config.time.start.minutes).toBeLessThan(60);
-        expect(config.time.start.minutes).toBeGreaterThanOrEqual(0);
-        expect(config.time.start.seconds).toBeLessThan(60);
-        expect(config.time.start.seconds).toBeGreaterThanOrEqual(0);
+        for (let status of ['start', 'end']) {
+            expect(config.time[status].hours).toBeLessThan(24);
+            expect(config.time[status].hours).toBeGreaterThanOrEqual(0);
+            expect(config.time[status].minutes).toBeLessThan(60);
+            expect(config.time[status].minutes).toBeGreaterThanOrEqual(0);
+            expect(config.time[status].seconds).toBeLessThan(60);
+            expect(config.time[status].seconds).toBeGreaterThanOrEqual(0);
+        }
+
     });
 
 });
