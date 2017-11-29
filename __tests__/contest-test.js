@@ -16,7 +16,7 @@ describe('Contest Files Existence', function () {
 
 });
 
-describe('Standard Check Of inputs.js', function () {
+describe('Standard Check for "inputs.js"', function () {
 
     const inputs = require('../contest/inputs');
 
@@ -28,6 +28,10 @@ describe('Standard Check Of inputs.js', function () {
     it('should have length property', function () {
         expect(inputs.length).toBeDefined();
         expect(typeof inputs.length).toBe('number')
+    });
+
+    it('should return input when get() calls', function () {
+        for (let i = 0; i < inputs.length; i++) expect(inputs.get(i)).toBeDefined();
     })
 
 });
