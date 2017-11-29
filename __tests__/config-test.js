@@ -36,4 +36,10 @@ describe('Checking Necessary Properties', function () {
 
     });
 
+    it('should have config.db', function () {
+        expect(config.db).toBeDefined();
+        expect(typeof config.db.host).toBe('string');
+        expect(typeof config.db.dbname).toBe('string');
+    })
+
 });
