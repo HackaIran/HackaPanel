@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-describe('Files Existence', function () {
+describe('Contest Files Existence', function () {
 
     it('should find "contest/challenge.md"', function () {
         expect(fs.existsSync('./contest/challenge.md')).toBeTruthy();
@@ -13,4 +13,21 @@ describe('Files Existence', function () {
     it('should find "contest/solver.js"', function () {
         expect(fs.existsSync('./contest/solver.js')).toBeTruthy();
     })
+
+});
+
+describe('Standard Check Of inputs.js', function () {
+
+    const inputs = require('../contest/inputs');
+
+    it('should have get method', function () {
+        expect(inputs.get).toBeDefined();
+        expect(typeof inputs.get).toBe('function')
+    });
+
+    it('should have length property', function () {
+        expect(inputs.length).toBeDefined();
+        expect(typeof inputs.length).toBe('number')
+    })
+
 });
