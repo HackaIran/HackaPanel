@@ -1,0 +1,1 @@
+const Compiler = require('../server/Compiler');
