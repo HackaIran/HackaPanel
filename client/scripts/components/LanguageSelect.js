@@ -14,7 +14,8 @@ class LanguageSelect extends React.Component {
                 python: 'Python3',
                 csharp: 'C#',
                 golang: 'Go',
-                java: 'Java'
+                java: 'Java',
+                'c_cpp': 'C/C++'
             }
         }
     }

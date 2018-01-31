@@ -3,6 +3,7 @@ const pythonCompiler = require('./compilers/python');
 const csharpCompiler = require('./compilers/csharp');
 const goCompiler = require('./compilers/go');
 const javaCompiler = require('./compilers/java');
+const cppCompiler = require('./compilers/cpp');
 
 const ScoreChecker = require('./ScoreChecker');
 
@@ -14,6 +15,7 @@ const untrustedPatterns = {
     csharp: /using\s+.*/,
     golang: /package\s+.*|import\s+.*/,
     java: /import\s+.*/,
+    'c_cpp': /#include\s+.*/,
 };
 
 const runningQueue = [];
@@ -64,6 +66,7 @@ class Compiler {
 
             // security check for codes
             const hasUntrustedMatches = Compiler.checkSecurity(language, code);
+
             if (hasUntrustedMatches) {
                 const result = {
                     hasErrors: true,
@@ -119,6 +122,16 @@ class Compiler {
             else if (language === 'golang') {
                 code = `package main\nimport "fmt"\nconst INPUT string = "${input.split('\n').join('\\n')}"\n${code}`;
                 goCompiler.run(username, code, (result) => {
+                    result.inputId = inputId;
+                    result.input = input;
+                    resolve(this.onResult(socket, codeData, result))
+                });
+            }
+
+            // C/C++
+            else if (language === 'c_cpp') {
+                code = `#include <iostream>\n#include <stdio.h>\n#include <math.h>\n#include <string.h>\nchar INPUT[100] = "${input.split('\n').join('\\n')}";\n\n${code}`;
+                cppCompiler.run(username, code, (result) => {
                     result.inputId = inputId;
                     result.input = input;
                     resolve(this.onResult(socket, codeData, result))
