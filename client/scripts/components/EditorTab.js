@@ -21,7 +21,7 @@ const defaults = {
     golang: `// Go: Absolutely Different From The Others!\n\nfunc main() {\n\tlines := strings.Split(INPUT,"\\n");\n\ttarget := lines[0];\n\tclientHistory := strings.Split(strings.Split(lines[len(lines)-1], ":")[1], ",")\n\tvar usersHistory[][] string;\n\tfor index, item := range lines[1:len(lines)-2] {\n\t\tfmt.Println(index);\n\t\tusersHistory = append(usersHistory, strings.Split(strings.Split(item, ":")[1], ","))\n\t}\n\n\tfmt.Println(target);\n\tfmt.Println(clientHistory);\n\tfmt.Println(usersHistory);\n}\n`,
     java: `// Java: Old Fashioned But Still Sexy:)\n\npublic static void main(String[] args) {\n\n\tSystem.out.println("Hello Hackers World");\n\n}\n`,
     c_cpp: `// C/C++: Today\`s Grandpa, Yesterday\`s Celebrity!`,
-    php: `// PHP: As Of 2016, It Comprises More Than 80% Of The Websites On The Internet.`
+    php: `// PHP: As Of 2016, It Comprises More Than 80% Of The Websites On The Internet.\n\n$lines = explode("\\n",$INPUT);\n$target = intval($lines[0]);\n$usersHistory = [];\nfor($i=1;$i<count($lines)-1;$i++){\n\t$usersHistory[$i-1] = explode(":",$lines[$i])[1];\n\t$usersHistory[$i-1] = explode(",",$usersHistory[$i-1]);\n}\n$clientHistory = explode(":",$lines[$i])[1];\n$clientHistory = explode(",",$clientHistory);`
 };
 
 class EditorTab extends React.Component {

@@ -2,13 +2,13 @@ module.exports = {
     city: "Karaj",
     time: {
         start: {
-            hours: 15,
-            minutes: 15,
+            hours: 10,
+            minutes: 10,
             seconds: 0
         },
         end: {
             hours: 23,
-            minutes: 59,
+            minutes: 29,
             seconds: 59
         }
     },
