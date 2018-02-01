@@ -12,7 +12,7 @@ class Main extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            tab: window.localStorage['hacka-tab'] || 'challenge'
+            tab: 'challenge' // || window.localStorage['hacka-tab']
         }
     }
 

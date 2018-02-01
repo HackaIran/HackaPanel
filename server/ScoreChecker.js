@@ -12,8 +12,8 @@ class ScoreChecker {
         this.server = compiler.server;
 
         // score checker properties
-        this.minScore = 100;
-        this.maxScore = 500
+        this.minScore = 300;
+        this.maxScore = 500;
     }
 
     sandwichScore (current, min, max) {

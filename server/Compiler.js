@@ -4,6 +4,7 @@ const csharpCompiler = require('./compilers/csharp');
 const goCompiler = require('./compilers/go');
 const javaCompiler = require('./compilers/java');
 const cppCompiler = require('./compilers/cpp');
+const phpCompiler = require('./compilers/php');
 
 const ScoreChecker = require('./ScoreChecker');
 
@@ -16,6 +17,7 @@ const untrustedPatterns = {
     golang: /package\s+.*|import\s+.*/,
     java: /import\s+.*/,
     'c_cpp': /#include\s+.*/,
+    php: /require\s+.*/
 };
 
 const runningQueue = [];
@@ -82,6 +84,16 @@ class Compiler {
             if (language === 'javascript') {
                 code = `const INPUT = \`${input}\`;\n${code}`;
                 javascriptCompiler.run(username, code, (result) => {
+                    result.inputId = inputId;
+                    result.input = input;
+                    resolve(this.onResult(socket, codeData, result));
+                });
+            }
+
+            // PHP
+            if (language === 'php') {
+                code = `<?php\n$INPUT = "${input.split('\n').join('\\n')}";\n${code}\n?>`;
+                phpCompiler.run(username, code, (result) => {
                     result.inputId = inputId;
                     result.input = input;
                     resolve(this.onResult(socket, codeData, result));

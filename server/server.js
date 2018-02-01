@@ -75,6 +75,10 @@ class Server {
         Team.update({}, { socketId: '' }, { multi: true }, function () {})
     }
 
+    static resetAllScores () {
+        Team.update({}, { score: 0 }, { multi: true }, function () {})
+    }
+
     login (form, socket) {
 
         if (!!this.io) Team.findOne({ username: form.username, password: form.password }, (err, team) => {
@@ -158,6 +162,7 @@ const onUserConnected = socket => {
 };
 
 Server.resetAllConnections();
+//Server.resetAllScores();
 
 const server = new Server;
 
