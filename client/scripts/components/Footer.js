@@ -18,7 +18,7 @@ class Footer extends React.Component {
         return (
             <footer>
                 <div className={`connection ${this.state.online ? '' : 'offline'}`} />
-                <span>All right reserved by <a href="http://hackaglobal.com/" title="HackaGlobal - The largest global community of developers!" target="_blank">HackaGlobal</a></span>
+                <span>All right reserved by <a href="http://hackairan.com/" title="HackaIran - The largest global community of technologist" target="_blank">HackaIran</a></span>
                 <LanguageSelect />
             </footer>
         )

@@ -132,7 +132,7 @@ class Compiler {
 
             // Go
             else if (language === 'golang') {
-                code = `package main\nimport "fmt"\nconst INPUT string = "${input.split('\n').join('\\n')}"\n${code}`;
+                code = `package main\nimport (\n\t"fmt"\n\t"strings"\n)\nconst INPUT string = "${input.split('\n').join('\\n')}"\n${code}`;
                 goCompiler.run(username, code, (result) => {
                     result.inputId = inputId;
                     result.input = input;

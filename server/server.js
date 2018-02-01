@@ -162,7 +162,7 @@ const onUserConnected = socket => {
 };
 
 Server.resetAllConnections();
-//Server.resetAllScores();
+// Server.resetAllScores();
 
 const server = new Server;
 
