@@ -11,7 +11,7 @@ class CppCompiler extends Compiler {
 
             this.execute(`vcvarsall x86 && cd ${dir} && cl /EHsc ${username}.cpp`, result => {
 
-                if (result.hasErrors) return callback(result);
+                if (!result.output.match(/out:.+\.exe/)) return callback(result);
 
                 this.execute(`cd ${dir} && ${username}.exe`, finalResult => {
                     // if code has errors returns result
