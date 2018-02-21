@@ -1,3 +1,5 @@
+const md5 = require('md5')
+
 const time = require('./model/time');
 const Team = require('./model/Team');
 
@@ -81,7 +83,7 @@ class Server {
 
     login (form, socket) {
 
-        if (!!this.io) Team.findOne({ username: form.username, password: form.password }, (err, team) => {
+        if (!!this.io) Team.findOne({ username: form.username, password: md5(form.password) }, (err, team) => {
 
             // Send error message if user doesn't exist
             if (!team) return socket.emit('user login error', 'Ops! re-check your username or password;)');

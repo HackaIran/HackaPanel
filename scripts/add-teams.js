@@ -43,9 +43,9 @@ const addTeam = () => new Promise((resolve, reject) => {
         const team = new Team(teamProps);
         team.save(err => {
             if (err) {
-                console.error(chalk`\n{bgRed  FAILD } coudln't add the team!`)
+                console.error(chalk`\n{bgRed  FAILD } coudln't add the team!\n`)
             } else {
-                console.log(chalk`\n{bgGreen  SUCCESS } ${answers.name} added to teams! Team's username is {bgYellow.black  ${answers.username} } and their password is {bgYellow.black  ${password} }`)
+                console.log(chalk`\n{bgGreen  SUCCESS } ${answers.name} added to teams! Team's username is {bgYellow.black  ${answers.username} } and their password is {bgYellow.black  ${password} }\n`)
             }
             return resolve()
         });
@@ -54,7 +54,6 @@ const addTeam = () => new Promise((resolve, reject) => {
 
 const continueAddingTeams = () => {
     addTeam().then(() => {
-        console.log('\n')
         prompt([{
             type : 'list',
             name : 'shouldContinue',
