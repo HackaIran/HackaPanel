@@ -9,3 +9,4 @@ user_codes/
 # Webpack bundles
 bundle.js
 
+.DS_Store
