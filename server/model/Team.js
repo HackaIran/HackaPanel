@@ -8,10 +8,6 @@ const teamSchema = db.Schema({
     socketId: String
 });
 
-teamSchema.methods.introduce = function () {
-    console.log(`Hey! we're ${this.name}, with score ${this.score}! this is our user/pass: ${this.username}/${this.password}`)
-};
-
 const Team = db.model('Team', teamSchema);
 
 module.exports = Team;
