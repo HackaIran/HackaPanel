@@ -22,7 +22,7 @@ const showOptions = (team) => {
         // If Edit name chose
         if (choice === 'edit name') {
             prompt([{
-                type: 'text',
+                type: 'input',
                 name: 'name',
                 message: `Enter ${team}'s new name:`
             }]).then(ans => {

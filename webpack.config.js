@@ -1,7 +1,6 @@
 module.exports = {
     devtool: 'inline-source-map',
     entry: './client/index.js',
-    watch: true,
     output: {
         filename: './public/javascripts/bundle.js',
         sourceMapFilename: './public/javascripts/bundle.js.map'

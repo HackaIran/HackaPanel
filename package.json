@@ -5,8 +5,9 @@
   "scripts": {
     "start": "node ./bin/www",
     "start:watch": "nodemon ./bin/www",
-    "webpack": "webpack",
+    "webpack": "webpack --watch",
     "test": "jest",
+    "setup": "node ./scripts/setup.js",
     "team:add": "node ./scripts/add-teams.js",
     "team:edit": "node ./scripts/edit-teams.js"
   },
@@ -39,6 +40,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "clui": "^0.3.6",
     "css-loader": "^0.28.7",
     "jest-cli": "^21.2.1",
     "node-sass": "^4.5.3",
