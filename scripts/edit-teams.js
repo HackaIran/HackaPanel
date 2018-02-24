@@ -39,38 +39,62 @@ const showOptions = (team) => {
 
         // If Re-Generate Password chose
         if (choice === 're-generate password') {
-            const password = Math.random().toString(36).substring(10);
-            Team.updateOne({ username: team }, { password: md5(password) }, err => {
-                if (err) {
-                    console.error(err)
-                    return showMenu()
-                }
-                console.log(chalk`${team} password has been changed! new password is {bgYellow.black  ${password} }`);
-                showMenu();
+            prompt([{
+                type: 'list',
+                name: 'choice',
+                choices: ['No', 'Yes'],
+                message: `Are you sure to re-generate a password for ${team}?`
+            }]).then(ans => {
+                if (ans.choice === 'No') return showMenu();
+                const password = Math.random().toString(36).substring(10);
+                Team.updateOne({ username: team }, { password: md5(password) }, err => {
+                    if (err) {
+                        console.error(err)
+                        return showMenu()
+                    }
+                    console.log(chalk`${team} password has been changed! new password is {bgYellow.black  ${password} }`);
+                    showMenu();
+                })
             })
         }
 
         // If Kick out chose
         if (choice === 'kick out from server') {
-            Team.updateOne({ username: team }, { socketId: '' }, err => {
-                if (err) {
-                    console.error(err)
-                    return showMenu()
-                }
-                console.log(`${team} has been successfuly kicked out!`);
-                showMenu();
-            })
+            prompt([{
+                type: 'list',
+                name: 'choice',
+                choices: ['No', 'Yes'],
+                message: `Are you sure to kick ${team} out from server?`
+            }]).then(ans => {
+                if (ans.choice === 'No') return showMenu();
+                Team.updateOne({ username: team }, { socketId: '' }, err => {
+                    if (err) {
+                        console.error(err)
+                        return showMenu()
+                    }
+                    console.log(`${team} has been successfuly kicked out!`);
+                    showMenu();
+                })
+            });
         }
 
         // If remove chose
         if (choice === 'remove') {
-            Team.deleteOne({ username: team }, err => {
-                if (err) {
-                    console.error(err)
-                    return showMenu()
-                }
-                console.log(`${team} has been successfuly removed!`);
-                showMenu();
+            prompt([{
+                type: 'list',
+                name: 'choice',
+                choices: ['No', 'Yes'],
+                message: `Are you sure to remove ${team}?`
+            }]).then(ans => {
+                if (ans.choice === 'No') return showMenu();
+                Team.deleteOne({ username: team }, err => {
+                    if (err) {
+                        console.error(err)
+                        return showMenu()
+                    }
+                    console.log(`${team} has been successfuly removed!`);
+                    showMenu();
+                })
             })
         }
 
