@@ -11,6 +11,14 @@ describe('Compilers Installation', function () {
         });
     })
 
+    it('python should be installed', function (done) {
+        exec('python --version', (err, stdout, stderr) => {
+            expect(err).toBeFalsy();
+            expect(stderr.toLowerCase()).toContain('python');
+            done();
+        });
+    });
+
 })
 
 describe('Compilers works fine', function () {
