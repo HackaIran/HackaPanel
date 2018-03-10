@@ -40,8 +40,26 @@ const webpack = () => {
             console.log(chalk`  {bgGreen  SUCCESS } bundling application script finished successfuly!\n`);
             success++;
         }
-        finish();
+        npmTest();
     })
+}
+
+const npmTest = () => {
+    expected++;
+    const countdown = new Spinner('Testing Everything');
+    countdown.start();
+    const child = exec(`npm test`, (err, stdout, stderr) => {
+        countdown.stop();
+        if (stderr.includes("FAIL")) {
+            console.log(chalk`   {bgRed  ERR } npm test faild! You can check errors by running 'npm test'\n`)
+        }
+        else {
+            console.log(chalk`  {bgGreen  SUCCESS } HackaPanel passed the test and everything is right!\n`)
+            success++;
+        }
+        finish()
+    });
+    setTimeout(() => child.kill(), 10 * 1000);
 }
 
 const finish = () => {
