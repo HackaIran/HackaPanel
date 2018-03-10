@@ -35,6 +35,8 @@
     "socket.io-client": "^2.0.3"
   },
   "devDependencies": {
+    "superagent": "^3.8.2",
+    "supertest": "^3.0.0",
     "babel-cli": "^6.24.1",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
