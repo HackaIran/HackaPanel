@@ -1,4 +1,6 @@
 const javascriptCompiler = require('../server/compilers/javascript')
+const pythonCompiler = require('../server/compilers/python')
+
 const { exec } = require('child_process')
 
 describe('Compilers Installation', function () {
@@ -26,8 +28,16 @@ describe('Compilers works fine', function () {
     const username = 'hacka_test';
     
     it('should compile javascript correctly', function (done) {
-        const javascriptCode = `const INPUT = 'Hacka!';\nconsole.log(INPUT);`;
-        javascriptCompiler.run(username, javascriptCode, (result) => {
+        const code = `console.log("Hacka!");`;
+        javascriptCompiler.run(username, code, (result) => {
+            expect(result.output).toBe('Hacka!')
+            done()
+        });
+    });
+
+    it('should compile python correctly', function (done) {
+        const code = `print("Hacka!")`;
+        pythonCompiler.run(username, code, (result) => {
             expect(result.output).toBe('Hacka!')
             done()
         });
