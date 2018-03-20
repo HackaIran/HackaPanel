@@ -3,15 +3,36 @@ const fs = require('fs');
 describe('Contest Files Existence', function () {
 
     it('should find "contest/challenge.md"', function () {
-        expect(fs.existsSync('./contest/challenge.md')).toBeTruthy();
+
+        // checking existance of both real file and sample file
+        const realFileExists = fs.existsSync('./contest/challenge.md');
+        const sampleFileExists = fs.existsSync('./contest/challenge.sample.md');
+
+        // final check if one of them exists (Both is not acceptable - XOR Check)
+        expect(Boolean(realFileExists ^ sampleFileExists)).toBeTruthy();
+
     });
 
     it('should find "contest/inputs.js"', function () {
-        expect(fs.existsSync('./contest/inputs.js')).toBeTruthy();
+
+        // checking existance of both real file and sample file
+        const realFileExists = fs.existsSync('./contest/inputs.md');
+        const sampleFileExists = fs.existsSync('./contest/inputs.sample.md');
+
+        // final check if one of them exists (Both is not acceptable - XOR Check)
+        expect(Boolean(realFileExists ^ sampleFileExists)).toBeTruthy();
+        
     });
 
     it('should find "contest/solver.js"', function () {
-        expect(fs.existsSync('./contest/solver.js')).toBeTruthy();
+        
+        // checking existance of both real file and sample file
+        const realFileExists = fs.existsSync('./contest/solver.md');
+        const sampleFileExists = fs.existsSync('./contest/solver.sample.md');
+
+        // final check if one of them exists (Both is not acceptable - XOR Check)
+        expect(Boolean(realFileExists ^ sampleFileExists)).toBeTruthy();
+
     })
 
 });
