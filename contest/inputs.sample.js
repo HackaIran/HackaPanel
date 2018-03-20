@@ -32,4 +32,7 @@ const inputs = [
 
 ];
 
-module.exports = inputs;
+module.exports = {
+    get: (i) => inputs[i],
+    length: inputs.length
+};
