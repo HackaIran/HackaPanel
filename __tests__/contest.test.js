@@ -1,5 +1,8 @@
 const fs = require('fs');
 
+let inputsFilePath = '';
+let solverFilePath = '';
+
 describe('Contest Files Existence', function () {
 
     it('should find "contest/challenge.md"', function () {
@@ -8,30 +11,34 @@ describe('Contest Files Existence', function () {
         const realFileExists = fs.existsSync('./contest/challenge.md');
         const sampleFileExists = fs.existsSync('./contest/challenge.sample.md');
 
-        // final check if one of them exists (Both is not acceptable - XOR Check)
-        expect(Boolean(realFileExists ^ sampleFileExists)).toBeTruthy();
+        // final check if one of them exists
+        expect(realFileExists || sampleFileExists).toBeTruthy();
 
     });
 
     it('should find "contest/inputs.js"', function () {
 
         // checking existance of both real file and sample file
-        const realFileExists = fs.existsSync('./contest/inputs.md');
-        const sampleFileExists = fs.existsSync('./contest/inputs.sample.md');
+        const realFileExists = fs.existsSync('./contest/inputs.js');
+        const sampleFileExists = fs.existsSync('./contest/inputs.sample.js');
 
-        // final check if one of them exists (Both is not acceptable - XOR Check)
-        expect(Boolean(realFileExists ^ sampleFileExists)).toBeTruthy();
+        inputsFilePath = `./contest/inputs${ realFileExists ? '' : '.sample' }.md`
+
+        // final check if one of them exists
+        expect(realFileExists || sampleFileExists).toBeTruthy();
         
     });
 
     it('should find "contest/solver.js"', function () {
         
         // checking existance of both real file and sample file
-        const realFileExists = fs.existsSync('./contest/solver.md');
-        const sampleFileExists = fs.existsSync('./contest/solver.sample.md');
+        const realFileExists = fs.existsSync('./contest/solver.js');
+        const sampleFileExists = fs.existsSync('./contest/solver.sample.js');
 
-        // final check if one of them exists (Both is not acceptable - XOR Check)
-        expect(Boolean(realFileExists ^ sampleFileExists)).toBeTruthy();
+        solverFilePath = `./contest/solver${ realFileExists ? '' : '.sample' }.js`
+
+        // final check if one of them exists
+        expect(realFileExists || sampleFileExists).toBeTruthy();
 
     })
 
@@ -39,7 +46,7 @@ describe('Contest Files Existence', function () {
 
 describe('Standard Check for "inputs.js"', function () {
 
-    const inputs = require('../contest/inputs');
+    const inputs = require(inputsFilePath);
 
     it('should have get() method', function () {
         expect(inputs.get).toBeDefined();
@@ -59,8 +66,8 @@ describe('Standard Check for "inputs.js"', function () {
 
 describe('Standard Check for "solver.js"', function () {
 
-    const inputs = require('../contest/inputs');
-    const solver = require('../contest/solver');
+    const inputs = require(inputsFilePath);
+    const solver = require(solverFilePath);
 
     it('should have solve() method', function () {
         expect(solver.solve).toBeDefined();
