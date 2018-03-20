@@ -1,7 +1,18 @@
 const fs = require('fs');
 
-let inputsFilePath = '';
-let solverFilePath = '';
+let inputs, solver;
+
+try {
+    inputs = require('../contest/inputs')
+} catch (e) {
+    inputs = require('../contest/inputs.sample')
+}
+
+try {
+    solver = require('../contest/solver')
+} catch (e) {
+    solver = require('../contest/solver.sample')
+}
 
 describe('Contest Files Existence', function () {
 
@@ -22,8 +33,6 @@ describe('Contest Files Existence', function () {
         const realFileExists = fs.existsSync('./contest/inputs.js');
         const sampleFileExists = fs.existsSync('./contest/inputs.sample.js');
 
-        inputsFilePath = `./contest/inputs${ realFileExists ? '' : '.sample' }.md`
-
         // final check if one of them exists
         expect(realFileExists || sampleFileExists).toBeTruthy();
         
@@ -35,8 +44,6 @@ describe('Contest Files Existence', function () {
         const realFileExists = fs.existsSync('./contest/solver.js');
         const sampleFileExists = fs.existsSync('./contest/solver.sample.js');
 
-        solverFilePath = `./contest/solver${ realFileExists ? '' : '.sample' }.js`
-
         // final check if one of them exists
         expect(realFileExists || sampleFileExists).toBeTruthy();
 
@@ -45,8 +52,6 @@ describe('Contest Files Existence', function () {
 });
 
 describe('Standard Check for "inputs.js"', function () {
-
-    const inputs = require(inputsFilePath);
 
     it('should have get() method', function () {
         expect(inputs.get).toBeDefined();
@@ -65,9 +70,6 @@ describe('Standard Check for "inputs.js"', function () {
 });
 
 describe('Standard Check for "solver.js"', function () {
-
-    const inputs = require(inputsFilePath);
-    const solver = require(solverFilePath);
 
     it('should have solve() method', function () {
         expect(solver.solve).toBeDefined();
