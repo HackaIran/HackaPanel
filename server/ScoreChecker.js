@@ -1,5 +1,17 @@
-const solver = require('../contest/solver');
-const inputs = require('../contest/inputs');
+let inputs, solver;
+
+try {
+    inputs = require('../contest/inputs')
+} catch (e) {
+    inputs = require('../contest/inputs.sample')
+}
+
+try {
+    solver = require('../contest/solver')
+} catch (e) {
+    solver = require('../contest/solver.sample')
+}
+
 const server = require('./server');
 
 const usersScore = {};

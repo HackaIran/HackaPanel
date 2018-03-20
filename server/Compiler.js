@@ -8,7 +8,13 @@ const phpCompiler = require('./compilers/php');
 
 const ScoreChecker = require('./ScoreChecker');
 
-const inputs = require('../contest/inputs');
+let inputs;
+
+try {
+    inputs = require('../contest/inputs')
+} catch (e) {
+    inputs = require('../contest/inputs.sample')
+}
 
 const untrustedPatterns = {
     javascript: /require\s*\(.*\)|import\s+.*/,
