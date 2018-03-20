@@ -5,7 +5,13 @@ const server = require('../server/server');
 const marked = require('marked');
 const config = require('../config/hacka.config');
 
-let challenge = fs.readFileSync('./contest/challenge.md', 'utf-8');
+let challenge;
+
+try {
+    challenge = fs.readFileSync('./contest/challenge.md', 'utf-8');
+} catch (e) {
+    challenge = fs.readFileSync('./contest/challenge.sample.md', 'utf-8');
+}
 
 /* GET home page. */
 router.get('/', function(req, res) {
