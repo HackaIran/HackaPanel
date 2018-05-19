@@ -1,3 +1,5 @@
+const Sphere = require('sphere-engine');
+
 const javascriptCompiler = require('./compilers/javascript');
 const pythonCompiler = require('./compilers/python');
 const csharpCompiler = require('./compilers/csharp');
@@ -7,6 +9,15 @@ const cppCompiler = require('./compilers/cpp');
 const phpCompiler = require('./compilers/php');
 
 const ScoreChecker = require('./ScoreChecker');
+
+let sphere;
+
+try {
+    const apiConfig = require('../config/apis.config')
+    sphere = new Sphere(apiConfig.sphere);
+} catch (e) {
+    console.log(`Couldn't connect to sphere`);
+}
 
 let inputs;
 
@@ -34,6 +45,8 @@ class Compiler {
     constructor (server) {
         this.server = server;
         this.scoreChecker = new ScoreChecker(this);
+        this.isOnline = false;
+        if (sphere) sphere.ready(() => this.isOnline = true);
     }
 
     onResult (socket, codeData, result) {
@@ -65,7 +78,7 @@ class Compiler {
         return code.match(untrustedPatterns[language]);
     }
 
-    run (socket, codeData, inputId) {
+    offlineRun (socket, codeData, inputId) {
         return new Promise((resolve) => {
             const language = codeData.language;
             const username = codeData.username;
@@ -168,6 +181,33 @@ class Compiler {
                 resolve(this.onResult(socket, codeData, result));
             }
         });
+    }
+
+    onlineRun (socket, codeData, inputId) {
+        let language = codeData.language;
+        let code = codeData.code;
+        if (language === 'javascript') language = 'nodejs';
+
+        return new Promise((resolve, reject) => {    
+            sphere.compile({
+                language: language,
+                source: code
+            }, 100).then(result => {
+                result.inputId = inputId;
+                result.duration = parseFloat(result.time) * 1000;
+                result.hasErrors = Boolean(result.error);
+                if (result.output) result.output = result.output.trim();
+                resolve(this.onResult(socket, codeData, result));
+            });
+        })
+    }
+
+    run (socket, codeData, inputId) {
+        if (this.isOnline) {
+            return this.onlineRun(socket, codeData, inputId);
+        } else {
+            return this.offlineRun(socket, codeData, inputId);
+        }
     }
 
     runNextItemInQueue () {

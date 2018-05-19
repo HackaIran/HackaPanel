@@ -12,3 +12,5 @@ bundle.js
 .DS_Store
 
 log.txt
+
+apis.config.js

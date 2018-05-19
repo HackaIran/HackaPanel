@@ -39,7 +39,7 @@ class OutputTab extends React.Component {
 
         qa.score = result.score;
         qa.duration = result.duration;
-        qa.rate = parseFloat(result.rate.toPrecision(4)) * 100 + '%';
+        if (result.rate) qa.rate = parseFloat(result.rate.toPrecision(4)) * 100 + '%';
         qa.successful = result.rate > 0;
 
         if (isNaN(result.rate)) qa.rate = '';
