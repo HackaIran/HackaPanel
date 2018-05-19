@@ -160,7 +160,10 @@ const onUserConnected = socket => {
     socket.on('user logout', () => server.logout(socket));
     socket.on('disconnect', () => server.logout(socket));
     socket.on('i am connected', () => allAvailableConnections.push(socket.id));
-    socket.on('user run code', codeData => server.runCodeFor(socket, codeData));
+    socket.on('user run code', codeData => {
+        codeData.password = md5(codeData.password);
+        server.runCodeFor(socket, codeData)
+    });
 };
 
 Server.resetAllConnections();
