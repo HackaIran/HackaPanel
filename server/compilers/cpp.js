@@ -9,9 +9,9 @@ class CppCompiler extends Compiler {
             // exe path
             const dir = file.substring(0, file.lastIndexOf(username));
 
-            this.execute(`vcvarsall x86 && cd ${dir} && cl /EHsc ${username}.cpp`, result => {
+            this.execute(`cd ${dir} && dmc ${username}.cpp`, result => {
 
-                if (!result.output.match(/out:.+\.exe/)) return callback(result);
+                if (result.output.match(/Error/)) return callback(result);
 
                 this.execute(`cd ${dir} && ${username}.exe`, finalResult => {
                     // if code has errors returns result
