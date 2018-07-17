@@ -4,6 +4,7 @@ node_modules/
 /contest/challenge.md
 /contest/solver.js
 /contest/inputs.js
+/contest/extra
 user_codes/
 
 # Webpack bundles
