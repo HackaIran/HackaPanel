@@ -5,7 +5,8 @@
   "scripts": {
     "start": "webpack && node ./bin/www",
     "start:watch": "nodemon ./bin/www",
-    "webpack": "webpack --watch",
+    "bundle": "webpack",
+    "bundle:watch": "webpack --watch",
     "test": "jest",
     "setup": "node ./scripts/setup.js",
     "team:add": "node ./scripts/add-teams.js",
