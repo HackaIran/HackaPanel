@@ -2,7 +2,7 @@ module.exports = {
     city: "Karaj",
     time: {
         start: {
-            hours: 10,
+            hours: 0,
             minutes: 10,
             seconds: 0
         },
