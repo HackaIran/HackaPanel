@@ -49,6 +49,7 @@
     & > section
         flex-grow: 1
         overflow: auto
+        width: 400px
 
         & > div
             margin: 40px
@@ -65,7 +66,9 @@
                 padding: 30px
                 font-size: 20px
                 overflow: auto
-                white-space: pre-wrap
+                white-space: pre-wrap;
+                word-wrap: break-word;
+                overflow-x: auto;
 
                 &.error-mode
                     color: #b30000
