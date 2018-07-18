@@ -8,6 +8,7 @@ import 'brace/mode/python';
 import 'brace/mode/csharp';
 import 'brace/mode/java';
 import 'brace/mode/golang';
+import 'brace/mode/c_cpp';
 
 import 'brace/theme/monokai';
 import 'brace/ext/language_tools';
