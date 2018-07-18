@@ -10,7 +10,12 @@
     "test": "jest",
     "setup": "node ./scripts/setup.js",
     "team:add": "node ./scripts/add-teams.js",
-    "team:edit": "node ./scripts/edit-teams.js"
+    "team:edit": "node ./scripts/edit-teams.js",
+    "production:start": "pm2 start ./bin/www --name hackapanel",
+    "production:restart": "pm2 restart hackapanel",
+    "production:stop": "pm2 stop hackapanel",
+    "production:delete": "pm2 delete hackapanel",
+    "pull": "git pull && npm run production:restart"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
