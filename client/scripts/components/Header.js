@@ -56,12 +56,19 @@ class Header extends React.Component {
 
         return `${hours}:${minutes}:${seconds}`
     }
+    logout () {
+        socket.emit('user logout');
+        localStorage['hacka-username'] = '';
+        localStorage['hacka-password'] = '';
+        location.reload();
+    }
     render() {
         return (
             <header>
                 <div className="team">
                     <img src="./assets/images/terminal.png" />
                     <h3 className="name">{this.state.name}</h3>
+                    <img title="Logout" onClick={this.logout.bind(this)} className="logout-button" src="./assets/images/logout.svg" />
                     <span className="score">Score: <span>{this.state.score}</span></span>
                 </div>
                 <time>{this.time}</time>

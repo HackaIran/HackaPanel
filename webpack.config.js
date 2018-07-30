@@ -18,7 +18,7 @@ module.exports = {
             use: [{ loader: "style-loader" }, { loader: "css-loader?-url" }, { loader: "sass-loader" }]
         }]
     },
-    plugins: [
-        new UglifyJsPlugin()
-    ]
+    // plugins: [
+    //     new UglifyJsPlugin()
+    // ]
 };
