@@ -25,6 +25,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 
+// handling robot.txt for online contest
+app.use('/robots.txt', function (req, res, next) {
+  res.type('text/plain')
+  res.send("User-agent: *\nDisallow: /");
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error(`"${req.url}" Not Found`);
