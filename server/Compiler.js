@@ -46,7 +46,7 @@ class Compiler {
         this.server = server;
         this.scoreChecker = new ScoreChecker(this);
         this.isOnline = false;
-        if (sphere) sphere.ready(() => this.isOnline = true);
+        // if (sphere) sphere.ready(() => this.isOnline = true);
     }
 
     onResult (socket, codeData, result) {
