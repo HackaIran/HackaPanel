@@ -19,8 +19,8 @@
 	* [Pre-Installation](#pre-installation)
 	* [Installation](#installation)
 * [Configurations](#configurations)
-  * [Database](#database-config)
-  * [Time](#time-config)
+  * [Database](#database)
+  * [Time](#time)
 * [License](#license)
 
 # Features
