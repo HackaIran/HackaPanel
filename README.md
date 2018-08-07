@@ -31,12 +31,12 @@
  -  **Real-time** competition system.
  - **Multi-Level** test cases generation.
 
+# Getting Started
+
 ### Pre-Installation
 
  1. **Download and Install [Node.js](https://nodejs.org/en/download/)**
  2. **Download and Install [MongoDB](https://www.mongodb.com/download-center?_ga=2.56287778.820520607.1533623016-152191401.1531196918#production)**
-
-# Getting Started
 
 ### Installation
 
