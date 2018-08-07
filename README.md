@@ -1,6 +1,7 @@
 # Hacka{Iran}'s Contest Panel
 
-[![Gitter](https://img.shields.io/badge/license-MIT-ED4A08.svg?style=flat-square)](https://github.com/HackaIran/HackaPanel/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/travis-ci/HackaIran/HackaPanel.svg?style=flat-square)](https://travis-ci.org/HackaIran/HackaPanel)
+[![License](https://img.shields.io/badge/license-MIT-ED4A08.svg?style=flat-square)](https://github.com/HackaIran/HackaPanel/blob/master/LICENSE)
 [![Gitter](https://img.shields.io/badge/gitter-join--chat-23CD7A.svg?style=flat-square)](https://gitter.im/HackaCommunityIran/Lobby)
 [![Tweet](https://img.shields.io/badge/twiter-share-76abec.svg?style=flat-square)](https://ctt.ac/KIO2d)
 
