@@ -78,7 +78,7 @@ You're Done! Run the server using the following command:
 ```bash
 > nodemon app.js
 ```
-<p align="center"><img src="https:///imgur.com/OAVw7Nj.gif"/></p>
+<p align="center"><img src="https://imgur.com/OAVw7Nj.gif"/></p>
 
 # Configurations
 
