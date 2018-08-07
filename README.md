@@ -71,12 +71,12 @@ Rename and remove "**.sample**" from the files under **_contest/_** like below:
 On HackaPanel/ issue:
 
 ```bash
-webpack
+> webpack
 ```
 
 You're Done! Run the server using the following command:
 ```bash
-nodemon app.js
+> nodemon app.js
 ```
 <p align="center"><img src="https:///imgur.com/OAVw7Nj.gif"/></p>
 
