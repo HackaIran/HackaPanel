@@ -86,7 +86,7 @@ You're Done! Run the server using the following command:
 You can touch "**db**" property in "[hacka.config.js](https://github.com/HackaIran/HackaPanel/blob/master/config/hacka.config.js)" like below:
 
 ```javascript
-host: 'mongodb://localhost/' // Change it based on your mongodb config,
+host: 'mongodb://localhost/', // Change it based on your mongodb config
 dbname: 'hacka' // Change it if you wish to customize it (Default one is OK!) 
 ```
 
