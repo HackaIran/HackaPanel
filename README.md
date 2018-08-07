@@ -21,7 +21,6 @@
 * [Configurations](#configurations)
   * [Database](#database-config)
   * [Time](#time-config)
-  * [Questions](#questions-config)
 * [License](#license)
 
 # Features
@@ -82,7 +81,37 @@ You're Done! Run the server using the following command:
 
 # Configurations
 
-TODO: Add it!!!!
+### Database
+
+You can touch "**db**" property in "[hacka.config.js](https://github.com/HackaIran/HackaPanel/blob/master/config/hacka.config.js)" like below:
+
+```javascript
+host: 'mongodb://localhost/' // Change it based on your mongodb config,
+dbname: 'hacka' // Change it if you wish to customize it (Default one is OK!) 
+```
+
+<p align="center"><img src="https://imgur.com/OknwYLi.gif"/></p>
+
+### Time
+
+You can touch "**time**" property in "[hacka.config.js](https://github.com/HackaIran/HackaPanel/blob/master/config/hacka.config.js)" like below:
+
+```javascript
+// You can edit the start time and end time for the duration in between
+time: {
+	start: {
+		hours: 0, // Start time hour
+		minutes: 10, // Start time minute
+		seconds: 0 // Start time second
+	},
+	end: {
+		hours: 23, // End time hour
+		minutes: 29, // End time minute
+		seconds: 59 // End time second
+	}
+}, 
+```
+<p align="center"><img src="https://imgur.com/aXQVl12.gif"/></p>
 
 # License
 
