@@ -100,14 +100,14 @@ You can touch "**time**" property in "[hacka.config.js](https://github.com/Hacka
 // You can edit the start time and end time for the duration in between
 time: {
 	start: {
-		hours: 0, // Start time hour
-		minutes: 10, // Start time minute
+		hours: 16, // Start time hour
+		minutes: 30, // Start time minute
 		seconds: 0 // Start time second
 	},
 	end: {
-		hours: 23, // End time hour
-		minutes: 29, // End time minute
-		seconds: 59 // End time second
+		hours: 18, // End time hour
+		minutes: 10, // End time minute
+		seconds: 0 // End time second
 	}
 }, 
 ```
@@ -115,6 +115,6 @@ time: {
 
 # License
 
-Copyright (c) 2017 Alireza Sheikholmolouki All rights reserved.
+Copyright (c) 2017 HackaIran All rights reserved.
 
 This work is licensed under the terms of the MIT license. For a copy, see  [https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT).
