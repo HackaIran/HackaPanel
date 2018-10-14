@@ -161,7 +161,7 @@ class Compiler {
 
             // C/C++
             else if (language === 'c_cpp') {
-                code = `#include <iostream.h>\n#include <stdio.h>\n#include <math.h>\n#include <string.h>\nchar INPUT[100] = "${input.split('\n').join('\\n')}";\n\n${code}`;
+                code = `#include <iostream>\n#include <stdio.h>\n#include <math.h>\n#include <string.h>\nusing namespace std;\nchar INPUT[10000] = "${input.split('\n').join('\\n')}";\n\n${code}`;
                 cppCompiler.run(username, code, (result) => {
                     result.inputId = inputId;
                     result.input = input;

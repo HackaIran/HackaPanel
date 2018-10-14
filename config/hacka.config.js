@@ -2,14 +2,14 @@ module.exports = {
     city: "Karaj",
     time: {
         start: {
-            hours: 0,
-            minutes: 10,
+            hours: 1,
+            minutes: 0,
             seconds: 0
         },
         end: {
-            hours: 23,
-            minutes: 29,
-            seconds: 59
+            hours: 9,
+            minutes: 4,
+            seconds: 0
         }
     },
     db: {

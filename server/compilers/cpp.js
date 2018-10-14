@@ -5,15 +5,15 @@ class CppCompiler extends Compiler {
     run (username, code, callback) {
 
         // first step is storing the code:
-        this.store(`${username}.cpp`, code).then(file => {
+        this.store(`${username}.cc`, code).then(file => {
             // exe path
             const dir = file.substring(0, file.lastIndexOf(username));
 
-            this.execute(`cd ${dir} && dmc ${username}.cpp`, result => {
+            this.execute(`cd ${dir} && g++ -o ${username} ${username}.cc`, result => {
 
-                if (result.output.match(/Error/)) return callback(result);
+                if (result.error) return callback(result);
 
-                this.execute(`cd ${dir} && ${username}.exe`, finalResult => {
+                this.execute(`cd ${dir} && ./${username}`, finalResult => {
                     // if code has errors returns result
                     if (finalResult.hasErrors) return callback(finalResult);
 

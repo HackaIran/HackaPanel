@@ -16,7 +16,7 @@ class Solver {
 
         return {
             solved: true,
-            rate: 1,
+            rate: Math.floor(Math.random() * 100) / 100,
 
             minDuration: 200,
             maxDuration: 1000,
