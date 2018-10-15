@@ -1,3 +1,26 @@
+@font-face {
+    font-family: 'Vazir';
+    src: url('../fonts/Vazir/Vazir-FD-WOL.eot');
+    src: url('../fonts/Vazir/Vazir-FD-WOL.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Vazir/Vazir-FD-WOL.woff2') format('woff2'), 
+        url('../fonts/Vazir/Vazir-FD-WOL.woff') format('woff'),
+        url('../fonts/Vazir/Vazir-FD-WOL.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Vazir';
+    font-weight: bold;
+    src: url('../fonts/Vazir/Vazir-Bold-FD-WOL.eot');
+    src: url('../fonts/Vazir/Vazir-Bold-FD-WOL.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Vazir/Vazir-Bold-FD-WOL.woff2') format('woff2'), 
+        url('../fonts/Vazir/Vazir-Bold-FD-WOL.woff') format('woff'),
+        url('../fonts/Vazir/Vazir-Bold-FD-WOL.ttf') format('truetype');
+}
+
+#challenge > div > *:not(pre) {
+    font-family: 'Vazir', 'B Yekan', 'Tahoma', Arial, serif;
+}
+
 .app > dialog {
     z-index: 999;
     border: none;
