@@ -6,7 +6,7 @@ class PythonCompiler extends Compiler {
         // first step is storing the code:
         this.store(`${username}.py`, code).then(file => {
             // then we should exec file using this command:
-            this.execute(`python ${file}`, result => {
+            this.execute(`python3 ${file}`, result => {
                 // if code has errors returns result
                 if (result.hasErrors) {
                     result.error = result.error.substring(result.error.indexOf("\n") + 1);

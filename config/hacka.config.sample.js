@@ -1,14 +1,14 @@
 module.exports = {
-    city: "Tehran",
+    city: "Utupia",
     time: {
         start: {
-            hours: 9,
+            hours: 0,
             minutes: 0,
             seconds: 0
         },
         end: {
-            hours: 13,
-            minutes: 4,
+            hours: 24,
+            minutes: 0,
             seconds: 0
         }
     },
