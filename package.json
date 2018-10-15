@@ -10,6 +10,7 @@
     "test": "jest",
     "init": "node ./scripts/init.js",
     "setup": "node ./scripts/setup.js",
+    "time:add": "node ./scripts/add-time.js",
     "team:add": "node ./scripts/add-teams.js",
     "team:edit": "node ./scripts/edit-teams.js",
     "production:start": "pm2 start ./bin/www --name hackapanel",
