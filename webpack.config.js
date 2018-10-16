@@ -1,3 +1,5 @@
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 module.exports = {
     devtool: 'inline-source-map',
     entry: './client/index.js',
@@ -15,5 +17,8 @@ module.exports = {
             test: /\.sass$/,
             use: [{ loader: "style-loader" }, { loader: "css-loader?-url" }, { loader: "sass-loader" }]
         }]
-    }
+    },
+    plugins: [
+        new UglifyJsPlugin()
+    ]
 };
