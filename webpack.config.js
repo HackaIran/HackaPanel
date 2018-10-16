@@ -4,8 +4,8 @@ module.exports = {
     mode: 'production',
     entry: './client/index.js',
     output: {
-        filename: './public/javascripts/bundle.js',
-        sourceMapFilename: './public/javascripts/bundle.js.map'
+        filename: '../public/javascripts/bundle.js',
+        sourceMapFilename: '../public/javascripts/bundle.js.map'
     },
     module: {
         rules: [{
