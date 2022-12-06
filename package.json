@@ -20,11 +20,11 @@
     "pull": "git pull && npm run production:restart"
   },
   "dependencies": {
-    "body-parser": "~1.18.2",
+    "body-parser": "~1.20.1",
     "chalk": "^2.3.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "inquirer": "^5.1.0",
     "ip": "^1.1.5",
     "marked": "^0.3.6",
