@@ -61,7 +61,7 @@
     "supertest": "^3.0.0",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.3.12"
   },
   "nodemonConfig": {
     "ignore": [
